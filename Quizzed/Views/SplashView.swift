@@ -36,6 +36,7 @@ struct SplashView: View {
                 .rotation(Angle(degrees: 45))
                 .fill(Color("Purple"))
                 .frame(width: 900, height: screenAnimation ? 1000 : 0)
+                .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
             
             VStack {
                 
@@ -67,13 +68,13 @@ struct SplashView: View {
                 screenAnimation = true
             }
             
-//            withAnimation(.default.delay(3.5)) {
-//                endAnimation = true
-//            }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+            withAnimation(.spring().delay(3.5)) {
                 endAnimation = true
             }
+            
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+//                endAnimation = true
+//            }
             
         }
     

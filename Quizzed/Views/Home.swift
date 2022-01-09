@@ -84,7 +84,7 @@ struct Home: View {
 
                     
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(maxHeight: .infinity)
             }
             .ignoresSafeArea()
         }

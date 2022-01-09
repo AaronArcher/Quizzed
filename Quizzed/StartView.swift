@@ -13,13 +13,17 @@ struct StartView: View {
     
     var body: some View {
         
-        
-        if endAnimation {
-            Home()
-        }
-        else {
+        ZStack {
+            
+            
             SplashView(endAnimation: $endAnimation)
+            
+            Home()
+                .offset(y: endAnimation ? 0 : UIScreen.main.bounds.height)
+
         }
+        
+
         
     }
 }
