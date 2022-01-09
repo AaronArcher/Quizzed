@@ -8,9 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var endAnimation = false
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        
+        if endAnimation {
+            Home()
+        }
+        else {
+            SplashView(endAnimation: $endAnimation)
+        }
+        
     }
 }
 
