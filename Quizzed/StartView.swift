@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct StartView: View {
     
     @State var endAnimation = false
     
     var body: some View {
+        
         
         if endAnimation {
             Home()
@@ -25,6 +26,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        StartView()
     }
 }

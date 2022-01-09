@@ -37,6 +37,21 @@ struct SplashView: View {
                 .fill(Color("Purple"))
                 .frame(width: 900, height: screenAnimation ? 1000 : 0)
             
+            VStack {
+                
+                Spacer()
+                
+                Text("Powered By")
+                    .font(.subheadline)
+                
+                Text("Open Trivia Database")
+                    .font(.caption)
+                
+            }
+            .padding(.bottom, 60)
+            .frame(height: UIScreen.main.bounds.height)
+            .foregroundColor(Color("Purple"))
+            
         }
         .ignoresSafeArea()
         .onAppear {
@@ -52,6 +67,10 @@ struct SplashView: View {
                 screenAnimation = true
             }
             
+//            withAnimation(.default.delay(3.5)) {
+//                endAnimation = true
+//            }
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
                 endAnimation = true
             }
@@ -63,7 +82,7 @@ struct SplashView: View {
 
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        StartView()
     }
 }
 

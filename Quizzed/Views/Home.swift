@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Home: View {
     
+    
     let columns = [
         GridItem(.flexible(), spacing: 0),
         GridItem(.flexible(), spacing: 0)
@@ -18,66 +19,76 @@ struct Home: View {
     
     var body: some View {
        
-        ZStack {
-            
-            Color("Purple")
-            
-            VStack(spacing: 20) {
-                Text("QUIZZED")
-                    .foregroundColor(Color("Yellow"))
-                    .font(.system(size: 45, weight: .bold))
-                .padding(.top, 50)
+        NavigationView {
+            ZStack(alignment: .top) {
                 
-                Text("SELECT A CATEGORY")
-                    .foregroundColor(Color("Orange"))
-                    .font(.title2)
-                    .fontWeight(.light)
+                Color("Purple")
+                
+                VStack(spacing: 20) {
+                    Text("QUIZZED")
+                        .foregroundColor(Color("Yellow"))
+                        .font(.system(size: 45, weight: .bold))
+                        .padding(.top, 40)
+                    
+                    Text("SELECT A CATEGORY")
+                        .foregroundColor(Color("Orange"))
+                        .font(.title2)
+                        .fontWeight(.light)
 
-                
-                // Category Blocks
-                
-                ScrollView(.vertical, showsIndicators: false){
-                    LazyVGrid(columns: columns, spacing: 0) {
-                        ForEach(categories, id: \.id) { item in
-                            
-                            CategoryBlock(selectedCategory: $selectedCategory, category: item.category, image: item.image, color: item.color)
-                                .onTapGesture {
-                                    withAnimation(.easeInOut) {
-                                        selectedCategory = item.category
-                                    }
-                                    print(selectedCategory)
-                                }
+                    
+                    // Category Blocks
+                    
+                    ScrollView(.vertical, showsIndicators: false){
+                        LazyVGrid(columns: columns, spacing: 0) {
+                            ForEach(categories, id: \.id) { item in
                                 
+                                CategoryBlock(selectedCategory: $selectedCategory, category: item.category, image: item.image, color: item.color)
+                                    .onTapGesture {
+                                        withAnimation(.easeInOut) {
+                                            selectedCategory = item.category
+                                        }
+                                        print(selectedCategory)
+                                    }
+                                    
+                                
+                            }
                             
                         }
-                        
                     }
-                }
-                .frame(maxHeight: 540)
-                
-                Button {
+                    .frame(maxHeight: 520)
                     
-                } label: {
+                    RoundedRectangle(cornerRadius: 5)
+                        .frame(width: UIScreen.main.bounds.width - 40, height: 1)
+                        .foregroundColor(.clear)
                     
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 20)
-                            .frame(width: 200, height: 50)
-                            .foregroundColor(Color("Orange"))
-                            .shadow(color: Color("Orange"), radius: 3, x: 0, y: 0)
+                    NavigationLink {
+                        DifficultyView(selectedCategory: $selectedCategory)
                         
-                        Text("NEXT")
-                            .font(.title)
-                            .foregroundColor(Color("Purple"))
+                    } label: {
+                        
+                        HStack(spacing: 0) {
+                            Spacer()
+                            
+                            Text("NEXT")
+                                .font(.title)
+                                .fontWeight(.light)
+                                
+                            Image(systemName: "arrow.right")
+                                .font(.system(size: 30, weight: .light))
+                                .padding(.horizontal)
+                                
+                        }
+                        .foregroundColor(Color("Orange"))
                     }
-                    
-                }
+                    .disabled(selectedCategory.isEmpty ? true : false)
 
-                
-                Spacer()
+                    
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-
+            .ignoresSafeArea()
         }
-        .ignoresSafeArea()
+        
     
     }
 }
@@ -127,22 +138,18 @@ struct CategoryBlock: View {
                 ClickShape1()
                     .trim(from: 0, to: selectedCategory == category ? 1 : 0)
                     .stroke(.white, lineWidth: 1.5)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
                 ClickShape2()
                     .trim(from: 0, to: selectedCategory == category ? 1 : 0)
                     .stroke(.white, lineWidth: 1.5)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
                 ClickShape3()
                     .trim(from: 0, to: selectedCategory == category ? 1 : 0)
                     .stroke(.white, lineWidth: 1.5)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 
                 ClickShape4()
                     .trim(from: 0, to: selectedCategory == category ? 1 : 0)
                     .stroke(.white, lineWidth: 1.5)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
                 
             
