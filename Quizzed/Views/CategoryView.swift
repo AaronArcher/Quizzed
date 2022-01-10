@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct Home: View {
+struct CategoryView: View {
     
+    @EnvironmentObject var quizModel: QuizViewModel
     
     let columns = [
         GridItem(.flexible(), spacing: 0),
@@ -63,6 +64,8 @@ struct Home: View {
                     
                     NavigationLink {
                         DifficultyView(selectedCategory: $selectedCategory)
+                            .environmentObject(quizModel)
+
                         
                     } label: {
                         
@@ -95,7 +98,8 @@ struct Home: View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
+        CategoryView()
+            .environmentObject(QuizViewModel())
     }
 }
 

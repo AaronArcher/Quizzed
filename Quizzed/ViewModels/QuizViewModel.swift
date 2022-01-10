@@ -10,17 +10,23 @@ import SwiftUI
 
 class QuizViewModel: ObservableObject {
     
-    private(set) var quiz: [Quiz.Result] = []
-    @Published private(set) var length = 0
-    @Published private(set) var index = 0
-    @Published private(set) var reachedEnd = false
-    @Published private(set) var answerSelected = false
-    @Published private(set) var question: AttributedString = ""
-    @Published private(set) var answerChoices: [Answer] = []
-    @Published private(set) var progress: CGFloat = 0
-    @Published private(set) var score = 0
+    var quiz: [Quiz.Result] = []
+    @Published var length = 0
+    @Published var index = 0
+    @Published var reachedEnd = false
+    @Published var answerSelected = false
+    @Published var question: AttributedString = ""
+    @Published var answerChoices: [Answer] = []
+    @Published var progress: CGFloat = 0
+    @Published var score = 0
 
 
+    init() {
+        Task.init {
+            await fetchQuiz()
+        }
+    }
+    
     func fetchQuiz() async {
         
         guard let url = URL(string: "https://opentdb.com/api.php?amount=10") else { fatalError("Missing URL") }

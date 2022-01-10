@@ -11,6 +11,8 @@ struct DifficultyView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @EnvironmentObject var quizModel: QuizViewModel
+    
     @Binding var selectedCategory: String
     
     @State var selectedDifficulty = "Easy"
@@ -113,10 +115,12 @@ struct DifficultyView: View {
                         Spacer()
                         
                         NavigationLink {
+                            QuizView()
+                                .environmentObject(quizModel)
                             
                         } label: {
                             
-                            Text("NEXT")
+                            Text("START")
                                 .font(.title)
                                 .fontWeight(.light)
                                 
@@ -141,6 +145,7 @@ struct DifficultyView: View {
 struct DifficultyView_Previews: PreviewProvider {
     static var previews: some View {
         DifficultyView(selectedCategory: .constant("Comics"))
+            .environmentObject(QuizViewModel())
     }
 }
 
