@@ -48,6 +48,7 @@ struct CategoryView: View {
                                         withAnimation(.easeInOut) {
                                             selectedCategory = item.category
                                         }
+                                        quizModel.categoryID = item.categoryID
                                         print(selectedCategory)
                                     }
                                     

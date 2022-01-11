@@ -40,25 +40,24 @@ struct DifficultyView: View {
                 Group {
                     DifficultyBlock(selectedDifficulty: $selectedDifficulty, difficulty: "Easy", color: "Blue")
                         .onTapGesture {
-                            withAnimation(.easeInOut) {
-                                selectedDifficulty = "Easy"
-                            }
+                                selectedDifficulty = "easy"
+                            quizModel.difficulty = selectedDifficulty
                         }
                         .frame(height: 80)
                     
                     DifficultyBlock(selectedDifficulty: $selectedDifficulty, difficulty: "Medium", color: "Orange")
                         .onTapGesture {
-                            withAnimation(.easeInOut) {
-                                selectedDifficulty = "Medium"
-                            }
+                                selectedDifficulty = "medium"
+                            quizModel.difficulty = selectedDifficulty
+
                         }
                         .frame(height: 80)
 
                     DifficultyBlock(selectedDifficulty: $selectedDifficulty, difficulty: "Hard", color: "Yellow")
                         .onTapGesture {
-                            withAnimation(.easeInOut) {
-                                selectedDifficulty = "Hard"
-                            }
+                                selectedDifficulty = "hard"
+                            quizModel.difficulty = selectedDifficulty
+
                         }
                         .frame(height: 80)
                 }
@@ -71,7 +70,7 @@ struct DifficultyView: View {
                         .padding(.top)
                         .padding(.bottom, 5)
                     
-                    Text(selectedCategory)
+                    Text(selectedCategory.uppercased())
                         .foregroundColor(.white)
                         .font(.title3)
                 }
@@ -84,7 +83,7 @@ struct DifficultyView: View {
                         .padding(.top)
                         .padding(.bottom, 5)
                     
-                    Text(selectedDifficulty)
+                    Text(selectedDifficulty.uppercased())
                         .foregroundColor(.white)
                         .font(.title3)
                      

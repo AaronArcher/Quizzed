@@ -11,6 +11,11 @@ struct QuizView: View {
     
     @EnvironmentObject var quizModel: QuizViewModel
     
+
+    
+    var c = "20"
+    var d = "easy"
+    
     var body: some View {
                     
             VStack(spacing: 25) {
@@ -76,7 +81,13 @@ struct QuizView: View {
             .background(Color("Purple"))
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
-
+            .task {
+                do {
+                    try await quizModel.fetchQuiz()
+                } catch {
+                    print("Error", error)
+                }
+            }
          
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProgressView: View {
     
+    
     var progress: CGFloat
     
     var body: some View {

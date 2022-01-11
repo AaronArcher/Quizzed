@@ -19,42 +19,47 @@ class QuizViewModel: ObservableObject {
     @Published var answerChoices: [Answer] = []
     @Published var progress: CGFloat = 0
     @Published var score = 0
-
-
-    init() {
-        Task.init {
-            await fetchQuiz()
-        }
-    }
     
-    func fetchQuiz() async {
-        
-        guard let url = URL(string: "https://opentdb.com/api.php?amount=10") else { fatalError("Missing URL") }
-        
-        let urlRequest = URLRequest(url: url)
-        
-        do {
-            let (data, response) = try await URLSession.shared.data(for: urlRequest)
-            
-            guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
-            
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            let decodedData = try decoder.decode(Quiz.self, from: data)
-            
-            DispatchQueue.main.async {
-                self.index = 0
-                self.score = 0
-                self.progress = 0
-                self.reachedEnd = false
-                self.quiz = decodedData.results
-                self.length = self.quiz.count
-                self.setQuestion()
+    @Published var categoryID = "20"
+    @Published var difficulty = "easy"
+    
+    
+//        init() {
+//            Task.init {
+//                await fetchQuiz()
+//            }
+//        }
+    
+        func fetchQuiz() async {
+
+            guard let url = URL(string: "https://opentdb.com/api.php?amount=10&category=\(categoryID)&difficulty=\(difficulty)") else { fatalError("Missing URL") }
+
+            let urlRequest = URLRequest(url: url)
+
+            do {
+                let (data, response) = try await URLSession.shared.data(for: urlRequest)
+
+                guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
+
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let decodedData = try decoder.decode(Quiz.self, from: data)
+
+                DispatchQueue.main.async {
+                    self.index = 0
+                    self.score = 0
+                    self.progress = 0
+                    self.reachedEnd = false
+                    self.quiz = decodedData.results
+                    self.length = self.quiz.count
+                    self.setQuestion()
+                }
+            } catch {
+                print("Error fetching quiz data: \(error)")
             }
-        } catch {
-            print("Error fetching quiz data: \(error)")
         }
-    }
+    
+
     
     func nextQuestion() {
         if index + 1 < length {
@@ -82,6 +87,6 @@ class QuizViewModel: ObservableObject {
             score += 1
         }
     }
-
+    
     
 }

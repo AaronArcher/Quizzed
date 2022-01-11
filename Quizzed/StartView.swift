@@ -9,7 +9,7 @@ import SwiftUI
 
 struct StartView: View {
     
-    @StateObject var quizModel = QuizViewModel()
+    @EnvironmentObject var quizModel: QuizViewModel
     
     @State var endAnimation = false
     
@@ -19,6 +19,8 @@ struct StartView: View {
             
             
             SplashView(endAnimation: $endAnimation)
+                .environmentObject(quizModel)
+
             
             CategoryView()
                 .environmentObject(quizModel)
