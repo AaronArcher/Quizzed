@@ -22,7 +22,6 @@ struct StartView: View {
 
             
             CategoryView()
-                .environmentObject(quizModel)
                 .offset(x: endAnimation ? 0 : UIScreen.main.bounds.width)
 
         }

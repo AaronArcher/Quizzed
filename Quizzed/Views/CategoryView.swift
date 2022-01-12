@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CategoryView: View {
     
-    @EnvironmentObject var quizModel: QuizViewModel
-    
+    @StateObject var quizModel = QuizViewModel()
+
     let columns = [
         GridItem(.flexible(), spacing: 5),
         GridItem(.flexible(), spacing: 5)
@@ -53,7 +53,7 @@ struct CategoryView: View {
                         }
                     }
                     .padding(.horizontal,10)
-                    .frame(maxHeight: 520)
+                    .frame(maxHeight: 544)
                     
                     Spacer()
                     
