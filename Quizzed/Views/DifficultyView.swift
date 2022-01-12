@@ -13,131 +13,144 @@ struct DifficultyView: View {
     
     @EnvironmentObject var quizModel: QuizViewModel
     
+    let width = UIScreen.main.bounds.width
+    
     @Binding var selectedCategory: String
     
-    @State var selectedDifficulty = "Easy"
+    @State var selectedDifficulty = "easy"
     
     var body: some View {
-
-        ZStack(alignment: .top) {
-            Color("Purple")
+        
+        
+        VStack(spacing: 20) {
             
-            VStack(spacing: 20) {
+            Text("QUIZZED")
+                .foregroundColor(Color("Green3"))
+                .font(.system(size: 45, weight: .bold))
+                .padding(.top, 10)
             
-                Text("QUIZZED")
-                    .foregroundColor(Color("Yellow"))
-                    .font(.system(size: 45, weight: .bold))
-                    .padding(.top, 40)
-                
-                Text("SELECT A DIFFICULTY")
-                    .foregroundColor(Color("Orange"))
-                    .font(.title2)
-                    .fontWeight(.light)
-                    .padding(.bottom, 30)
-                
-                
-               // Difficulties
-                Group {
-                    DifficultyBlock(selectedDifficulty: $selectedDifficulty, difficulty: "Easy", color: "Blue")
-                        .onTapGesture {
-                                selectedDifficulty = "easy"
+            Text("SELECT A DIFFICULTY")
+                .foregroundColor(Color("Green3"))
+                .font(.title2)
+                .fontWeight(.light)
+                .padding(.bottom, 20)
+            
+            
+            // Difficulties
+            Group {
+                DifficultyBlock(selectedDifficulty: $selectedDifficulty, difficulty: "easy", color: "Green2")
+                    .onTapGesture {
+                        withAnimation {
+                            selectedDifficulty = "easy"
                             quizModel.difficulty = selectedDifficulty
                         }
-                        .frame(height: 80)
-                    
-                    DifficultyBlock(selectedDifficulty: $selectedDifficulty, difficulty: "Medium", color: "Orange")
-                        .onTapGesture {
-                                selectedDifficulty = "medium"
-                            quizModel.difficulty = selectedDifficulty
 
-                        }
-                        .frame(height: 80)
-
-                    DifficultyBlock(selectedDifficulty: $selectedDifficulty, difficulty: "Hard", color: "Yellow")
-                        .onTapGesture {
-                                selectedDifficulty = "hard"
-                            quizModel.difficulty = selectedDifficulty
-
-                        }
-                        .frame(height: 80)
-                }
+                    }
+                    .frame(width: width - 40, height: 65)
                 
+                DifficultyBlock(selectedDifficulty: $selectedDifficulty, difficulty: "medium", color: "Green2")
+                    .onTapGesture {
+                        withAnimation {
+                            selectedDifficulty = "medium"
+                            quizModel.difficulty = selectedDifficulty
+                        }
+                        
+                    }
+                    .frame(width: width - 40, height: 65)
+
+                DifficultyBlock(selectedDifficulty: $selectedDifficulty, difficulty: "hard", color: "Green2")
+                    .onTapGesture {
+                        withAnimation {
+                            selectedDifficulty = "hard"
+                            quizModel.difficulty = selectedDifficulty
+                        }
+                        
+                    }
+                    .frame(width: width - 40, height: 65)
+            }
+            
+            Spacer()
+            
+            Group {
                 // Selected category
                 VStack(spacing: 0) {
                     Text("Category selected:".uppercased())
-                        .foregroundColor(Color("Yellow"))
+                        .foregroundColor(Color("Green3"))
                         .font(.title2)
                         .padding(.top)
                         .padding(.bottom, 5)
                     
                     Text(selectedCategory.uppercased())
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("Green2"))
                         .font(.title3)
                 }
                 
                 // Selected Difficulty
                 VStack(spacing: 0) {
                     Text("Difficulty selected:".uppercased())
-                        .foregroundColor(Color("Yellow"))
+                        .foregroundColor(Color("Green3"))
                         .font(.title2)
                         .padding(.top)
                         .padding(.bottom, 5)
                     
                     Text(selectedDifficulty.uppercased())
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("Green2"))
                         .font(.title3)
-                     
-                }
-//                .padding(.bottom, 30)
-
-
-                RoundedRectangle(cornerRadius: 5)
-                    .frame(width: UIScreen.main.bounds.width - 40, height: 1)
-                    .foregroundColor(Color("Yellow"))
-                    .padding(.top, 30)
-                
-                HStack {
-                    Button {
-                        presentationMode.wrappedValue.dismiss()
-
-                    } label: {
-                        
-                        Image(systemName: "arrow.left")
-                            .font(.system(size: 30, weight: .light))
-                            .padding(.horizontal)
-                        
-                        Text("BACK")
-                            .font(.title)
-                            .fontWeight(.light)
-                    }
                     
-                        Spacer()
-                        
-                        NavigationLink {
-                            QuizView()
-                                .environmentObject(quizModel)
-                            
-                        } label: {
-                            
-                            Text("START")
-                                .font(.title)
-                                .fontWeight(.light)
-                                
-                            Image(systemName: "arrow.right")
-                                .font(.system(size: 30, weight: .light))
-                                .padding(.horizontal)
-
-                    }
                 }
-                .foregroundColor(Color("Orange"))
-                
-                
             }
-            .frame(maxHeight: .infinity)
+            
+            Spacer()
+            
+            RoundedRectangle(cornerRadius: 5)
+                .frame(width: UIScreen.main.bounds.width - 40, height: 1)
+                .foregroundColor(Color("Green3"))
+            
+            
+            HStack {
+                Button {
+                    presentationMode.wrappedValue.dismiss()
+                    
+                } label: {
+                    
+                    Image(systemName: "arrow.left")
+                        .font(.system(size: 30, weight: .light))
+                        .padding(.horizontal)
+                    
+                    Text("BACK")
+                        .font(.title)
+                        .fontWeight(.light)
+                }
+                
+                Spacer()
+                
+                NavigationLink {
+                    QuizView()
+                        .environmentObject(quizModel)
+                    
+                } label: {
+                    
+                    Text("START")
+                        .font(.title)
+                        .fontWeight(.light)
+                    
+                    Image(systemName: "arrow.right")
+                        .font(.system(size: 30, weight: .light))
+                        .padding(.horizontal)
+                    
+                }
+            }
+            .foregroundColor(Color("Green3"))
+            
+            Spacer()
+            
         }
-        .ignoresSafeArea()
+        .padding()
+        .background(Color("Background"))
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+        
+        
     }
 }
 
@@ -159,8 +172,9 @@ struct DifficultyBlock: View {
         
         ZStack {
             Rectangle()
+                .cornerRadius(10)
                 .foregroundColor(Color(color))
-                .frame(height: 80)
+                .frame(height: 65)
             
             Text(difficulty.uppercased())
                 .foregroundColor(.white)
@@ -170,11 +184,11 @@ struct DifficultyBlock: View {
             DifficultyShape1()
                 .trim(from: 0, to: selectedDifficulty == difficulty ? 1 : 0)
                 .stroke(.white, lineWidth: 1.5)
-
+            
             DifficultyShape2()
                 .trim(from: 0, to: selectedDifficulty == difficulty ? 1 : 0)
                 .stroke(.white, lineWidth: 1.5)
-
+            
         }
         
     }
@@ -188,7 +202,7 @@ struct DifficultyShape1: Shape {
             
             path.move(to: CGPoint(x: rect.minX + 20, y: rect.midY))
             path.addLine(to: CGPoint(x: rect.midX - 80, y: rect.midY))
-
+            
             
         }
     }
@@ -202,7 +216,7 @@ struct DifficultyShape2: Shape {
             
             path.move(to: CGPoint(x: rect.maxX - 20, y: rect.midY))
             path.addLine(to: CGPoint(x: rect.midX + 80, y: rect.midY))
-
+            
             
         }
     }

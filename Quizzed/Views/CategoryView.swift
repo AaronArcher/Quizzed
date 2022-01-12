@@ -12,8 +12,8 @@ struct CategoryView: View {
     @EnvironmentObject var quizModel: QuizViewModel
     
     let columns = [
-        GridItem(.flexible(), spacing: 0),
-        GridItem(.flexible(), spacing: 0)
+        GridItem(.flexible(), spacing: 5),
+        GridItem(.flexible(), spacing: 5)
     ]
         
     @State private var selectedCategory = ""
@@ -21,18 +21,15 @@ struct CategoryView: View {
     var body: some View {
        
         NavigationView {
-            ZStack(alignment: .top) {
-                
-                Color("Purple")
-                
-                VStack(spacing: 20) {
+           
+                VStack(spacing: 10) {
                     Text("QUIZZED")
-                        .foregroundColor(Color("Yellow"))
+                        .foregroundColor(Color("Green3"))
                         .font(.system(size: 45, weight: .bold))
-                        .padding(.top, 40)
+                        .padding(.top, 10)
                     
                     Text("SELECT A CATEGORY")
-                        .foregroundColor(Color("Orange"))
+                        .foregroundColor(Color("Green3"))
                         .font(.title2)
                         .fontWeight(.light)
 
@@ -40,7 +37,7 @@ struct CategoryView: View {
                     // Category Blocks
                     
                     ScrollView(.vertical, showsIndicators: false){
-                        LazyVGrid(columns: columns, spacing: 0) {
+                        LazyVGrid(columns: columns, spacing: 5) {
                             ForEach(categories, id: \.id) { item in
                                 
                                 CategoryBlock(selectedCategory: $selectedCategory, category: item.category, image: item.image, color: item.color)
@@ -51,17 +48,14 @@ struct CategoryView: View {
                                         quizModel.categoryID = item.categoryID
                                         print(selectedCategory)
                                     }
-                                    
-                                
                             }
                             
                         }
                     }
+                    .padding(.horizontal,10)
                     .frame(maxHeight: 520)
                     
-                    RoundedRectangle(cornerRadius: 5)
-                        .frame(width: UIScreen.main.bounds.width - 40, height: 1)
-                        .foregroundColor(.clear)
+                    Spacer()
                     
                     NavigationLink {
                         DifficultyView(selectedCategory: $selectedCategory)
@@ -82,15 +76,18 @@ struct CategoryView: View {
                                 .padding(.horizontal)
                                 
                         }
-                        .foregroundColor(Color("Orange"))
+                        .foregroundColor(Color("Green3"))
                     }
                     .disabled(selectedCategory.isEmpty ? true : false)
 
-                    
+                    Spacer()
                 }
-                .frame(maxHeight: .infinity)
-            }
-            .ignoresSafeArea()
+                .background(
+                    Color("Background")
+                )
+                .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
+                
         }
         
     
@@ -118,6 +115,9 @@ struct CategoryBlock: View {
         ZStack {
             Rectangle()
                 .foregroundColor(Color(color))
+            
+            Rectangle()
+                .stroke(Color("Green3"), lineWidth: 1)
             
             VStack(spacing: 0) {
                 Image(image)

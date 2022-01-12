@@ -23,17 +23,24 @@ struct QuizView: View {
                 HStack {
                     
                     Text("QUIZZED")
-                        .foregroundColor(Color("Yellow"))
+                        .foregroundColor(Color("Background"))
                         .font(.title.bold())
                     
                     Spacer()
                     
-                    Text("\(quizModel.index + 1) out of \(quizModel.length) ")
-                        .foregroundColor(.white)
-                        .font(.title3)
+                    VStack {
+                        Text("Question")
+                            .bold()
+                        
+                        Text("\(quizModel.index + 1) out of \(quizModel.length) ")
+                            
+                    }
+                    .foregroundColor(Color("Background"))
+                    .font(.subheadline)
                 }
+                .padding(.top, 10)
             
-                ProgressView(progress: quizModel.progress)
+                ProgressBarView(progress: quizModel.progress)
                 
                 VStack(alignment: .leading, spacing: 20) {
                     
@@ -53,32 +60,37 @@ struct QuizView: View {
                 
                 Spacer()
                 
+                // Next Button
                 Button {
-                    quizModel.nextQuestion()
-                    
+                        quizModel.nextQuestion()
                 } label: {
                     ZStack {
-                        
                         RoundedRectangle(cornerRadius: 10)
                             .frame(width: 170, height: 50)
-                            .foregroundColor(Color("Yellow"))
+                            .foregroundColor(Color("Background"))
                         
                         Text("NEXT")
-                            .foregroundColor(Color("Blue"))
+                            .foregroundColor(Color("Green3"))
                             .font(.title)
-                        
-                            
                     }
                 }
                 .disabled(!quizModel.answerSelected)
-                .padding(.bottom, 50)
-
+                
+                Spacer()
+                
+                HStack {
+                    Text("SCORE: ")
+                    
+                    Text("\(quizModel.score)")
+                }
+                .foregroundColor(Color("Green2"))
+                .font(.headline)
+                .padding(.bottom,20)
                 
                         
             }
             .padding()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("Purple"))
+            .background(Color("Green3"))
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
             .task {

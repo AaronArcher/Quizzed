@@ -19,8 +19,10 @@
 		EE900641278CB5A900B9BAB8 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE900640278CB5A900B9BAB8 /* Answer.swift */; };
 		EE900643278CB5D600B9BAB8 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE900642278CB5D600B9BAB8 /* Quiz.swift */; };
 		EE900645278CCCD200B9BAB8 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE900644278CCCD200B9BAB8 /* QuizView.swift */; };
-		EE900648278CD8F700B9BAB8 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE900647278CD8F700B9BAB8 /* ProgressView.swift */; };
+		EE900648278CD8F700B9BAB8 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE900647278CD8F700B9BAB8 /* ProgressBarView.swift */; };
 		EE90064A278CDBEB00B9BAB8 /* AnswerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE900649278CDBEB00B9BAB8 /* AnswerRow.swift */; };
+		EE978A55278F763400B89F0A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE978A54278F763400B89F0A /* HomeView.swift */; };
+		EE978A57278F764100B89F0A /* QShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE978A56278F764100B89F0A /* QShape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,8 +40,10 @@
 		EE900640278CB5A900B9BAB8 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		EE900642278CB5D600B9BAB8 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		EE900644278CCCD200B9BAB8 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
-		EE900647278CD8F700B9BAB8 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		EE900647278CD8F700B9BAB8 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		EE900649278CDBEB00B9BAB8 /* AnswerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerRow.swift; sourceTree = "<group>"; };
+		EE978A54278F763400B89F0A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		EE978A56278F764100B89F0A /* QShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QShape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 				EE14C88A278B20DF007AE31B /* CategoryView.swift */,
 				EE14C893278B6093007AE31B /* DifficultyView.swift */,
 				EE900644278CCCD200B9BAB8 /* QuizView.swift */,
+				EE978A54278F763400B89F0A /* HomeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -125,8 +130,9 @@
 		EE900646278CD8DF00B9BAB8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				EE900647278CD8F700B9BAB8 /* ProgressView.swift */,
+				EE900647278CD8F700B9BAB8 /* ProgressBarView.swift */,
 				EE900649278CDBEB00B9BAB8 /* AnswerRow.swift */,
+				EE978A56278F764100B89F0A /* QShape.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -203,16 +209,18 @@
 			files = (
 				EE14C87C278B1356007AE31B /* StartView.swift in Sources */,
 				EE14C890278B422D007AE31B /* Category.swift in Sources */,
+				EE978A55278F763400B89F0A /* HomeView.swift in Sources */,
 				EE90063F278CB51200B9BAB8 /* QuizViewModel.swift in Sources */,
 				EE14C87A278B1356007AE31B /* QuizzedApp.swift in Sources */,
 				EE14C894278B6093007AE31B /* DifficultyView.swift in Sources */,
 				EE14C88B278B20DF007AE31B /* CategoryView.swift in Sources */,
 				EE14C889278B14A8007AE31B /* SplashView.swift in Sources */,
 				EE900645278CCCD200B9BAB8 /* QuizView.swift in Sources */,
+				EE978A57278F764100B89F0A /* QShape.swift in Sources */,
 				EE900641278CB5A900B9BAB8 /* Answer.swift in Sources */,
 				EE900643278CB5D600B9BAB8 /* Quiz.swift in Sources */,
 				EE90064A278CDBEB00B9BAB8 /* AnswerRow.swift in Sources */,
-				EE900648278CD8F700B9BAB8 /* ProgressView.swift in Sources */,
+				EE900648278CD8F700B9BAB8 /* ProgressBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

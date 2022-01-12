@@ -18,23 +18,25 @@ struct SplashView: View {
         
         ZStack {
 
-            Color("Yellow")
+            Color("Green3")
             
             Circle()
                 .rotation(Angle(degrees: -90))
                 .trim(from: 0, to: startAnimation ? 1 : 0)
-                .stroke(Color("Purple"), style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
+                .stroke(
+                    Color("Background")
+                    , style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
                 .frame(width: 200, height: 200)
             
             RoundedRectangle(cornerRadius: 15)
                 .rotation(Angle(degrees: 45))
                 .offset(x: 70, y: 70)
-                .fill(Color("Purple"))
+                .fill(Color("Background"))
                 .frame(width: lineAnimation ? 100 : 0, height: 20)
             
             Rectangle()
                 .rotation(Angle(degrees: 45))
-                .fill(Color("Purple"))
+                .fill(Color("Background"))
                 .frame(width: 900, height: screenAnimation ? 1000 : 0)
                 .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
             
@@ -51,7 +53,7 @@ struct SplashView: View {
             }
             .padding(.bottom, 60)
             .frame(height: UIScreen.main.bounds.height)
-            .foregroundColor(Color("Purple"))
+            .foregroundColor(Color("Background"))
             
         }
         .ignoresSafeArea()

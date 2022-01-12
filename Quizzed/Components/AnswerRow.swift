@@ -21,10 +21,10 @@ struct AnswerRow: View {
             Rectangle()
                 .cornerRadius(3)
                 .frame(width: 10, height: 2)
-                .foregroundColor(Color("Purple"))
+                .foregroundColor(isSelected ? (answer.isCorrect ? Color("Background") : Color("Green3")) : Color("Green3"))
             
             Text(answer.text)
-                .foregroundColor(Color("Purple"))
+                .foregroundColor(isSelected ? (answer.isCorrect ? Color("Background") : Color("Green3")) : Color("Green3"))
                 .font(.title3)
                 .fontWeight(.light)
             
@@ -33,7 +33,7 @@ struct AnswerRow: View {
                 
                 Image(systemName: answer.isCorrect ? "checkmark.circle" : "x.circle")
                     .font(.system(size: 25, weight: .light))
-                    .foregroundColor(answer.isCorrect ? Color("Yellow") : Color("Purple"))
+                    .foregroundColor(answer.isCorrect ? Color("Background") : Color("Green3"))
                     .padding(.trailing)
                     
             }
@@ -42,9 +42,9 @@ struct AnswerRow: View {
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.white)
+        .background(isSelected ? (answer.isCorrect ? Color("Green2") : Color("Background")) : .white)
         .cornerRadius(10)
-        .shadow(color: Color("Orange"), radius: 2, x: 0, y: 0)
+        .shadow(color: .white, radius: 2, x: 0, y: 0)
         .onTapGesture {
             if !quizModel.answerSelected {
                 withAnimation {

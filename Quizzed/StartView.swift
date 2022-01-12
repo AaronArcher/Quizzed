@@ -19,12 +19,11 @@ struct StartView: View {
             
             
             SplashView(endAnimation: $endAnimation)
-                .environmentObject(quizModel)
 
             
             CategoryView()
                 .environmentObject(quizModel)
-                .offset(y: endAnimation ? 0 : UIScreen.main.bounds.height)
+                .offset(x: endAnimation ? 0 : UIScreen.main.bounds.width)
 
         }
         
@@ -36,5 +35,7 @@ struct StartView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         StartView()
+            .environmentObject(QuizViewModel())
+
     }
 }
