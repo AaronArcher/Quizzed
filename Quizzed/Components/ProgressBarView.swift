@@ -16,14 +16,14 @@ struct ProgressBarView: View {
 
         ZStack(alignment: .leading) {
             Rectangle()
-                .frame(maxWidth: 350, maxHeight: 4)
-                .foregroundColor(Color("Green2"))
-                .cornerRadius(10)
+                .frame(height: 2)
+                .foregroundColor(.white)
+                .cornerRadius(5)
             
             Rectangle()
-                .frame(width: progress, height: 5)
+                .frame(width: progress, height: 4)
                 .animation(.easeInOut, value: progress)
-                .foregroundColor(Color("Background"))
+                .foregroundColor(Color("Red"))
                 .cornerRadius(10)
         }
 

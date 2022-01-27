@@ -35,27 +35,25 @@ struct ResultView: View {
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(Color("Background"))
+                            .foregroundColor(Color("Red"))
                             .frame(width: 160, height: 50)
                         
                         Text("Play Again!")
-                            .foregroundColor(Color("Green3"))
+                            .foregroundColor(.white)
                             .font(.title2)
-                            .fontWeight(.light)
                     }
                 }
 
                 
             }
-            .foregroundColor(Color("Background"))
+            .foregroundColor(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("Green3"))
+            .background(Color("Blue1"))
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
             
         } else {
-            CategoryView()
-                .environmentObject(quizModel)
+            HomeView()
         }
         
     }

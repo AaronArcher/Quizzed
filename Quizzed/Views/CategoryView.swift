@@ -40,7 +40,7 @@ struct CategoryView: View {
                         LazyVGrid(columns: columns, spacing: 5) {
                             ForEach(categories, id: \.id) { item in
                                 
-                                CategoryBlock(selectedCategory: $selectedCategory, category: item.category, image: item.image, color: item.color)
+                                CategoryBlock(selectedCategory: $selectedCategory, category: item.category, image: item.image)
                                     .onTapGesture {
                                         withAnimation(.easeInOut) {
                                             selectedCategory = item.category
@@ -108,13 +108,12 @@ struct CategoryBlock: View {
         
     var category: String
     var image: String
-    var color: String
     
     var body: some View {
         
         ZStack {
             Rectangle()
-                .foregroundColor(Color(color))
+                .foregroundColor(.white)
             
             Rectangle()
                 .stroke(Color("Green3"), lineWidth: 1)

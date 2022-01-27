@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+
 struct StartView: View {
     
+
     @EnvironmentObject var quizModel: QuizViewModel
     
     @State var endAnimation = false
@@ -21,7 +23,7 @@ struct StartView: View {
             SplashView(endAnimation: $endAnimation)
 
             
-            CategoryView()
+            HomeView()
                 .offset(x: endAnimation ? 0 : UIScreen.main.bounds.width)
 
         }

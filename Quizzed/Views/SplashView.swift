@@ -18,25 +18,25 @@ struct SplashView: View {
         
         ZStack {
 
-            Color("Green3")
+            Color("Red")
             
             Circle()
                 .rotation(Angle(degrees: -90))
                 .trim(from: 0, to: startAnimation ? 1 : 0)
                 .stroke(
-                    Color("Background")
+                    Color("Blue1")
                     , style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
                 .frame(width: 200, height: 200)
             
             RoundedRectangle(cornerRadius: 15)
                 .rotation(Angle(degrees: 45))
                 .offset(x: 70, y: 70)
-                .fill(Color("Background"))
+                .fill(Color("Blue1"))
                 .frame(width: lineAnimation ? 100 : 0, height: 20)
             
             Rectangle()
                 .rotation(Angle(degrees: 45))
-                .fill(Color("Background"))
+                .fill(Color("Blue1"))
                 .frame(width: 900, height: screenAnimation ? 1000 : 0)
                 .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
             
@@ -46,9 +46,12 @@ struct SplashView: View {
                 
                 Text("Powered By")
                     .font(.subheadline)
+                    .foregroundColor(Color("Blue1"))
                 
                 Text("Open Trivia Database")
                     .font(.caption)
+                    .foregroundColor(Color("Blue1"))
+
                 
             }
             .padding(.bottom, 60)
