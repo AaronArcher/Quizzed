@@ -128,6 +128,8 @@ struct HomeView: View {
                     }
                     .opacity(selectedCategory != "" ? 1 : 0.4)
                 }
+                .disabled(selectedCategory != "" ? false : true)
+
                 
                 
             }

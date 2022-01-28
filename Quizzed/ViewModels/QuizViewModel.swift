@@ -72,7 +72,7 @@ class QuizViewModel: ObservableObject {
     
     func setQuestion() {
         answerSelected = false
-        progress = CGFloat(Double(index + 1) / Double(length) * 350)
+        progress = CGFloat(Double(index) / Double(length) * 350)
         
         if index < length {
             let currentQuizQuestion = quiz[index]

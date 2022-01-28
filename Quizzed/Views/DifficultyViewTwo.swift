@@ -152,6 +152,8 @@ struct DifficultyViewTwo: View {
                 }
                 .opacity(selectedDifficulty != "" ? 1 : 0.4)
             }
+            .disabled(selectedCategory != "" ? false : true)
+
             
         }
         .ignoresSafeArea()

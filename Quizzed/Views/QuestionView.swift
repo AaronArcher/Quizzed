@@ -9,12 +9,17 @@ import SwiftUI
 
 struct QuestionView: View {
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+    
     @EnvironmentObject var quizModel: QuizViewModel
     let screenWidth = UIScreen.main.bounds.width
     let screenHeight = UIScreen.main.bounds.height
     
     @Binding var selectedCategory: String
     @Binding var categoryImage: String
+    
+    @State private var showingAlert = false
     
     var body: some View {
         
@@ -39,17 +44,12 @@ struct QuestionView: View {
                     .offset(y: -20)
                 
                 HStack(spacing: 15) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 5)
-                            .foregroundColor(Color("Blue3"))
-                            .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                         
                         Image(categoryImage)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 35)
-                    }
-                    .frame(width: 40, height: 40)
+                            .frame(width: 50)
+                    
                     
                     Text(selectedCategory)
                         .foregroundColor(.white)
@@ -57,15 +57,21 @@ struct QuestionView: View {
                     
                     Spacer()
                     
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 5)
-                            .foregroundColor(Color("Blue3"))
-                            .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                        
-                        Image(systemName: "xmark")
-                            .font(.title)
+                    Button {
+                        showingAlert = true
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 5)
+                                .foregroundColor(.white)
+                                .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                            
+                            Image(systemName: "xmark")
+                                .font(.title2)
+                                .foregroundColor(Color("Blue1"))
+                        }
+                        .frame(width: 30, height: 30)
                     }
-                    .frame(width: 40, height: 40)
+
                 }
                 .padding(.horizontal)
             }
@@ -155,6 +161,12 @@ struct QuestionView: View {
             } catch {
                 print("Error", error)
             }
+        }
+        .alert("Are you sure you want to cancel?", isPresented: $showingAlert) {
+            Button("Yes") {
+                presentationMode.wrappedValue.dismiss()
+            }
+            Button("No", role: .cancel) {}
         }
     }
         
