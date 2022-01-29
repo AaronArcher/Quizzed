@@ -48,7 +48,7 @@ struct QuestionView: View {
                         Image(categoryImage)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 50)
+                            .frame(height: 40)
                     
                     
                     Text(selectedCategory)
@@ -162,7 +162,7 @@ struct QuestionView: View {
                 print("Error", error)
             }
         }
-        .alert("Are you sure you want to cancel?", isPresented: $showingAlert) {
+        .alert("Are you sure you want to quit?", isPresented: $showingAlert) {
             Button("Yes") {
                 presentationMode.wrappedValue.dismiss()
             }

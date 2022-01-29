@@ -107,7 +107,7 @@ struct HomeView: View {
                 // MARK: Next Button
                 
                 NavigationLink {
-                    DifficultyViewTwo(selectedCategory: $selectedCategory, categoryImage: $categoryImage)
+                    DifficultyView(selectedCategory: $selectedCategory, categoryImage: $categoryImage)
                         .environmentObject(quizModel)
                 } label: {
                     ZStack{

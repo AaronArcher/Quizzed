@@ -14,7 +14,7 @@ struct AnswerRow: View {
     var answer: Answer
     @State private var isSelected = false
     @State private var selectedBox = false
-    @State private var selectedCorrect = false
+    @State var selectedCorrect = false
     
     let screenHeight = UIScreen.main.bounds.height
     
@@ -48,15 +48,27 @@ struct AnswerRow: View {
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 5)
-                        .frame(width: 20, height: 20)
-                        .foregroundColor(Color("Blue3"))
-                        .shadow(color: Color("Blue1"), radius: 3, x: 3, y: 3)
+                        .frame(width: screenHeight / 12 - 30, height: screenHeight / 12 - 30)
+                        .foregroundColor(Color(hue: 0.365, saturation: 0.0, brightness: 0.94))
+                        .shadow(color: Color("Blue1").opacity(0.3), radius: 2, x: 2, y: 2)
                         .scaleEffect(selectedBox ? 1 : 0)
                     
-                        Image(systemName: answer.isCorrect ? "checkmark" : "xmark")
-                            .font(.system(size: 45))
-                            .foregroundColor(Color("Red"))
-                            .scaleEffect(selectedCorrect ? 1 : 0)
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 20))
+                        .foregroundColor(Color(hue: 0.302, saturation: 1.0, brightness: 0.465))
+                        .shadow(color: Color("Blue1").opacity(0.3), radius: 2, x: 2, y: 2)
+                        .offset(x: selectedCorrect ? 0 : 40, y: selectedCorrect ? 0 : 40)
+                        .opacity((isSelected && selectedCorrect) ? 1 : 0)
+                    
+                    Image(systemName: "xmark")
+                        .font(.system(size: 20))
+                        .foregroundColor(Color("Red"))
+                        .shadow(color: Color("Blue1").opacity(0.3), radius: 2, x: 2, y: 2)
+                        .offset(x: 40, y: 40)
+                        .offset(x: (isSelected && !selectedCorrect) ? -40 : 0, y: (isSelected && !selectedCorrect) ? -40 : 0)
+                        .animation(.spring(response: 0.5, dampingFraction: 0.5).delay(0.7), value: isSelected)
+                        .opacity((isSelected && !selectedCorrect) ? 1 : 0)
+                        .animation(.easeInOut.delay(0.7), value: isSelected)
                 }
                 
             }
@@ -71,57 +83,15 @@ struct AnswerRow: View {
                     quizModel.selectAnswer(answer: answer)
                 }
                 
-                withAnimation(.easeInOut.delay(0.4)) {
+                withAnimation(.easeInOut.delay(0.3)) {
                     selectedBox = true
                 }
-                withAnimation(.spring(response: 0.8, dampingFraction: 0.5).delay(0.7)) {
-                    selectedCorrect = true
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.5).delay(0.7)) {
+                    selectedCorrect = answer.isCorrect
                 }
                 
             }
         }
-        
-        //        ZStack {
-        //            Color("Blue1")
-        //            HStack(spacing: 10) {
-        //
-        //                Rectangle()
-        //                    .cornerRadius(3)
-        //                    .frame(width: 10, height: 2)
-        //                    .foregroundColor(isSelected ? (answer.isCorrect ? Color("Blue3") : Color("Green3")) : .white)
-        //
-        //                Text(answer.text)
-        //                    .foregroundColor(isSelected ? (answer.isCorrect ? Color("Background") : Color("Green3")) : .white)
-        //                    .font(.title3)
-        //                    .fontWeight(.light)
-        //
-        //                if isSelected {
-        //                    Spacer()
-        //
-        //                    Image(systemName: answer.isCorrect ? "checkmark.circle" : "x.circle")
-        //                        .font(.system(size: 25, weight: .light))
-        //                        .foregroundColor(answer.isCorrect ? Color("Background") : Color("Green3"))
-        //                        .padding(.trailing)
-        //
-        //                }
-        //
-        //
-        //            }
-        //            .padding()
-        //            .frame(maxWidth: .infinity, alignment: .leading)
-        //            .background(isSelected ? (answer.isCorrect ? Color("Green2") : Color("Background")) : Color("Blue3"))
-        //            .cornerRadius(10)
-        //            .shadow(color: .white, radius: 2, x: 0, y: 0)
-        //            .onTapGesture {
-        //                if !quizModel.answerSelected {
-        //                    withAnimation {
-        //                        isSelected = true
-        //                        quizModel.selectAnswer(answer: answer)
-        //                    }
-        //                }
-        //        }
-        //        }
-        
         
     }
 }

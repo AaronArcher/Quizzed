@@ -1,8 +1,8 @@
 //
-//  DifficultyView.swift
+//  DifficultyViewTwo.swift
 //  Quizzed
 //
-//  Created by Aaron Johncock on 09/01/2022.
+//  Created by Aaron Johncock on 26/01/2022.
 //
 
 import SwiftUI
@@ -13,211 +13,162 @@ struct DifficultyView: View {
     
     @EnvironmentObject var quizModel: QuizViewModel
     
-    let width = UIScreen.main.bounds.width
+    let screenWidth = UIScreen.main.bounds.width
+    let screenHeight = UIScreen.main.bounds.height
+    
+    @State var selectedDifficulty = ""
     
     @Binding var selectedCategory: String
-    
-    @State var selectedDifficulty = "easy"
+    @Binding var categoryImage: String
+
     
     var body: some View {
-        
-        
-        VStack(spacing: 20) {
+
+        VStack(spacing: 0) {
             
-            Text("QUIZZED")
-                .foregroundColor(Color("Green3"))
-                .font(.system(size: 45, weight: .bold))
-                .padding(.top, 10)
+            // MARK: Title Bar
+            ZStack {
+                
+                Rectangle()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: screenHeight / 6)
+                    .foregroundColor(Color("Red"))
+                
+                    .mask(RoundedRectangle(cornerRadius: 25))
+                    .offset(y: -20)
+                
+                HStack {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 5)
+                                .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                            
+                            Image(systemName: "chevron.left")
+                                .font(.title)
+                                .foregroundColor(Color("Blue3"))
+                            
+                        }
+                        .frame(width: 30, height: 30)
+                    }
+                    
+                    Spacer()
+                    
+                    Text("QUIZZED")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                        .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                    
+                    Spacer()
+                    
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundColor(.clear)
+                        
+                    }
+                    .frame(width: 30, height: 30)
+                }
+                .padding(.horizontal)
+                
+            }
             
-            Text("SELECT A DIFFICULTY")
-                .foregroundColor(Color("Green3"))
+            // MARK: Select Difficulty
+            Text("Select your difficulty")
                 .font(.title2)
                 .fontWeight(.light)
-                .padding(.bottom, 20)
+                .padding(.vertical)
             
-            
-            // Difficulties
+            // MARK: Difficulties
             Group {
-                DifficultyBlock(selectedDifficulty: $selectedDifficulty, difficulty: "easy", color: "Green2")
+                DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "easy")
                     .onTapGesture {
-                        withAnimation {
+                        withAnimation(.easeInOut) {
                             selectedDifficulty = "easy"
                             quizModel.difficulty = selectedDifficulty
                         }
-
                     }
-                    .frame(width: width - 40, height: 65)
                 
-                DifficultyBlock(selectedDifficulty: $selectedDifficulty, difficulty: "medium", color: "Green2")
+                DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "medium")
                     .onTapGesture {
-                        withAnimation {
+                        withAnimation(.easeInOut) {
                             selectedDifficulty = "medium"
                             quizModel.difficulty = selectedDifficulty
                         }
-                        
                     }
-                    .frame(width: width - 40, height: 65)
-
-                DifficultyBlock(selectedDifficulty: $selectedDifficulty, difficulty: "hard", color: "Green2")
+                
+                DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "hard")
                     .onTapGesture {
-                        withAnimation {
+                        withAnimation(.easeInOut) {
                             selectedDifficulty = "hard"
                             quizModel.difficulty = selectedDifficulty
                         }
-                        
                     }
-                    .frame(width: width - 40, height: 65)
             }
-            
-            Spacer()
-            
-            Group {
-                // Selected category
-                VStack(spacing: 0) {
-                    Text("Category selected:".uppercased())
-                        .foregroundColor(Color("Green3"))
-                        .font(.title2)
-                        .padding(.top)
-                        .padding(.bottom, 5)
-                    
-                    Text(selectedCategory.uppercased())
-                        .foregroundColor(Color("Green2"))
-                        .font(.title3)
-                }
-                
-                // Selected Difficulty
-                VStack(spacing: 0) {
-                    Text("Difficulty selected:".uppercased())
-                        .foregroundColor(Color("Green3"))
-                        .font(.title2)
-                        .padding(.top)
-                        .padding(.bottom, 5)
-                    
-                    Text(selectedDifficulty.uppercased())
-                        .foregroundColor(Color("Green2"))
-                        .font(.title3)
-                    
-                }
-            }
-            
-            Spacer()
-            
-            RoundedRectangle(cornerRadius: 5)
-                .frame(width: UIScreen.main.bounds.width - 40, height: 1)
-                .foregroundColor(Color("Green3"))
+            .padding(.horizontal)
+            .padding(.vertical, 10)
+
             
             
-            HStack {
-                Button {
-                    presentationMode.wrappedValue.dismiss()
-                    
-                } label: {
-                    
-                    Image(systemName: "arrow.left")
-                        .font(.system(size: 30, weight: .light))
-                        .padding(.horizontal)
-                    
-                    Text("BACK")
+           
+            VStack(spacing: 10) {
+                    Text(selectedCategory)
                         .font(.title)
                         .fontWeight(.light)
-                }
-                
-                Spacer()
-                
-                NavigationLink {
-                    QuizView()
-                        .environmentObject(quizModel)
                     
-                } label: {
+                        Image(categoryImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 60)
+
+                    
+                }
+                .padding(.top, 40)
+                
+                
+
+            Spacer()
+            
+            // MARK: Start Button
+            NavigationLink {
+                QuestionView(selectedCategory: $selectedCategory, categoryImage: $categoryImage)
+                    .environmentObject(quizModel)
+            } label: {
+                ZStack{
+                    Rectangle()
+                        .frame(maxWidth: .infinity)
+                        .frame(height: screenHeight / 7)
+                        .foregroundColor(Color("Red").opacity(1))
+                    
+                        .mask(RoundedRectangle(cornerRadius: 25))
+                        .offset(y: 15)
+                    
                     
                     Text("START")
-                        .font(.title)
-                        .fontWeight(.light)
-                    
-                    Image(systemName: "arrow.right")
-                        .font(.system(size: 30, weight: .light))
-                        .padding(.horizontal)
+                        .font(.largeTitle)
+                        .padding(.top, 5)
+                        .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                     
                 }
+                .opacity(selectedDifficulty != "" ? 1 : 0.4)
             }
-            .foregroundColor(Color("Green3"))
-            
-            Spacer()
+            .disabled(selectedDifficulty != "" ? false : true)
+
             
         }
-        .padding()
-        .background(Color("Background"))
+        .ignoresSafeArea()
+        .foregroundColor(.white)
+        .background(Color("Blue1"))
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        
-        
+
     }
 }
 
-struct DifficultyView_Previews: PreviewProvider {
+struct DifficultyViewTwo_Previews: PreviewProvider {
     static var previews: some View {
-        DifficultyView(selectedCategory: .constant("Comics"))
+        DifficultyView(selectedCategory: .constant("Comics"), categoryImage: .constant("Comics"))
             .environmentObject(QuizViewModel())
-    }
-}
 
-struct DifficultyBlock: View {
-    
-    @Binding var selectedDifficulty: String
-    
-    var difficulty: String
-    var color: String
-    
-    var body: some View {
-        
-        ZStack {
-            Rectangle()
-                .cornerRadius(10)
-                .foregroundColor(Color(color))
-                .frame(height: 65)
-            
-            Text(difficulty.uppercased())
-                .foregroundColor(.white)
-                .font(.title)
-                .fontWeight(.light)
-            
-            DifficultyShape1()
-                .trim(from: 0, to: selectedDifficulty == difficulty ? 1 : 0)
-                .stroke(.white, lineWidth: 1.5)
-            
-            DifficultyShape2()
-                .trim(from: 0, to: selectedDifficulty == difficulty ? 1 : 0)
-                .stroke(.white, lineWidth: 1.5)
-            
-        }
-        
-    }
-}
-
-struct DifficultyShape1: Shape {
-    
-    func path(in rect: CGRect) -> Path {
-        
-        return Path { path in
-            
-            path.move(to: CGPoint(x: rect.minX + 20, y: rect.midY))
-            path.addLine(to: CGPoint(x: rect.midX - 80, y: rect.midY))
-            
-            
-        }
-    }
-}
-
-struct DifficultyShape2: Shape {
-    
-    func path(in rect: CGRect) -> Path {
-        
-        return Path { path in
-            
-            path.move(to: CGPoint(x: rect.maxX - 20, y: rect.midY))
-            path.addLine(to: CGPoint(x: rect.midX + 80, y: rect.midY))
-            
-            
-        }
     }
 }
