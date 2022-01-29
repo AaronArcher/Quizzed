@@ -24,6 +24,7 @@
 		EEC1F6FA27A1F4F200CDD70A /* DifficultyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC1F6F927A1F4F200CDD70A /* DifficultyButton.swift */; };
 		EEC1F6FC27A1FDBC00CDD70A /* DifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC1F6FB27A1FDBC00CDD70A /* DifficultyView.swift */; };
 		EEC1F6FE27A33F7300CDD70A /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC1F6FD27A33F7300CDD70A /* QuestionView.swift */; };
+		EEC1F70027A57FA800CDD70A /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC1F6FF27A57FA800CDD70A /* RulesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		EEC1F6F927A1F4F200CDD70A /* DifficultyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyButton.swift; sourceTree = "<group>"; };
 		EEC1F6FB27A1FDBC00CDD70A /* DifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyView.swift; sourceTree = "<group>"; };
 		EEC1F6FD27A33F7300CDD70A /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		EEC1F6FF27A57FA800CDD70A /* RulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				EEC1F6FB27A1FDBC00CDD70A /* DifficultyView.swift */,
 				EEC1F6FD27A33F7300CDD70A /* QuestionView.swift */,
 				EE978A58278F83BE00B89F0A /* ResultView.swift */,
+				EEC1F6FF27A57FA800CDD70A /* RulesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEC1F6FA27A1F4F200CDD70A /* DifficultyButton.swift in Sources */,
+				EEC1F70027A57FA800CDD70A /* RulesView.swift in Sources */,
 				EE14C87C278B1356007AE31B /* StartView.swift in Sources */,
 				EEC1F6F627A0AB7800CDD70A /* HomeView.swift in Sources */,
 				EE14C890278B422D007AE31B /* Category.swift in Sources */,
