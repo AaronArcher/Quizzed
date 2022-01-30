@@ -56,9 +56,9 @@ struct SplashView: View {
             }
             .padding(.bottom, 60)
             .frame(height: UIScreen.main.bounds.height)
-            .foregroundColor(Color("Background"))
             
         }
+        .background(Color("Blue1"))
         .ignoresSafeArea()
         .onAppear {
             withAnimation(.easeInOut(duration: 0.75).delay(0.25)) {
@@ -73,7 +73,7 @@ struct SplashView: View {
                 screenAnimation = true
             }
             
-            withAnimation(.spring().delay(3.5)) {
+            withAnimation(.easeInOut.delay(3.5)) {
                 endAnimation = true
             }
             

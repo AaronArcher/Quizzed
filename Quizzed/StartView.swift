@@ -11,22 +11,30 @@ import SwiftUI
 struct StartView: View {
     
 
-    @EnvironmentObject var quizModel: QuizViewModel
     
     @State var endAnimation = false
     
     var body: some View {
         
-        ZStack {
-            
-            
-            SplashView(endAnimation: $endAnimation)
 
-            
-            HomeView()
-                .offset(x: endAnimation ? 0 : UIScreen.main.bounds.width)
-
-        }
+            ZStack {
+          
+//                if !endAnimation {
+//                    SplashView(endAnimation: $endAnimation)
+//
+//                } else {
+//                    HomeHolderView()
+//                        .transition(.move(edge: .trailing))
+//
+//                }
+                SplashView(endAnimation: $endAnimation)
+                    .zIndex(!endAnimation ? 1 : 0)
+    
+    
+                HomeHolderView()
+                    .offset(x: endAnimation ? 0 : -screenSize().width)
+            }
+        
         
 
         
@@ -38,5 +46,12 @@ struct ContentView_Previews: PreviewProvider {
         StartView()
             .environmentObject(QuizViewModel())
 
+    }
+}
+
+// MARK: Extension to get screen size
+extension View {
+    func screenSize() -> CGRect {
+        return UIScreen.main.bounds
     }
 }

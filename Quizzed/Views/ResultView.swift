@@ -53,7 +53,7 @@ struct ResultView: View {
             .navigationBarBackButtonHidden(true)
             
         } else {
-            HomeView()
+            HomeHolderView()
         }
         
     }

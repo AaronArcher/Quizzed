@@ -16,7 +16,6 @@ struct AnswerRow: View {
     @State private var selectedBox = false
     @State var selectedCorrect = false
     
-    let screenHeight = UIScreen.main.bounds.height
     
     
     var body: some View {
@@ -26,11 +25,11 @@ struct AnswerRow: View {
             
             RoundedRectangle(cornerRadius: 10)
                 .foregroundColor( Color("Blue3"))
-                .frame(height: screenHeight / 12)
+                .frame(height: screenSize().height / 12)
             
             RoundedRectangle(cornerRadius: 10)
                 .foregroundColor(.white)
-                .frame(height: screenHeight / 12)
+                .frame(height: screenSize().height / 12)
                 .frame(maxWidth: isSelected ? .infinity : 0)
             
             HStack(spacing: 10) {
@@ -48,7 +47,7 @@ struct AnswerRow: View {
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 5)
-                        .frame(width: screenHeight / 12 - 30, height: screenHeight / 12 - 30)
+                        .frame(width: screenSize().height / 12 - 30, height: screenSize().height / 12 - 30)
                         .foregroundColor(Color(hue: 0.365, saturation: 0.0, brightness: 0.94))
                         .shadow(color: Color("Blue1").opacity(0.3), radius: 2, x: 2, y: 2)
                         .scaleEffect(selectedBox ? 1 : 0)

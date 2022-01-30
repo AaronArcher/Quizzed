@@ -13,8 +13,6 @@ struct QuestionView: View {
 
     
     @EnvironmentObject var quizModel: QuizViewModel
-    let screenWidth = UIScreen.main.bounds.width
-    let screenHeight = UIScreen.main.bounds.height
     
     @Binding var selectedCategory: String
     @Binding var categoryImage: String
@@ -37,7 +35,7 @@ struct QuestionView: View {
             ZStack {
                 Rectangle()
                     .frame(maxWidth: .infinity)
-                    .frame(height: screenHeight / 6)
+                    .frame(height: screenSize().height / 6)
                     .foregroundColor(Color("Red"))
                 
                     .mask(RoundedRectangle(cornerRadius: 25))
@@ -131,7 +129,7 @@ struct QuestionView: View {
                 ZStack{
                     Rectangle()
                         .frame(maxWidth: .infinity)
-                        .frame(height: screenHeight / 7)
+                        .frame(height: screenSize().height / 7)
                         .foregroundColor(Color("Red").opacity(1))
                     
                         .mask(RoundedRectangle(cornerRadius: 25))

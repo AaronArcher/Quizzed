@@ -13,7 +13,7 @@ struct QuizzedApp: App {
     var body: some Scene {
         WindowGroup {
             StartView()
-         
+                .preferredColorScheme(.dark)
 
         }
 

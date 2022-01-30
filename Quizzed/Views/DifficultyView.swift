@@ -13,9 +13,6 @@ struct DifficultyView: View {
     
     @EnvironmentObject var quizModel: QuizViewModel
     
-    let screenWidth = UIScreen.main.bounds.width
-    let screenHeight = UIScreen.main.bounds.height
-    
     @State var selectedDifficulty = ""
     
     @Binding var selectedCategory: String
@@ -31,7 +28,7 @@ struct DifficultyView: View {
                 
                 Rectangle()
                     .frame(maxWidth: .infinity)
-                    .frame(height: screenHeight / 6)
+                    .frame(height: screenSize().height / 6)
                     .foregroundColor(Color("Red"))
                 
                     .mask(RoundedRectangle(cornerRadius: 25))
@@ -137,7 +134,7 @@ struct DifficultyView: View {
                 ZStack{
                     Rectangle()
                         .frame(maxWidth: .infinity)
-                        .frame(height: screenHeight / 7)
+                        .frame(height: screenSize().height / 7)
                         .foregroundColor(Color("Red").opacity(1))
                     
                         .mask(RoundedRectangle(cornerRadius: 25))
