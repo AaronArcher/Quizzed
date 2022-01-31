@@ -28,13 +28,9 @@ struct HomeView: View {
                         // MARK: Title Bar
                         ZStack {
                             
-                            Rectangle()
-                                .frame(maxWidth: .infinity)
-                                .frame(height: screenSize().height / 6)
+                            RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                                .frame(height: screenSize().height / 7)
                                 .foregroundColor(Color("Red"))
-                            
-                                .mask(RoundedRectangle(cornerRadius: 25))
-                                .offset(y: -20)
                             
                             HStack {
                                 
@@ -90,6 +86,7 @@ struct HomeView: View {
                         // MARK: Select Category
                         Text("Select a category")
                             .font(.title2)
+                            .padding(.top, 20)
                         
                         
                         // MARK: Categories
@@ -126,19 +123,16 @@ struct HomeView: View {
                                 .environmentObject(quizModel)
                         } label: {
                             ZStack{
-                                Rectangle()
-                                    .frame(maxWidth: .infinity)
-                                    .frame(height: screenSize().height / 7)
-                                    .foregroundColor(Color("Red").opacity(1))
-                                
-                                    .mask(RoundedRectangle(cornerRadius: 25))
-                                    .offset(y: 20)
+//
+                                RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                    .frame(height: screenSize().height / 9)
+                                    .foregroundColor(Color("Red"))
                                 
                                 
                                 Text("NEXT")
                                     .font(.largeTitle)
-                                    .padding(.top, 15)
                                     .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                                    .padding(.bottom, 10)
                                 
                             }
                             .opacity(selectedCategory != "" ? 1 : 0.4)

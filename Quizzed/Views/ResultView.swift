@@ -13,9 +13,14 @@ struct ResultView: View {
     
     @State private var restart = false
     
+    // Disable animation with navigation Link to HomeViewHolder as the default animation shows the StatsView when sliding in
+    init(){
+            UINavigationBar.setAnimationsEnabled(false)
+        }
+    
     var body: some View {
         
-        if !restart {
+//        if !restart {
             
             VStack(spacing: 50) {
                 Text("Quizzed".uppercased())
@@ -27,11 +32,26 @@ struct ResultView: View {
                 Text("You scored \(quizModel.score) out of \(quizModel.length)")
                 
                 
-                Button {
-                    
-                    restart = true
-                    
-                    
+//                Button {
+//
+//                    restart = true
+//
+//
+//                } label: {
+//                    ZStack {
+//                        RoundedRectangle(cornerRadius: 10)
+//                            .foregroundColor(Color("Red"))
+//                            .frame(width: 160, height: 50)
+//
+//                        Text("Play Again!")
+//                            .foregroundColor(.white)
+//                            .font(.title2)
+//                    }
+//                }
+
+                NavigationLink {
+                    HomeHolderView()
+                        .transition(.slide)
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
@@ -52,9 +72,9 @@ struct ResultView: View {
             .navigationBarHidden(true)
             .navigationBarBackButtonHidden(true)
             
-        } else {
-            HomeHolderView()
-        }
+//        } else {
+//            HomeHolderView()
+//        }
         
     }
 }

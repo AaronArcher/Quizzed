@@ -22,21 +22,10 @@ struct HomeHolderView: View {
 
         let statsViewWidth = screenSize().width - 90
         
-//        ZStack {
-//
-//            StatsView(showStats: $showStats)
-//
-//            HomeView(showStats: $showStats)
-////                .cornerRadius(showStats ? 20 : 0)
-//                .rotation3DEffect(Angle.degrees(showStats ? -15 : 0), axis: (x: 0, y: 0, z: 0), anchor: .trailing)
-//                .offset(x: showStats ? screenWidth / 2 : 0)
-//                .ignoresSafeArea()
-//
-//        }
         
         HStack(spacing: 0) {
+                StatsView(showStats: $showStats)
             
-            StatsView(showStats: $showStats)
             
             HomeView(showStats: $showStats)
                 .frame(width: screenSize().width)
@@ -50,24 +39,24 @@ struct HomeHolderView: View {
                         .ignoresSafeArea(.container, edges: .vertical)
                         .onTapGesture {
                             withAnimation {
-                                showStats.toggle()
+                                showStats = false
                             }
                         }
                 )
         }
-//        .frame(width: screenSize().width + statsViewWidth)
+        .frame(width: screenSize().width + statsViewWidth)
         .offset(x: -statsViewWidth / 2)
         .offset(x: offset > 0 ? offset : 0)
-        .gesture(
-        
-            DragGesture()
-                .updating($gestureOffset, body: { value, out, _ in
-                    
-                    out = value.translation.width
-                })
-                .onEnded(onEnd(value:))
-        )
-        .animation(.easeInOut, value: offset == 0)
+//        .gesture(
+//
+//            DragGesture()
+//                .updating($gestureOffset, body: { value, out, _ in
+//
+//                    out = value.translation.width
+//                })
+//                .onEnded(onEnd(value:))
+//        )
+        .animation(.spring(), value: offset == 0)
         .onChange(of: showStats) { newValue in
             if showStats && offset == 0 {
                 offset = statsViewWidth
@@ -78,9 +67,11 @@ struct HomeHolderView: View {
                 lastStoredOffset = 0
             }
         }
-        .onChange(of: gestureOffset) { newValue in
-            onChange()
-        }
+//        .onChange(of: gestureOffset) { newValue in
+//            onChange()
+//        }
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
 
     }
     
@@ -95,6 +86,7 @@ struct HomeHolderView: View {
         let translation = value.translation.width
         
         withAnimation {
+            
             if translation > 0 {
                 if translation > (statsViewWidth / 2) {
                     // Show StatsView

@@ -19,6 +19,8 @@ struct QuestionView: View {
     
     @State private var showingAlert = false
     
+    @State private var showQuiz = false
+    
     var body: some View {
         
         
@@ -33,13 +35,10 @@ struct QuestionView: View {
             
             // MARK: Header
             ZStack {
-                Rectangle()
-                    .frame(maxWidth: .infinity)
-                    .frame(height: screenSize().height / 6)
-                    .foregroundColor(Color("Red"))
                 
-                    .mask(RoundedRectangle(cornerRadius: 25))
-                    .offset(y: -20)
+                RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                    .frame(height: screenSize().height / 7)
+                    .foregroundColor(Color("Red"))
                 
                 HStack(spacing: 15) {
                         
@@ -74,51 +73,81 @@ struct QuestionView: View {
                 .padding(.horizontal)
             }
             
-            //MARK: Score
-            HStack {
-                
-                VStack {
-                    Text("Question")
-                        .font(.headline)
-                    
-                    Text("\(quizModel.index + 1) out of \(quizModel.length) ")
-                        .font(.subheadline)
-                }
-                
-                Spacer()
-                
-                VStack {
-                    Text("Score")
-                        .font(.headline)
-                    
-                    Text("\(quizModel.score)")
-                        .font(.subheadline)
-                }
-            }
-            .padding(.horizontal, 40)
-            .padding(.top)
             
-    
-            ProgressBarView(progress: quizModel.progress)
-                .padding(.top, 10)
-                .padding(.horizontal, 30)
             
-            // MARK: Questions
-            VStack(alignment: .leading, spacing: 10) {
+            if !showQuiz {
                 
-                Text(quizModel.question)
-                    .foregroundColor(.white)
-                    
-                ForEach(quizModel.answerChoices, id: \.id) { answer in
-                    
-                    AnswerRow(answer: answer)
-                        .environmentObject(quizModel)
-                }
-                
-                    
+                Text("Loading Quiz")
+                    .padding(.top, 60)
+                    .font(.title3)
+           
             }
-            .padding(.horizontal)
-            .padding(.top, 20)
+            
+            else {
+                //MARK: Score
+                HStack {
+                    
+                    VStack {
+                        Text("Question")
+                            .font(.headline)
+                        
+                        Text("\(quizModel.index + 1) out of \(quizModel.length) ")
+                            .font(.subheadline)
+                    }
+                    
+                    Spacer()
+                    
+                    VStack {
+                        Text("Score")
+                            .font(.headline)
+                        
+                        Text("\(quizModel.score)")
+                            .font(.subheadline)
+                    }
+                }
+                .padding(.horizontal, 40)
+                .padding(.top, 20)
+                
+        
+                ProgressBarView(progress: quizModel.progress)
+                    .padding(.top, 10)
+                    .padding(.horizontal, 30)
+                
+                // MARK: Questions
+                    VStack(alignment: .leading, spacing: 10) {
+                        
+                        Text(quizModel.question)
+                            .foregroundColor(.white)
+                            
+                        ForEach(quizModel.answerChoices, id: \.id) { answer in
+                            
+                            AnswerRow(answer: answer)
+                                .environmentObject(quizModel)
+                        }
+                        
+                            
+                    }
+                    .padding(.horizontal)
+                    .padding(.top, 20)
+               
+            }
+            
+//            // MARK: Questions
+//            VStack(alignment: .leading, spacing: 10) {
+//
+//                Text(quizModel.question)
+//                    .foregroundColor(.white)
+//
+//                ForEach(quizModel.answerChoices, id: \.id) { answer in
+//
+//                    AnswerRow(answer: answer)
+//                        .environmentObject(quizModel)
+//                }
+//
+//
+//            }
+//            .padding(.horizontal)
+//            .padding(.top, 20)
             
             Spacer()
             
@@ -127,18 +156,13 @@ struct QuestionView: View {
                 quizModel.nextQuestion()
             } label: {
                 ZStack{
-                    Rectangle()
-                        .frame(maxWidth: .infinity)
-                        .frame(height: screenSize().height / 7)
-                        .foregroundColor(Color("Red").opacity(1))
-                    
-                        .mask(RoundedRectangle(cornerRadius: 25))
-                        .offset(y: 30)
-                    
+                    RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                        .frame(height: screenSize().height / 9)
+                        .foregroundColor(Color("Red"))
                     
                     Text("NEXT")
                         .font(.largeTitle)
-                        .padding(.top, 25)
+                        .padding(.bottom, 10)
                         .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                     
                 }
@@ -148,6 +172,11 @@ struct QuestionView: View {
 
             
         }
+        .onAppear(perform: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+                showQuiz = true
+            }
+        })
         .ignoresSafeArea()
         .foregroundColor(.white)
         .background(Color("Blue1"))

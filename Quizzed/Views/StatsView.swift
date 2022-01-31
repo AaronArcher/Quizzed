@@ -12,7 +12,7 @@ struct StatsView: View {
     @Binding var showStats: Bool
     
     var body: some View {
-        ZStack {
+        VStack {
             Button("Close"){
                 withAnimation {
                     showStats.toggle()
@@ -20,6 +20,10 @@ struct StatsView: View {
                 }
             }
             .foregroundColor(.white)
+            
+            RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 20)
+                .frame(width: 100, height: 40)
+                .foregroundColor(Color("Red"))
         }
         .frame(width: screenSize().width - 90)
         .frame(maxHeight: .infinity)

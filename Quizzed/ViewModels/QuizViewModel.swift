@@ -24,11 +24,7 @@ class QuizViewModel: ObservableObject {
     @Published var difficulty = "easy"
     
     
-//        init() {
-//            Task.init {
-//                await fetchQuiz()
-//            }
-//        }
+
     
         func fetchQuiz() async {
 

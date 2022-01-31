@@ -82,10 +82,10 @@ struct AnswerRow: View {
                     quizModel.selectAnswer(answer: answer)
                 }
                 
-                withAnimation(.easeInOut.delay(0.3)) {
+                withAnimation(.easeInOut.delay(0.2)) {
                     selectedBox = true
                 }
-                withAnimation(.spring(response: 0.5, dampingFraction: 0.5).delay(0.7)) {
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.5).delay(0.5)) {
                     selectedCorrect = answer.isCorrect
                 }
                 

@@ -26,13 +26,10 @@ struct DifficultyView: View {
             // MARK: Title Bar
             ZStack {
                 
-                Rectangle()
-                    .frame(maxWidth: .infinity)
-                    .frame(height: screenSize().height / 6)
+                RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                    .frame(height: screenSize().height / 7)
                     .foregroundColor(Color("Red"))
-                
-                    .mask(RoundedRectangle(cornerRadius: 25))
-                    .offset(y: -20)
+
                 
                 HStack {
                     Button {
@@ -75,6 +72,7 @@ struct DifficultyView: View {
                 .font(.title2)
                 .fontWeight(.light)
                 .padding(.vertical)
+                .padding(.top, 20)
             
             // MARK: Difficulties
             Group {
@@ -132,18 +130,14 @@ struct DifficultyView: View {
                     .environmentObject(quizModel)
             } label: {
                 ZStack{
-                    Rectangle()
-                        .frame(maxWidth: .infinity)
-                        .frame(height: screenSize().height / 7)
-                        .foregroundColor(Color("Red").opacity(1))
-                    
-                        .mask(RoundedRectangle(cornerRadius: 25))
-                        .offset(y: 15)
+                    RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                        .frame(height: screenSize().height / 9)
+                        .foregroundColor(Color("Red"))
                     
                     
                     Text("START")
                         .font(.largeTitle)
-                        .padding(.top, 5)
+                        .padding(.bottom, 10)
                         .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                     
                 }
@@ -153,6 +147,7 @@ struct DifficultyView: View {
 
             
         }
+        .frame(maxWidth: screenSize().width)
         .ignoresSafeArea()
         .foregroundColor(.white)
         .background(Color("Blue1"))
