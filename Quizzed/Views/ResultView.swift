@@ -11,70 +11,130 @@ struct ResultView: View {
     
     @EnvironmentObject var quizModel: QuizViewModel
     
-    @State private var restart = false
+    @State var score: Int = 0
+    
+    private var resultsText: String {
+        if quizModel.score > 7 {
+            return "Congratulations!"
+        }
+        else if quizModel.score < 4 {
+            return "Oh no..."
+        }
+        else {
+            return "Not bad!"
+        }
+    }
+    
     
     // Disable animation with navigation Link to HomeViewHolder as the default animation shows the StatsView when sliding in
     init(){
-            UINavigationBar.setAnimationsEnabled(false)
-        }
+        UINavigationBar.setAnimationsEnabled(false)
+    }
     
     var body: some View {
         
-//        if !restart {
+        
+        
+        VStack {
             
-            VStack(spacing: 50) {
-                Text("Quizzed".uppercased())
+            ZStack {
+                
+                RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                    .frame(height: screenSize().height / 7)
+                    .foregroundColor(Color("Red"))
+                
+                Text(resultsText)
                     .font(.largeTitle)
-                
-                Text("Congratulations")
-                    .font(.title2)
-                
-                Text("You scored \(quizModel.score) out of \(quizModel.length)")
-                
-                
-//                Button {
-//
-//                    restart = true
-//
-//
-//                } label: {
-//                    ZStack {
-//                        RoundedRectangle(cornerRadius: 10)
-//                            .foregroundColor(Color("Red"))
-//                            .frame(width: 160, height: 50)
-//
-//                        Text("Play Again!")
-//                            .foregroundColor(.white)
-//                            .font(.title2)
-//                    }
-//                }
-
-                NavigationLink {
-                    HomeHolderView()
-                        .transition(.slide)
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                            .foregroundColor(Color("Red"))
-                            .frame(width: 160, height: 50)
-                        
-                        Text("Play Again!")
-                            .foregroundColor(.white)
-                            .font(.title2)
-                    }
-                }
-
+                    .foregroundColor(.white)
+                    .bold()
+                    .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                 
             }
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color("Blue1"))
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
+            Spacer()
             
-//        } else {
-//            HomeHolderView()
-//        }
+            
+//            Text("You scored \(quizModel.score) out of \(quizModel.length)")
+            
+            HStack {
+                
+                Text("Correct Answers:")
+                
+                Spacer()
+                
+                Text("\(quizModel.score)")
+                    .foregroundColor(.white)
+                    .bold()
+                
+            }
+            .font(.title)
+            .foregroundColor(Color("Red"))
+            .padding()
+            
+            HStack {
+                
+                Text("Out of:")
+                
+                Spacer()
+                
+                Text("\(quizModel.length)")
+                    .foregroundColor(.white)
+                    .bold()
+                
+            }
+            .font(.title)
+            .foregroundColor(Color("Red"))
+            .padding()
+            
+        
+            Text("Score")
+                .font(.largeTitle)
+                .padding(.top)
+            
+            Text("\(score)")
+                .font(.largeTitle)
+                .bold()
+                .foregroundColor(Color("Red"))
+            
+            Spacer()
+            
+            
+            
+            NavigationLink {
+                HomeHolderView()
+                    .transition(.slide)
+            } label: {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                        .foregroundColor(Color("Red"))
+                        .frame(width: 160, height: 50)
+                    
+                    Text("Play Again!")
+                        .foregroundColor(.white)
+                        .font(.title2)
+                }
+            }
+            
+            Spacer()
+            
+        }
+        .ignoresSafeArea()
+        .foregroundColor(.white)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color("Blue1"))
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if quizModel.difficulty == "easy" {
+                score = quizModel.score * 5
+            }
+            else if quizModel.difficulty == "medium" {
+                score = quizModel.score * 10
+            }
+            else {
+                score = quizModel.score * 15
+            }
+        }
+        
         
     }
 }

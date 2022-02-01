@@ -43,8 +43,8 @@ struct HomeView: View {
                                         RoundedRectangle(cornerRadius: 5)
                                             .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                                         
-                                        Image(systemName: "person.fill")
-                                            .font(.title2)
+                                        Image(systemName: "chart.bar.fill")
+                                            .font(.title3)
                                             .foregroundColor(Color("Blue3"))
                                         
                                     }

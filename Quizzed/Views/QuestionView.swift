@@ -80,6 +80,11 @@ struct QuestionView: View {
                 Text("Loading Quiz")
                     .padding(.top, 60)
                     .font(.title3)
+                    .padding(.bottom, 30)
+                
+                LottieView()
+                    .frame(width: screenSize().width / 2, height: screenSize().width / 2)
+                
            
             }
             
@@ -173,7 +178,7 @@ struct QuestionView: View {
             
         }
         .onAppear(perform: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 showQuiz = true
             }
         })

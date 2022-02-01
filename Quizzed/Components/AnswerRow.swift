@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct AnswerRow: View {
     
     @EnvironmentObject var quizModel: QuizViewModel
@@ -16,7 +17,7 @@ struct AnswerRow: View {
     @State private var selectedBox = false
     @State var selectedCorrect = false
     
-    
+    @State private var textHeight: CGFloat = 0
     
     var body: some View {
         
@@ -42,6 +43,7 @@ struct AnswerRow: View {
                     .foregroundColor(isSelected ? Color("Blue3") : .white)
                     .font(.title3)
                     .fontWeight(.light)
+                    
                 
                 Spacer()
                 
@@ -85,7 +87,7 @@ struct AnswerRow: View {
                 withAnimation(.easeInOut.delay(0.2)) {
                     selectedBox = true
                 }
-                withAnimation(.spring(response: 0.5, dampingFraction: 0.5).delay(0.5)) {
+                withAnimation(.spring(response: 0.5, dampingFraction: 0.5).delay(0.4)) {
                     selectedCorrect = answer.isCorrect
                 }
                 
