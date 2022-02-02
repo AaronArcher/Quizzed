@@ -10,11 +10,14 @@ import SwiftUI
 struct ResultView: View {
     
     @EnvironmentObject var quizModel: QuizViewModel
-    
-    @State var score: Int = 0
+        
     
     private var resultsText: String {
-        if quizModel.score > 7 {
+        
+        if quizModel.score == 10 {
+            return "Perfect Score!"
+        }
+        else if quizModel.score > 7 {
             return "Congratulations!"
         }
         else if quizModel.score < 4 {
@@ -25,6 +28,9 @@ struct ResultView: View {
         }
     }
     
+    
+    @AppStorage("totalScore") var totalScore = 0
+    @AppStorage("perfectRounds") var perfectRounds = 0
     
     // Disable animation with navigation Link to HomeViewHolder as the default animation shows the StatsView when sliding in
     init(){
@@ -53,7 +59,6 @@ struct ResultView: View {
             Spacer()
             
             
-//            Text("You scored \(quizModel.score) out of \(quizModel.length)")
             
             HStack {
                 
@@ -90,7 +95,7 @@ struct ResultView: View {
                 .font(.largeTitle)
                 .padding(.top)
             
-            Text("\(score)")
+            Text("\(quizModel.score)")
                 .font(.largeTitle)
                 .bold()
                 .foregroundColor(Color("Red"))
@@ -124,18 +129,17 @@ struct ResultView: View {
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            if quizModel.difficulty == "easy" {
-                score = quizModel.score * 5
-            }
-            else if quizModel.difficulty == "medium" {
-                score = quizModel.score * 10
-            }
-            else {
-                score = quizModel.score * 15
-            }
+            updateStorage()
         }
         
         
+    }
+    
+    func updateStorage() {
+        totalScore += quizModel.score
+        if quizModel.score == 10 {
+            perfectRounds += 1
+        }
     }
 }
 

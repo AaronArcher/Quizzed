@@ -18,13 +18,16 @@ struct HomeHolderView: View {
     // Gesture offset
     @GestureState var gestureOffset: CGFloat = 0
     
+
+    
+    
     var body: some View {
 
         let statsViewWidth = screenSize().width - 90
         
         
         HStack(spacing: 0) {
-                StatsView(showStats: $showStats)
+            StatsView(showStats: $showStats)
             
             
             HomeView(showStats: $showStats)

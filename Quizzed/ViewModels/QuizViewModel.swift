@@ -19,9 +19,11 @@ class QuizViewModel: ObservableObject {
     @Published var answerChoices: [Answer] = []
     @Published var progress: CGFloat = 0
     @Published var score = 0
+    @Published var configuredScore = 0
     
     @Published var categoryID = "20"
     @Published var difficulty = "easy"
+    @Published var selectedCategory = "Animals"
     
     
 
@@ -80,6 +82,13 @@ class QuizViewModel: ObservableObject {
     func selectAnswer(answer: Answer) {
         answerSelected = true
         if answer.isCorrect {
+            if difficulty == "easy" {
+            configuredScore += 1
+            } else if difficulty == "medium" {
+                configuredScore += 5
+            } else {
+                configuredScore += 10
+            }
             score += 1
         }
     }

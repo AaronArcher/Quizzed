@@ -14,9 +14,6 @@ struct QuestionView: View {
     
     @EnvironmentObject var quizModel: QuizViewModel
     
-    @Binding var selectedCategory: String
-    @Binding var categoryImage: String
-    
     @State private var showingAlert = false
     
     @State private var showQuiz = false
@@ -42,13 +39,13 @@ struct QuestionView: View {
                 
                 HStack(spacing: 15) {
                         
-                        Image(categoryImage)
+                    Image(quizModel.selectedCategory)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 40)
                     
                     
-                    Text(selectedCategory)
+                    Text(quizModel.selectedCategory)
                         .foregroundColor(.white)
                         .font(.title2)
                     
@@ -137,23 +134,6 @@ struct QuestionView: View {
                
             }
             
-//            // MARK: Questions
-//            VStack(alignment: .leading, spacing: 10) {
-//
-//                Text(quizModel.question)
-//                    .foregroundColor(.white)
-//
-//                ForEach(quizModel.answerChoices, id: \.id) { answer in
-//
-//                    AnswerRow(answer: answer)
-//                        .environmentObject(quizModel)
-//                }
-//
-//
-//            }
-//            .padding(.horizontal)
-//            .padding(.top, 20)
-            
             Spacer()
             
             
@@ -207,7 +187,7 @@ struct QuestionView: View {
 
 struct QuestionView_Previews: PreviewProvider {
     static var previews: some View {
-        QuestionView(selectedCategory: .constant("Animals"), categoryImage: .constant("Animals"))
+        QuestionView()
             .environmentObject(QuizViewModel())
         
     }

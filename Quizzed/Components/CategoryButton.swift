@@ -11,7 +11,6 @@ struct CategoryButton: View {
     
     @Binding var selectedCategory: String
     
-    var icon: String = "Animals"
     var category: String = "Animals"
 
     var body: some View {
@@ -30,7 +29,7 @@ struct CategoryButton: View {
 
                 HStack {
                     
-                        Image(icon)
+                        Image(category)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 50)

@@ -94,13 +94,13 @@ struct HomeView: View {
                             
                             ForEach(categories, id: \.id) { item in
                                 
-                                CategoryButton(selectedCategory: $selectedCategory, icon: item.image, category: item.category)
+                                CategoryButton(selectedCategory: $selectedCategory, category: item.category)
                                     .onTapGesture {
                                         withAnimation(.easeInOut) {
                                             selectedCategory = item.category
-                                            categoryImage = item.image
                                         }
                                         quizModel.categoryID = item.categoryID
+                                        quizModel.selectedCategory = item.category
                                         print(selectedCategory)
 
                                     }
@@ -119,7 +119,7 @@ struct HomeView: View {
                         // MARK: Next Button
                         
                         NavigationLink {
-                            DifficultyView(selectedCategory: $selectedCategory, categoryImage: $categoryImage)
+                            DifficultyView()
                                 .environmentObject(quizModel)
                         } label: {
                             ZStack{

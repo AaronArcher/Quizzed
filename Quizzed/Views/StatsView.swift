@@ -11,6 +11,21 @@ struct StatsView: View {
     
     @Binding var showStats: Bool
     
+    @State private var showingAlert = false
+    
+    @AppStorage("totalScore")  var totalScore = 0
+    @AppStorage("perfectRounds") var perfectRounds = 0
+    
+    @AppStorage("animalsPlayed") var animalsPlayed = 0
+    @AppStorage("filmPlayed") var filmPlayed = 0
+    @AppStorage("musicPlayed") var musicPlayed = 0
+    @AppStorage("tvPlayed") var tvPlayed = 0
+    @AppStorage("videoGamesPlayed") var videoGamesPlayed = 0
+    @AppStorage("sciencePlayed") var sciencePlayed = 0
+    @AppStorage("mythologyPlayed") var mythologyPlayed = 0
+    @AppStorage("comicsPlayed") var comicsPlayed = 0
+
+    
     var body: some View {
         VStack {
             
@@ -53,7 +68,7 @@ struct StatsView: View {
                     .bold()
                 Spacer()
                 
-                Text("865")
+                Text("\(totalScore)")
                     .font(.title)
                 
             }
@@ -70,12 +85,14 @@ struct StatsView: View {
                 
                 Spacer()
                 
-                Text("6")
+                Text("\(perfectRounds)")
                     .font(.title)
                 
             }
             .padding(.horizontal)
             .padding(.trailing)
+            
+            Spacer()
             
             // MARK: Favourite Category
             Text("Favourite Category")
@@ -98,7 +115,7 @@ struct StatsView: View {
             
             HStack{
                 Button {
-                    
+                    showingAlert = true
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 15)
@@ -122,6 +139,13 @@ struct StatsView: View {
         .frame(maxHeight: .infinity)
         .background(Color("Blue3"))
         .frame(maxWidth: .infinity, alignment: .leading)
+        .alert("Are you sure you want to reset your score?", isPresented: $showingAlert) {
+            Button("Yes") {
+                totalScore = 0
+                perfectRounds = 0
+            }
+            Button("No", role: .cancel) {}
+        }
 
     }
 }

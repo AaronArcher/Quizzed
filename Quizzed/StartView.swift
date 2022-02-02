@@ -11,7 +11,7 @@ import SwiftUI
 struct StartView: View {
     
 
-    
+    @State var totalScore = 0
     @State var endAnimation = false
     
     var body: some View {

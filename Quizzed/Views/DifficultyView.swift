@@ -14,9 +14,6 @@ struct DifficultyView: View {
     @EnvironmentObject var quizModel: QuizViewModel
     
     @State var selectedDifficulty = ""
-    
-    @Binding var selectedCategory: String
-    @Binding var categoryImage: String
 
     
     var body: some View {
@@ -107,11 +104,11 @@ struct DifficultyView: View {
             
            
             VStack(spacing: 10) {
-                    Text(selectedCategory)
+                Text(quizModel.selectedCategory)
                         .font(.title)
                         .fontWeight(.light)
                     
-                        Image(categoryImage)
+                Image(quizModel.selectedCategory)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: 60)
@@ -126,7 +123,7 @@ struct DifficultyView: View {
             
             // MARK: Start Button
             NavigationLink {
-                QuestionView(selectedCategory: $selectedCategory, categoryImage: $categoryImage)
+                QuestionView()
                     .environmentObject(quizModel)
             } label: {
                 ZStack{
@@ -159,7 +156,7 @@ struct DifficultyView: View {
 
 struct DifficultyViewTwo_Previews: PreviewProvider {
     static var previews: some View {
-        DifficultyView(selectedCategory: .constant("Comics"), categoryImage: .constant("Comics"))
+        DifficultyView()
             .environmentObject(QuizViewModel())
 
     }
