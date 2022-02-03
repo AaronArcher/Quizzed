@@ -103,7 +103,7 @@ struct QuestionView: View {
                         Text("Score")
                             .font(.headline)
                         
-                        Text("\(quizModel.score)")
+                        Text("\(quizModel.configuredScore)")
                             .font(.subheadline)
                     }
                 }

@@ -83,11 +83,11 @@ class QuizViewModel: ObservableObject {
         answerSelected = true
         if answer.isCorrect {
             if difficulty == "easy" {
-            configuredScore += 1
+            configuredScore += 5
             } else if difficulty == "medium" {
-                configuredScore += 5
-            } else {
                 configuredScore += 10
+            } else {
+                configuredScore += 15
             }
             score += 1
         }

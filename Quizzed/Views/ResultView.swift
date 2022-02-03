@@ -95,7 +95,7 @@ struct ResultView: View {
                 .font(.largeTitle)
                 .padding(.top)
             
-            Text("\(quizModel.score)")
+            Text("\(quizModel.configuredScore)")
                 .font(.largeTitle)
                 .bold()
                 .foregroundColor(Color("Red"))
@@ -136,7 +136,7 @@ struct ResultView: View {
     }
     
     func updateStorage() {
-        totalScore += quizModel.score
+        totalScore += quizModel.configuredScore
         if quizModel.score == 10 {
             perfectRounds += 1
         }

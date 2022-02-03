@@ -60,60 +60,56 @@ struct StatsView: View {
             .padding(.vertical, 5)
             .padding(.bottom, 30)
             
+            Spacer()
+            
             // MARK: Total Score
-            HStack{
-                Text("Total Score :")
-                    .font(.title3)
+            VStack{
+                Text("Total Score")
+                    .font(.title)
                     .foregroundColor(Color("Red"))
                     .bold()
-                Spacer()
                 
                 Text("\(totalScore)")
-                    .font(.title)
-                
+                    .font(.largeTitle)
             }
-            .padding(.horizontal)
-            .padding(.trailing)
+            .padding()
 
             
             // MARK: Perfect Rounds
-            HStack{
-                Text("Perfect Rounds :")
-                    .font(.title3)
+            VStack{
+                Text("Perfect Rounds")
+                    .font(.title)
                     .foregroundColor(Color("Red"))
                     .bold()
                 
-                Spacer()
                 
                 Text("\(perfectRounds)")
-                    .font(.title)
+                    .font(.largeTitle)
                 
             }
-            .padding(.horizontal)
-            .padding(.trailing)
+            .padding()
             
             Spacer()
             
-            // MARK: Favourite Category
-            Text("Favourite Category")
-                .font(.title)
-                .foregroundColor(Color("Red"))
-                .bold()
-                .padding(.top)
-                .padding(.bottom, 5)
-            
-            Text("Mythology")
-                .font(.title3)
-            
-            
-            Image("Mythology")
-                .resizable()
-                .scaledToFit()
-                .frame(width: screenSize().width / 3)
+//            // MARK: Favourite Category
+//            Text("Favourite Category")
+//                .font(.title)
+//                .foregroundColor(Color("Red"))
+//                .bold()
+//                .padding(.top)
+//                .padding(.bottom, 5)
+//
+//            Text("Mythology")
+//                .font(.title3)
+//
+//
+//            Image("Mythology")
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: screenSize().width / 3)
             
             Spacer()
             
-            HStack{
                 Button {
                     showingAlert = true
                 } label: {
@@ -128,8 +124,6 @@ struct StatsView: View {
                     }
                 }
 
-            }
-            .padding()
             
             Spacer()
             
