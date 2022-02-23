@@ -17,33 +17,42 @@ struct AnswerRow: View {
     @State private var selectedBox = false
     @State var selectedCorrect = false
     
-    @State private var textHeight: CGFloat = 0
     
     var body: some View {
         
         
         ZStack(alignment: .leading) {
-            
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor( Color("Blue3"))
-                .frame(height: screenSize().height / 12)
-            
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(.white)
-                .frame(height: screenSize().height / 12)
-                .frame(maxWidth: isSelected ? .infinity : 0)
-            
             HStack(spacing: 10) {
+                
                 Rectangle()
                     .cornerRadius(3)
                     .frame(width: 10, height: 2)
                     .foregroundColor(isSelected ? Color("Blue3") : .white)
                 
                 Text(answer.text)
-                    .foregroundColor(isSelected ? Color("Blue3") : .white)
                     .font(.title3)
                     .fontWeight(.light)
+                    .foregroundColor(isSelected ? Color("Blue3") : .white)
+                    .padding(.vertical, 12)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.trailing,50)
+                
+                Spacer()
+                
+            }
+            .padding(.leading, 10)
+            .background(
+                ZStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .fill(Color("Blue3"))
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .fill(.white)
+                        .frame(maxWidth: isSelected ? .infinity : 0)
+                }
                     
+                )
+
+            HStack {
                 
                 Spacer()
                 
@@ -71,10 +80,8 @@ struct AnswerRow: View {
                         .opacity((isSelected && !selectedCorrect) ? 1 : 0)
                         .animation(.easeInOut.delay(0.7), value: isSelected)
                 }
-                
             }
-            .padding(.horizontal,10)
-            
+            .padding(.trailing, 10)
             
         }
         .onTapGesture {

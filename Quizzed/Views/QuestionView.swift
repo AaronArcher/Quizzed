@@ -121,10 +121,12 @@ struct QuestionView: View {
                         Text(quizModel.question)
                             .foregroundColor(.white)
                             
-                        ForEach(quizModel.answerChoices, id: \.id) { answer in
-                            
-                            AnswerRow(answer: answer)
-                                .environmentObject(quizModel)
+                        ScrollView {
+                            ForEach(quizModel.answerChoices, id: \.id) { answer in
+                                
+                                AnswerRow(answer: answer)
+                                    .environmentObject(quizModel)
+                            }
                         }
                         
                             
