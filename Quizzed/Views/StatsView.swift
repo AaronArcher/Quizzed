@@ -16,14 +16,7 @@ struct StatsView: View {
     @AppStorage("totalScore")  var totalScore = 0
     @AppStorage("perfectRounds") var perfectRounds = 0
     
-    @AppStorage("animalsPlayed") var animalsPlayed = 0
-    @AppStorage("filmPlayed") var filmPlayed = 0
-    @AppStorage("musicPlayed") var musicPlayed = 0
-    @AppStorage("tvPlayed") var tvPlayed = 0
-    @AppStorage("videoGamesPlayed") var videoGamesPlayed = 0
-    @AppStorage("sciencePlayed") var sciencePlayed = 0
-    @AppStorage("mythologyPlayed") var mythologyPlayed = 0
-    @AppStorage("comicsPlayed") var comicsPlayed = 0
+
 
     
     var body: some View {
