@@ -170,11 +170,7 @@ struct QuestionView: View {
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .task {
-            do {
-                try await quizModel.fetchQuiz()
-            } catch {
-                print("Error", error)
-            }
+            await quizModel.fetchQuiz()
         }
         .alert("Are you sure you want to quit?", isPresented: $showingAlert) {
             Button("Yes") {
