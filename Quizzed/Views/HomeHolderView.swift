@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeHolderView: View {
     
+    @StateObject var quizModel = QuizViewModel()
+    
     @State var showStats = false
 
     // Offset for drag gesture and showing menu
@@ -31,6 +33,7 @@ struct HomeHolderView: View {
             
             
             HomeView(showStats: $showStats)
+                .environmentObject(quizModel)
                 .frame(width: screenSize().width)
             // Background when stats are showing
                 .overlay(

@@ -42,6 +42,11 @@ struct SplashView: View {
             
             VStack {
                 
+                Text("QUIZZED")
+                    .font(.title)
+                    .bold()
+                    .foregroundColor(.white)
+                
                 Spacer()
                 
                 Text("Powered By")

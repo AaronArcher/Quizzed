@@ -64,45 +64,6 @@ struct DifficultyView: View {
                 
             }
             
-            // MARK: Select Difficulty
-            Text("Select your difficulty")
-                .font(.title2)
-                .fontWeight(.light)
-                .padding(.vertical)
-                .padding(.top, 20)
-            
-            // MARK: Difficulties
-            Group {
-                DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "easy")
-                    .onTapGesture {
-                        withAnimation(.easeInOut) {
-                            selectedDifficulty = "easy"
-                            quizModel.difficulty = selectedDifficulty
-                        }
-                    }
-                
-                DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "medium")
-                    .onTapGesture {
-                        withAnimation(.easeInOut) {
-                            selectedDifficulty = "medium"
-                            quizModel.difficulty = selectedDifficulty
-                        }
-                    }
-                
-                DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "hard")
-                    .onTapGesture {
-                        withAnimation(.easeInOut) {
-                            selectedDifficulty = "hard"
-                            quizModel.difficulty = selectedDifficulty
-                        }
-                    }
-            }
-            .padding(.horizontal)
-            .padding(.vertical, 10)
-
-            
-            
-           
             VStack(spacing: 10) {
                 Text(quizModel.selectedCategory)
                         .font(.title)
@@ -116,6 +77,82 @@ struct DifficultyView: View {
                     
                 }
                 .padding(.top, 40)
+            
+            // MARK: Select Difficulty
+            Text("Select your difficulty")
+                .font(.title2)
+                .fontWeight(.light)
+                .padding(.vertical)
+                .padding(.top, 20)
+            
+            // MARK: Difficulties
+            Group {
+                DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "easy")
+                    .onTapGesture {
+                        if selectedDifficulty == "easy" {
+                            withAnimation(.easeInOut) {
+                                selectedDifficulty = ""
+                                quizModel.difficulty = ""
+                            }
+                        } else {
+                            withAnimation(.easeInOut) {
+                                selectedDifficulty = "easy"
+                                quizModel.difficulty = selectedDifficulty
+                            }
+                        }
+                    }
+                
+                DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "medium")
+                    .onTapGesture {
+                        if selectedDifficulty == "medium" {
+                            withAnimation(.easeInOut) {
+                                selectedDifficulty = ""
+                                quizModel.difficulty = ""
+                            }
+                        } else {
+                            withAnimation(.easeInOut) {
+                                selectedDifficulty = "medium"
+                                quizModel.difficulty = selectedDifficulty
+                            }
+                        }
+
+                    }
+                
+                DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "hard")
+                    .onTapGesture {
+                        if selectedDifficulty == "hard" {
+                            withAnimation(.easeInOut) {
+                                selectedDifficulty = ""
+                                quizModel.difficulty = ""
+                            }
+                        } else {
+                            withAnimation(.easeInOut) {
+                                selectedDifficulty = "hard"
+                                quizModel.difficulty = selectedDifficulty
+                            }
+                        }
+
+                    }
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 10)
+
+            
+            
+           
+//            VStack(spacing: 10) {
+//                Text(quizModel.selectedCategory)
+//                        .font(.title)
+//                        .fontWeight(.light)
+//
+//                Image(quizModel.selectedCategory)
+//                            .resizable()
+//                            .aspectRatio(contentMode: .fit)
+//                            .frame(width: 60)
+//
+//
+//                }
+//                .padding(.top, 40)
                 
                 
 
@@ -124,7 +161,7 @@ struct DifficultyView: View {
             // MARK: Start Button
             NavigationLink {
                 QuestionView()
-                    .environmentObject(quizModel)
+
             } label: {
                 ZStack{
                     RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)

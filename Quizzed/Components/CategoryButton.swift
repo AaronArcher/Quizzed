@@ -19,13 +19,13 @@ struct CategoryButton: View {
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(Color("Blue3"))
-                    .shadow(color: selectedCategory == category ? .clear : Color("Blue3"), radius: 3, x: 3, y: 3)
+//                    .shadow(color: selectedCategory == category ? .clear : Color("Blue3"), radius: 3, x: 3, y: 3)
                 
                 RoundedRectangle(cornerRadius: 10)
                     .foregroundColor(Color("Red"))
                     .frame(height: 60)
                     .frame(maxWidth: selectedCategory == category ? .infinity : 60)
-                    .shadow(color: selectedCategory == category ? Color("Red") : .clear, radius: 3, x: 3, y: 3)
+//                    .shadow(color: selectedCategory == category ? Color("Red") : .clear, radius: 3, x: 3, y: 3)
 
                 HStack {
                     

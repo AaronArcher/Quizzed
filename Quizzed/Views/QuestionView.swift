@@ -24,7 +24,7 @@ struct QuestionView: View {
         if quizModel.reachedEnd {
             
             ResultView()
-                .environmentObject(quizModel)
+
             
         } else {
             
@@ -105,6 +105,7 @@ struct QuestionView: View {
                         
                         Text("\(quizModel.configuredScore)")
                             .font(.subheadline)
+                            .animation(nil)
                     }
                 }
                 .padding(.horizontal, 40)
@@ -125,7 +126,7 @@ struct QuestionView: View {
                             ForEach(quizModel.answerChoices, id: \.id) { answer in
                                 
                                 AnswerRow(answer: answer)
-                                    .environmentObject(quizModel)
+
                             }
                         }
                         

@@ -30,7 +30,7 @@ class QuizViewModel: ObservableObject {
     
         func fetchQuiz() async {
 
-            guard let url = URL(string: "https://opentdb.com/api.php?amount=10&category=\(categoryID)&difficulty=\(difficulty)") else { fatalError("Missing URL") }
+            guard let url = URL(string: "https://opentdb.com/api.php?amount=10&category=\(categoryID)&difficulty=\(difficulty)") else { fatalError("Missing Questions URL") }
 
             let urlRequest = URLRequest(url: url)
 

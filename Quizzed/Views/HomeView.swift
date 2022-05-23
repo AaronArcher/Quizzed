@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var quizModel = QuizViewModel()
+    @EnvironmentObject var quizModel: QuizViewModel
     
     @State private var selectedCategory = ""
     @State private var categoryImage = ""
@@ -82,7 +82,7 @@ struct HomeView: View {
                             .padding(.horizontal)
                             
                         }
-                        
+                                                
                         // MARK: Select Category
                         Text("Select a category")
                             .font(.title2)
@@ -96,8 +96,14 @@ struct HomeView: View {
                                 
                                 CategoryButton(selectedCategory: $selectedCategory, category: item.category)
                                     .onTapGesture {
-                                        withAnimation(.easeInOut) {
-                                            selectedCategory = item.category
+                                        if selectedCategory == item.category {
+                                            withAnimation(.easeInOut) {
+                                                selectedCategory = ""
+                                            }
+                                        } else {
+                                            withAnimation(.easeInOut) {
+                                                selectedCategory = item.category
+                                            }
                                         }
                                         quizModel.categoryID = item.categoryID
                                         quizModel.selectedCategory = item.category
@@ -109,7 +115,7 @@ struct HomeView: View {
                             
                         }
                         .frame(maxWidth: .infinity)
-                        .frame(height: screenSize().height / 1.6)
+                        .frame(height: screenSize().height / 1.7)
                         .padding(.horizontal)
                         .padding(.top, 10)
                         
@@ -120,7 +126,7 @@ struct HomeView: View {
                         
                         NavigationLink {
                             DifficultyView()
-                                .environmentObject(quizModel)
+                            
                         } label: {
                             ZStack{
 //
@@ -255,6 +261,11 @@ struct HomeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
         .background(.ultraThinMaterial)
+        .onTapGesture {
+            withAnimation {
+                showRules.toggle()
+            }
+        }
     }
 }
 

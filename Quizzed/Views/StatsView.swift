@@ -13,14 +13,14 @@ struct StatsView: View {
     
     @State private var showingAlert = false
     
-    @AppStorage("totalScore")  var totalScore = 0
-    @AppStorage("perfectRounds") var perfectRounds = 0
-    
+    @EnvironmentObject var stats: StatsViewModel
 
 
     
     var body: some View {
-        VStack {
+       
+        HStack {
+            VStack {
             
             // MARK: Header
             HStack {
@@ -62,10 +62,27 @@ struct StatsView: View {
                     .foregroundColor(Color("Red"))
                     .bold()
                 
-                Text("\(totalScore)")
+                Text("\(stats.totalScore)")
                     .font(.largeTitle)
             }
             .padding()
+            
+            VStack {
+                
+                Text("Film")
+                Text("\(stats.film.timesPlayed)")
+                Text("\(stats.film.score)")
+                
+                Text("Games Played: \(stats.gamesPlayed)")
+                Text("TotalScore: \(stats.totalScore)")
+                Text("Perfect Rounds: \(stats.perfectRounds)")
+                
+                Text("Top category: \(stats.favouriteCategories()[0].categoryName), played - \(stats.favouriteCategories()[0].timesPlayed)")
+                
+                Text("Music \(stats.music.timesPlayed)")
+                
+                Text("TV \(stats.television.timesPlayed)")
+            }
 
             
             // MARK: Perfect Rounds
@@ -76,7 +93,7 @@ struct StatsView: View {
                     .bold()
                 
                 
-                Text("\(perfectRounds)")
+                Text("\(stats.perfectRounds)")
                     .font(.largeTitle)
                 
             }
@@ -121,6 +138,14 @@ struct StatsView: View {
             Spacer()
             
         }
+            
+            Spacer()
+            
+            Rectangle()
+                .fill(Color("Red"))
+                .frame(width: 1)
+                .ignoresSafeArea()
+            }
         .foregroundColor(.white)
         .frame(width: screenSize().width - 90)
         .frame(maxHeight: .infinity)
@@ -128,8 +153,7 @@ struct StatsView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .alert("Are you sure you want to reset your score?", isPresented: $showingAlert) {
             Button("Yes") {
-                totalScore = 0
-                perfectRounds = 0
+                stats.resetData()
             }
             Button("No", role: .cancel) {}
         }

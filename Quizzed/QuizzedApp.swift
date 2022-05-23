@@ -9,11 +9,14 @@ import SwiftUI
 
 @main
 struct QuizzedApp: App {
+    
+    @StateObject var stats = StatsViewModel()
 
     var body: some Scene {
         WindowGroup {
             StartView()
                 .preferredColorScheme(.dark)
+                .environmentObject(stats)
 
         }
 
