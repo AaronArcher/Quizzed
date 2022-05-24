@@ -27,12 +27,14 @@ struct AnswerRow: View {
                 Rectangle()
                     .cornerRadius(3)
                     .frame(width: 10, height: 2)
-                    .foregroundColor(isSelected ? Color("Blue3") : .white)
+                    .foregroundColor(isSelected ? Color("Blue3") : (quizModel.showCorrect && answer.isCorrect) ? .green : .white)
+                    .animation(.easeInOut, value: quizModel.showCorrect)
                 
                 Text(answer.text)
                     .font(.title3)
                     .fontWeight(.light)
-                    .foregroundColor(isSelected ? Color("Blue3") : .white)
+                    .foregroundColor(isSelected ? Color("Blue3") : (quizModel.showCorrect && answer.isCorrect) ? .green : .white)
+                    .animation(.easeInOut, value: quizModel.showCorrect)
                     .padding(.vertical, 12)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.trailing,50)
@@ -45,9 +47,15 @@ struct AnswerRow: View {
                 ZStack(alignment: .leading) {
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .fill(Color("Blue3"))
+                    
+//                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+//                        .fill(quizModel.showCorrect && answer.isCorrect ? Color(hue: 0.302, saturation: 1.0, brightness: 0.465) : .clear)
+//                        .animation(.easeInOut, value: quizModel.showCorrect)
+                    
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .fill(.white)
                         .frame(maxWidth: isSelected ? .infinity : 0)
+                   
                 }
                     
                 )
@@ -82,6 +90,7 @@ struct AnswerRow: View {
                 }
             }
             .padding(.trailing, 10)
+                    
             
         }
         .onTapGesture {

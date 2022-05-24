@@ -13,6 +13,7 @@
 		EE14C881278B1358007AE31B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE14C880278B1358007AE31B /* Preview Assets.xcassets */; };
 		EE14C889278B14A8007AE31B /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14C888278B14A8007AE31B /* SplashView.swift */; };
 		EE14C890278B422D007AE31B /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14C88F278B422D007AE31B /* Category.swift */; };
+		EE4EDB07283C1FCA003E7CA8 /* NewCategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4EDB06283C1FCA003E7CA8 /* NewCategoryButton.swift */; };
 		EE6D0B1127A58A8F00975AB1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D0B1027A58A8F00975AB1 /* Extensions.swift */; };
 		EE6D0B1327A58F5400975AB1 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D0B1227A58F5400975AB1 /* StatsView.swift */; };
 		EE6D0B1527A5980D00975AB1 /* HomeHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D0B1427A5980D00975AB1 /* HomeHolderView.swift */; };
@@ -43,6 +44,7 @@
 		EE14C888278B14A8007AE31B /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		EE14C88C278B2A9C007AE31B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EE14C88F278B422D007AE31B /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		EE4EDB06283C1FCA003E7CA8 /* NewCategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCategoryButton.swift; sourceTree = "<group>"; };
 		EE6D0B1027A58A8F00975AB1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EE6D0B1227A58F5400975AB1 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		EE6D0B1427A5980D00975AB1 /* HomeHolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHolderView.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				EE900647278CD8F700B9BAB8 /* ProgressBarView.swift */,
 				EE900649278CDBEB00B9BAB8 /* AnswerRow.swift */,
 				EEC1F6F727A0B0FF00CDD70A /* CategoryButton.swift */,
+				EE4EDB06283C1FCA003E7CA8 /* NewCategoryButton.swift */,
 				EEC1F6F927A1F4F200CDD70A /* DifficultyButton.swift */,
 				EE86CD4227A87E5200BDB3C8 /* RoundedCornerShape.swift */,
 				EE86CD4A27A897EA00BDB3C8 /* LottieView.swift */,
@@ -265,6 +268,7 @@
 				EE14C87A278B1356007AE31B /* QuizzedApp.swift in Sources */,
 				EE86CD4B27A897EA00BDB3C8 /* LottieView.swift in Sources */,
 				EEC1F6F827A0B0FF00CDD70A /* CategoryButton.swift in Sources */,
+				EE4EDB07283C1FCA003E7CA8 /* NewCategoryButton.swift in Sources */,
 				EE14C889278B14A8007AE31B /* SplashView.swift in Sources */,
 				EECE92BA283A8A99001FD7A4 /* StatsViewModel.swift in Sources */,
 				EE978A59278F83BE00B89F0A /* ResultView.swift in Sources */,

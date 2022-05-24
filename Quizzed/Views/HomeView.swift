@@ -17,7 +17,13 @@ struct HomeView: View {
     
     @State private var showRules = false
     @Binding var showStats: Bool
+    
+    let columns = [
+            GridItem(.flexible()),
+            GridItem(.flexible())
 
+        ]
+    
     
     var body: some View {
         
@@ -92,26 +98,50 @@ struct HomeView: View {
                         // MARK: Categories
                         ScrollView(showsIndicators: false) {
                             
-                            ForEach(categories, id: \.id) { item in
-                                
-                                CategoryButton(selectedCategory: $selectedCategory, category: item.category)
-                                    .onTapGesture {
-                                        if selectedCategory == item.category {
-                                            withAnimation(.easeInOut) {
-                                                selectedCategory = ""
+                            
+                            LazyVGrid(columns: columns, spacing: 15) {
+                                ForEach(categories, id: \.id) { item in
+                                    
+                                    NewCategoryButton(selectedCategory: $selectedCategory, category: item.category)
+                                        .frame(width: screenSize().width / 2.3, height: screenSize().width / 4)
+                                        .onTapGesture {
+                                            if selectedCategory == item.category {
+                                                withAnimation {
+                                                    selectedCategory = ""
+                                                }
+                                            } else {
+                                                withAnimation {
+                                                    selectedCategory = item.category
+                                                }
                                             }
-                                        } else {
-                                            withAnimation(.easeInOut) {
-                                                selectedCategory = item.category
-                                            }
+                                            quizModel.categoryID = item.categoryID
+                                            quizModel.selectedCategory = item.category
+                                            print(selectedCategory)
                                         }
-                                        quizModel.categoryID = item.categoryID
-                                        quizModel.selectedCategory = item.category
-                                        print(selectedCategory)
-
-                                    }
-                                    .padding(5)
+                                }
                             }
+                            .padding(.vertical)
+                            
+//                            ForEach(categories, id: \.id) { item in
+//
+//                                CategoryButton(selectedCategory: $selectedCategory, category: item.category)
+//                                    .onTapGesture {
+//                                        if selectedCategory == item.category {
+//                                            withAnimation(.easeInOut) {
+//                                                selectedCategory = ""
+//                                            }
+//                                        } else {
+//                                            withAnimation(.easeInOut) {
+//                                                selectedCategory = item.category
+//                                            }
+//                                        }
+//                                        quizModel.categoryID = item.categoryID
+//                                        quizModel.selectedCategory = item.category
+//                                        print(selectedCategory)
+//
+//                                    }
+//                                    .padding(5)
+//                            }
                             
                         }
                         .frame(maxWidth: .infinity)

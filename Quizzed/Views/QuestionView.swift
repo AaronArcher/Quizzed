@@ -155,6 +155,7 @@ struct QuestionView: View {
                     
                 }
                 .opacity(!quizModel.answerSelected ? 0.4 : 1)
+
             }
             .disabled(!quizModel.answerSelected)
 

@@ -20,6 +20,7 @@ class QuizViewModel: ObservableObject {
     @Published var progress: CGFloat = 0
     @Published var score = 0
     @Published var configuredScore = 0
+    @Published var showCorrect = false
     
     @Published var categoryID = "20"
     @Published var difficulty = "easy"
@@ -70,6 +71,7 @@ class QuizViewModel: ObservableObject {
     
     func setQuestion() {
         answerSelected = false
+        showCorrect = false
         progress = CGFloat(Double(index) / Double(length) * 350)
         
         if index < length {
@@ -90,7 +92,12 @@ class QuizViewModel: ObservableObject {
                 configuredScore += 15
             }
             score += 1
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                self.showCorrect = true
+            }
         }
+        
     }
     
     
