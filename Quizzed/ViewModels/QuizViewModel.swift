@@ -93,7 +93,7 @@ class QuizViewModel: ObservableObject {
             }
             score += 1
         } else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
                 self.showCorrect = true
             }
         }

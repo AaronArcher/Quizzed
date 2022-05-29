@@ -14,112 +14,132 @@ struct StatsView: View {
     @State private var showingAlert = false
     
     @EnvironmentObject var stats: StatsViewModel
-
-
+    
     
     var body: some View {
-       
+        
         HStack {
             VStack {
-            
-            // MARK: Header
-            HStack {
-                Button {
-                    showStats = false
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 5)
-                            .foregroundColor(.white)
-                            .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                
+                // MARK: Header
+                HStack {
+                    Button {
+                        showStats = false
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 5)
+                                .foregroundColor(.white)
+                                .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                            
+                            Image(systemName: "xmark")
+                                .font(.title2)
+                                .foregroundColor(Color("Blue1"))
+                        }
+                        .frame(width: 30, height: 30)
                         
-                        Image(systemName: "xmark")
-                            .font(.title2)
-                            .foregroundColor(Color("Blue1"))
                     }
-                    .frame(width: 30, height: 30)
+                    
+                    Spacer()
+                    
+                    Text("Stats")
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                    
+                    Spacer()
+                }
+                .padding()
+                .padding(.vertical, 5)
+                .padding(.bottom, 30)
+                
+                
+                // MARK: Total Score
+                HStack{
+                    Text("Total Score :")
+                        .font(.title2)
+                        .foregroundColor(Color("Red"))
+                        .bold()
+                    
+                    Spacer()
+                    
+                    Text("\(stats.totalScore)")
+                        .font(.title)
+                }
+                .padding(.horizontal)
+                .padding(.bottom, 10)
+                
+                
+                
+                // MARK: Perfect Rounds
+                HStack{
+                    Text("Perfect Rounds :")
+                        .font(.title2)
+                        .foregroundColor(Color("Red"))
+                        .bold()
+                        .onTapGesture {
+                            print(stats.allCategories.count)
+                        }
+                    
+                    Spacer()
+                    
+                    Text("\(stats.perfectRounds)")
+                        .font(.title)
                     
                 }
+                .padding(.horizontal)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(stats.allCategories, id: \.self) { category in
+                            
+                            GeometryReader { geo in
+                                let midX = geo.frame(in: .global).minX
+                                
+                                CategoryStatView(category: category.categoryName, score: category.score, gamesPlayed: category.timesPlayed, perfectRounds: category.perfectRound)
+                                    .padding(.trailing, 5)
+                                    .padding(.bottom)
+//                                    .rotation3DEffect(.degrees(midX / -8), axis: (x: 0, y: 1, z: 0))
+                                    .overlay(
+                                        Image(category.categoryName)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 40, height: 40)
+                                            .offset(x: 70, y: -55)
+                                    )
+
+                                
+                            }
+                            .frame(width: 210, height: 150)
+
+                        }
+                    }
+                }
+                .padding(.bottom)
+                .padding(.leading, 15)
+                .frame(height: 300)
+
                 
                 Spacer()
                 
-                Text("Stats")
-                    .font(.title)
-                    .fontWeight(.bold)
-                    .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                //            // MARK: Favourite Category
+                //            Text("Favourite Category")
+                //                .font(.title)
+                //                .foregroundColor(Color("Red"))
+                //                .bold()
+                //                .padding(.top)
+                //                .padding(.bottom, 5)
+                //
+                //            Text("Mythology")
+                //                .font(.title3)
+                //
+                //
+                //            Image("Mythology")
+                //                .resizable()
+                //                .scaledToFit()
+                //                .frame(width: screenSize().width / 3)
                 
-                    Spacer()
-            }
-            .padding()
-            .padding(.vertical, 5)
-            .padding(.bottom, 30)
-            
-            Spacer()
-            
-            // MARK: Total Score
-            VStack{
-                Text("Total Score")
-                    .font(.title)
-                    .foregroundColor(Color("Red"))
-                    .bold()
+                Spacer()
                 
-                Text("\(stats.totalScore)")
-                    .font(.largeTitle)
-            }
-            .padding()
-            
-            VStack {
-                
-                Text("Film")
-                Text("\(stats.film.timesPlayed)")
-                Text("\(stats.film.score)")
-                
-                Text("Games Played: \(stats.gamesPlayed)")
-                Text("TotalScore: \(stats.totalScore)")
-                Text("Perfect Rounds: \(stats.perfectRounds)")
-                
-                Text("Top category: \(stats.favouriteCategories()[0].categoryName), played - \(stats.favouriteCategories()[0].timesPlayed)")
-                
-                Text("Music \(stats.music.timesPlayed)")
-                
-                Text("TV \(stats.television.timesPlayed)")
-            }
-
-            
-            // MARK: Perfect Rounds
-            VStack{
-                Text("Perfect Rounds")
-                    .font(.title)
-                    .foregroundColor(Color("Red"))
-                    .bold()
-                
-                
-                Text("\(stats.perfectRounds)")
-                    .font(.largeTitle)
-                
-            }
-            .padding()
-            
-            Spacer()
-            
-//            // MARK: Favourite Category
-//            Text("Favourite Category")
-//                .font(.title)
-//                .foregroundColor(Color("Red"))
-//                .bold()
-//                .padding(.top)
-//                .padding(.bottom, 5)
-//
-//            Text("Mythology")
-//                .font(.title3)
-//
-//
-//            Image("Mythology")
-//                .resizable()
-//                .scaledToFit()
-//                .frame(width: screenSize().width / 3)
-            
-            Spacer()
-            
                 Button {
                     showingAlert = true
                 } label: {
@@ -133,11 +153,11 @@ struct StatsView: View {
                             .font(.headline)
                     }
                 }
-
-            
-            Spacer()
-            
-        }
+                
+                
+                Spacer()
+                
+            }
             
             Spacer()
             
@@ -145,7 +165,7 @@ struct StatsView: View {
                 .fill(Color("Red"))
                 .frame(width: 1)
                 .ignoresSafeArea()
-            }
+        }
         .foregroundColor(.white)
         .frame(width: screenSize().width - 90)
         .frame(maxHeight: .infinity)
@@ -157,12 +177,14 @@ struct StatsView: View {
             }
             Button("No", role: .cancel) {}
         }
-
+        
     }
 }
 
 struct StatsView_Previews: PreviewProvider {
+    
     static var previews: some View {
         StatsView(showStats: .constant(true))
+            .environmentObject(StatsViewModel())
     }
 }
