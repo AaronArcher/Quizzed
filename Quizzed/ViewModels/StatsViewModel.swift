@@ -82,13 +82,17 @@ class StatsViewModel: ObservableObject {
         }
     }
     
-    @Published var allCategories: [CategoryStat] = [].sorted()
     
-    func favouriteCategories() -> [CategoryStat] {
+    func bestCategory() -> CategoryStat {
         let allCategories = [film, music, television, videoGames, scienceAndNature, mythology, animals, comics]
         let sortedCategories = allCategories.sorted()
-        let top3 = [sortedCategories[0], sortedCategories[1], sortedCategories[2]]
-        return top3
+        let best = sortedCategories[0]
+        return best
+    }
+    func allCategories() -> [CategoryStat] {
+        let allCategories = [film, music, television, videoGames, scienceAndNature, mythology, animals, comics]
+        let sortedCategories = allCategories.sorted()
+        return sortedCategories
     }
     
     func resetData() {
@@ -132,66 +136,58 @@ class StatsViewModel: ObservableObject {
         if let filmStat = UserDefaults.standard.data(forKey: "filmStat") {
             if let decodedItems = try? JSONDecoder().decode(CategoryStat.self, from: filmStat) {
                 film = decodedItems
-                allCategories.append(film)
             }
         }
         
         if let musicStat = UserDefaults.standard.data(forKey: "musicStat") {
             if let decodedItems = try? JSONDecoder().decode(CategoryStat.self, from: musicStat) {
                 music = decodedItems
-                allCategories.append(music)
             }
         }
         
         if let televisionStat = UserDefaults.standard.data(forKey: "televisionStat") {
             if let decodedItems = try? JSONDecoder().decode(CategoryStat.self, from: televisionStat) {
                 television = decodedItems
-                allCategories.append(television)
             }
         }
         
         if let videoGamesStat = UserDefaults.standard.data(forKey: "videoGamesStat") {
             if let decodedItems = try? JSONDecoder().decode(CategoryStat.self, from: videoGamesStat) {
                 videoGames = decodedItems
-                allCategories.append(videoGames)
             }
         }
         
         if let scienceStat = UserDefaults.standard.data(forKey: "scienceStat") {
             if let decodedItems = try? JSONDecoder().decode(CategoryStat.self, from: scienceStat) {
                 scienceAndNature = decodedItems
-                allCategories.append(scienceAndNature)
             }
         }
         
         if let mythologyStat = UserDefaults.standard.data(forKey: "mythologyStat") {
             if let decodedItems = try? JSONDecoder().decode(CategoryStat.self, from: mythologyStat) {
                 mythology = decodedItems
-                allCategories.append(mythology)
             }
         }
         
         if let animalsStat = UserDefaults.standard.data(forKey: "animalsStat") {
             if let decodedItems = try? JSONDecoder().decode(CategoryStat.self, from: animalsStat) {
                 animals = decodedItems
-                allCategories.append(animals)
             }
         }
         
         if let comicsStat = UserDefaults.standard.data(forKey: "comicsStat") {
             if let decodedItems = try? JSONDecoder().decode(CategoryStat.self, from: comicsStat) {
                 comics = decodedItems
-                allCategories.append(comics)
             }
         }
-        
+                
     }
 
 }
 
 struct CategoryStat: Comparable, Codable, Hashable {
     static func < (lhs: CategoryStat, rhs: CategoryStat) -> Bool {
-        return lhs.timesPlayed > rhs.timesPlayed
+        return lhs.score > rhs.score
     }
     
     var categoryName: String

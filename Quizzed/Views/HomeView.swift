@@ -16,7 +16,7 @@ struct HomeView: View {
 
     
     @State private var showRules = false
-    @Binding var showStats: Bool
+    @State var showStats = false
     
     let columns = [
             GridItem(.flexible()),
@@ -41,7 +41,7 @@ struct HomeView: View {
                             HStack {
                                 
                                 Button {
-                                    withAnimation(.spring(response: 0.5, dampingFraction: 0.5)) {
+                                    withAnimation {
                                         showStats.toggle()
                                     }
                                 } label: {
@@ -187,6 +187,9 @@ struct HomeView: View {
                     .rulesPopup(show: $showRules) {
                         rulesContent
                     }
+                    .overlay(
+                        showStats ?  StatsView(showStats: $showStats.animation()) : nil
+                    )
                     
             }
 
@@ -296,12 +299,13 @@ struct HomeView: View {
                 showRules.toggle()
             }
         }
+        
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(showStats: .constant(false))
+        HomeView()
             .environmentObject(QuizViewModel())
 
     }

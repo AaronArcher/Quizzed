@@ -18,7 +18,6 @@ struct StatsView: View {
     
     var body: some View {
         
-        HStack {
             VStack {
                 
                 // MARK: Header
@@ -76,9 +75,6 @@ struct StatsView: View {
                         .font(.title2)
                         .foregroundColor(Color("Red"))
                         .bold()
-                        .onTapGesture {
-                            print(stats.allCategories.count)
-                        }
                     
                     Spacer()
                     
@@ -87,25 +83,41 @@ struct StatsView: View {
                     
                 }
                 .padding(.horizontal)
+                .padding(.bottom)
+                
+                Group {
+                    // MARK: Best Category
+                    Text("Best Category")
+                        .font(.title2)
+                        .underline()
+                        .foregroundColor(Color("Red"))
+                        .bold()
+                    
+                    CategoryStatView(category: stats.bestCategory())
+                    .padding(.bottom)
+                    
+                    Text("Film: \(stats.film.score), \(stats.film.timesPlayed)")
+                }
+               
+                
+                
+                //MARK: All Stats
+                Text("All Stats")
+                    .font(.title2)
+                    .foregroundColor(Color("Red"))
+                    .bold()
+                    .underline()
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(stats.allCategories, id: \.self) { category in
+                        ForEach(stats.allCategories(), id: \.self) { category in
                             
                             GeometryReader { geo in
-                                let midX = geo.frame(in: .global).minX
+//                                let midX = geo.frame(in: .global).minX
                                 
-                                CategoryStatView(category: category.categoryName, score: category.score, gamesPlayed: category.timesPlayed, perfectRounds: category.perfectRound)
+                                CategoryStatView(category: category)
                                     .padding(.trailing, 5)
                                     .padding(.bottom)
-//                                    .rotation3DEffect(.degrees(midX / -8), axis: (x: 0, y: 1, z: 0))
-                                    .overlay(
-                                        Image(category.categoryName)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: 40, height: 40)
-                                            .offset(x: 70, y: -55)
-                                    )
 
                                 
                             }
@@ -116,27 +128,7 @@ struct StatsView: View {
                 }
                 .padding(.bottom)
                 .padding(.leading, 15)
-                .frame(height: 300)
-
                 
-                Spacer()
-                
-                //            // MARK: Favourite Category
-                //            Text("Favourite Category")
-                //                .font(.title)
-                //                .foregroundColor(Color("Red"))
-                //                .bold()
-                //                .padding(.top)
-                //                .padding(.bottom, 5)
-                //
-                //            Text("Mythology")
-                //                .font(.title3)
-                //
-                //
-                //            Image("Mythology")
-                //                .resizable()
-                //                .scaledToFit()
-                //                .frame(width: screenSize().width / 3)
                 
                 Spacer()
                 
@@ -158,25 +150,17 @@ struct StatsView: View {
                 Spacer()
                 
             }
-            
-            Spacer()
-            
-            Rectangle()
-                .fill(Color("Red"))
-                .frame(width: 1)
-                .ignoresSafeArea()
-        }
         .foregroundColor(.white)
-        .frame(width: screenSize().width - 90)
-        .frame(maxHeight: .infinity)
-        .background(Color("Blue3"))
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(
+            LinearGradient(colors: [Color("Blue2"), Color("Blue3"), Color("Blue3"), Color("Blue3"), Color("Blue2")], startPoint: .top, endPoint: .bottom)
+        )
         .alert("Are you sure you want to reset your score?", isPresented: $showingAlert) {
             Button("Yes") {
                 stats.resetData()
             }
             Button("No", role: .cancel) {}
         }
+        .transition(.move(edge: .top))
         
     }
 }

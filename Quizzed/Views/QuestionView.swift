@@ -154,7 +154,9 @@ struct QuestionView: View {
                         .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                     
                 }
-                .opacity(!quizModel.answerSelected ? 0.4 : 1)
+                .opacity(!quizModel.showNext ? 0.4 : 1)
+                .animation(.easeInOut, value: quizModel.showNext)
+
 
             }
             .disabled(!quizModel.answerSelected)
