@@ -27,38 +27,47 @@ class QuizViewModel: ObservableObject {
     @Published var difficulty = "easy"
     @Published var selectedCategory = "Animals"
     
+ 
     
 
-    
-        func fetchQuiz() async {
+    // User Main Actor as this function is Asynchronous so will be performed on a background thread including any updates that may change the UI so marking this with Main Actor ensure UI changes are performed on the main thread
+        @MainActor
+        func fetchQuiz() async throws {
+            
+            let urlString = "https://opentdb.com/api.php?amount=10&category=\(categoryID)&difficulty=\(difficulty)"
+            if let url = URL(string: urlString) {
+                                
+                do {
+                    let (data, response) = try await URLSession.shared.data(from: url)
 
-            guard let url = URL(string: "https://opentdb.com/api.php?amount=10&category=\(categoryID)&difficulty=\(difficulty)") else { fatalError("Missing Questions URL") }
+                    guard let response = response as? HTTPURLResponse,
+                          response.statusCode >= 200 && response.statusCode <= 299 else {
+                        throw QuizError.invalidStatusCode
+                    }
 
-            let urlRequest = URLRequest(url: url)
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    guard let decodedData = try? decoder.decode(Quiz.self, from: data) else {
+                        throw QuizError.failedToDecode
+                    }
 
-            do {
-                let (data, response) = try await URLSession.shared.data(for: urlRequest)
-
-                guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
-
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let decodedData = try decoder.decode(Quiz.self, from: data)
-
-                DispatchQueue.main.async {
-                    self.index = 0
-                    self.score = 0
-                    self.progress = 0
-                    self.reachedEnd = false
-                    self.quiz = decodedData.results
-                    self.length = self.quiz.count
-                    self.setQuestion()
+//                    DispatchQueue.main.async {
+                        self.index = 0
+                        self.score = 0
+                        self.progress = 0
+                        self.reachedEnd = false
+                        self.quiz = decodedData.results
+                        self.length = self.quiz.count
+                        self.setQuestion()
+//                    }
+                    
+                } catch {
+                    throw QuizError.custom(error: error)
                 }
-            } catch {
-                print("Error fetching quiz data: \(error)")
+                
             }
+                        
         }
-    
 
     
     func nextQuestion() {

@@ -22,3 +22,22 @@ extension View {
             }
     }
 }
+
+extension QuizViewModel {
+    enum QuizError: LocalizedError {
+        case custom(error: Error)
+        case failedToDecode
+        case invalidStatusCode
+        
+        var errorDescription: String? {
+            switch self {
+            case .failedToDecode:
+                return "Failed to decode response"
+            case .invalidStatusCode:
+                return "Something went wrong loading data from the web"
+            case .custom(let error):
+                return error.localizedDescription
+            }
+        }
+    }
+}

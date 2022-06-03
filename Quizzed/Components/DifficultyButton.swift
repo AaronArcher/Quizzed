@@ -17,13 +17,20 @@ struct DifficultyButton: View {
         ZStack(alignment: .leading) {
             RoundedRectangle(cornerRadius: 10)
                 .foregroundColor(Color("Blue3"))
-//                .shadow(color: selectedDifficulty == difficulty ? .clear : Color("Blue3"), radius: 3, x: 3, y: 3)
+
             
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color("Red"))
-                .frame(height: 60)
-                .frame(maxWidth: selectedDifficulty == difficulty ? .infinity : 0)
-//                .shadow(color: selectedDifficulty == difficulty ? Color("Red") : .clear, radius: 3, x: 3, y: 3)
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(Color("Red"))
+                    
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .stroke(Color("Blue2").opacity(0.5), lineWidth: 5)
+                    .blur(radius: 15)
+                    
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            .frame(height: 60)
+            .frame(maxWidth: selectedDifficulty == difficulty ? .infinity : 0)
                 
             HStack {
                 Spacer()

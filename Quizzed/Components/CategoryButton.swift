@@ -1,59 +1,75 @@
 //
-//  CategoryButton.swift
+//  NewCategoryView.swift
 //  Quizzed
 //
-//  Created by Aaron Johncock on 25/01/2022.
+//  Created by Aaron Johncock on 23/05/2022.
 //
 
 import SwiftUI
 
 struct CategoryButton: View {
     
-    @Binding var selectedCategory: String
-    
+    @Binding var selectedCategory: String    
     var category: String = "Animals"
-
+        
     var body: some View {
         
-        
-            ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(Color("Blue3"))
-//                    .shadow(color: selectedCategory == category ? .clear : Color("Blue3"), radius: 3, x: 3, y: 3)
+        GeometryReader { geo in
+            
+            let width = geo.size.width
+            let height = geo.size.height
+            
+            ZStack() {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .fill(Color("Blue3"))
+                    
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .stroke(Color("Blue2"), lineWidth: 15)
+                        .blur(radius: 20)
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 
-                RoundedRectangle(cornerRadius: 10)
-                    .foregroundColor(Color("Red"))
-                    .frame(height: 60)
-                    .frame(maxWidth: selectedCategory == category ? .infinity : 60)
-//                    .shadow(color: selectedCategory == category ? Color("Red") : .clear, radius: 3, x: 3, y: 3)
-
-                HStack {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .fill(Color("Red"))
                     
-                        Image(category)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50)
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .stroke(Color("Blue2").opacity(0.5), lineWidth: 15)
+                        .blur(radius: 20)
                     
-
-
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .frame(width: selectedCategory == category ? width : 0, height: selectedCategory == category ? height : 0)
+                
+                VStack {
+                        
+                    Spacer()
+                    
+                    Image(category)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: geo.size.width / 4, height: geo.size.width / 4)
+                    
+                    Spacer()
+                    
                     Text(category)
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .padding(.leading, 10)
+                        .font(.title3)
+                        .multilineTextAlignment(.center)
                     
                     Spacer()
                 }
-                .padding(.leading, 5)
-                
-
+                .padding(.horizontal, 5)
             }
-            .frame(height: 60)
-        
+            .foregroundColor(.white)
+            
+        }
         
     }
 }
 
-struct CategoryButton_Previews: PreviewProvider {
+struct NewCategoryView_Previews: PreviewProvider {
+
     static var previews: some View {
         CategoryButton(selectedCategory: .constant(""))
     }

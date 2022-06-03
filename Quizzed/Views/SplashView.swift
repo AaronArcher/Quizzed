@@ -41,11 +41,12 @@ struct SplashView: View {
                 .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
             
             VStack {
+//                Spacer()
                 
-                Text("QUIZZED")
-                    .font(.title)
-                    .bold()
-                    .foregroundColor(.white)
+//                Text("QUIZZED")
+//                    .font(.title)
+//                    .bold()
+//                    .foregroundColor(.white)
                 
                 Spacer()
                 

@@ -45,8 +45,16 @@ struct AnswerRow: View {
             .padding(.leading, 10)
             .background(
                 ZStack(alignment: .leading) {
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .fill(Color("Blue3"))
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(Color("Blue3"))
+                            .shadow(color: Color("Blue1").opacity(0.2), radius: 10, x: 10, y: 10)
+                        
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .stroke(Color("Blue2"), lineWidth: 5)
+                            .blur(radius: 10)
+                    }
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     
 //                    RoundedRectangle(cornerRadius: 10, style: .continuous)
 //                        .fill(quizModel.showCorrect && answer.isCorrect ? Color(hue: 0.302, saturation: 1.0, brightness: 0.465) : .clear)

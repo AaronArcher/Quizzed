@@ -46,113 +46,147 @@ struct StatsView: View {
                         .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                     
                     Spacer()
+                    
+                    Button {
+                        showingAlert = true
+                    } label: {
+                        Text("Clear\nScore")
+                            .font(.footnote)
+                    }
+
                 }
                 .padding()
                 .padding(.vertical, 5)
-                .padding(.bottom, 30)
-                
-                
-                // MARK: Total Score
-                HStack{
-                    Text("Total Score :")
-                        .font(.title2)
-                        .foregroundColor(Color("Red"))
-                        .bold()
-                    
-                    Spacer()
-                    
-                    Text("\(stats.totalScore)")
-                        .font(.title)
-                }
-                .padding(.horizontal)
                 .padding(.bottom, 10)
                 
-                
-                
-                // MARK: Perfect Rounds
-                HStack{
-                    Text("Perfect Rounds :")
-                        .font(.title2)
-                        .foregroundColor(Color("Red"))
-                        .bold()
+                ScrollView(showsIndicators: false) {
+                    VStack {
                     
-                    Spacer()
-                    
-                    Text("\(stats.perfectRounds)")
-                        .font(.title)
-                    
-                }
-                .padding(.horizontal)
-                .padding(.bottom)
-                
-                Group {
-                    // MARK: Best Category
-                    Text("Best Category")
-                        .font(.title2)
-                        .underline()
-                        .foregroundColor(Color("Red"))
-                        .bold()
-                    
-                    CategoryStatView(category: stats.bestCategory())
-                    .padding(.bottom)
-                    
-                    Text("Film: \(stats.film.score), \(stats.film.timesPlayed)")
-                }
-               
-                
-                
-                //MARK: All Stats
-                Text("All Stats")
-                    .font(.title2)
-                    .foregroundColor(Color("Red"))
-                    .bold()
-                    .underline()
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach(stats.allCategories(), id: \.self) { category in
+                    // MARK: Total Score
+                    HStack{
+                        Text("Total Score :")
+                            .font(.title2)
+                            .foregroundColor(Color("Red"))
+                            .bold()
+                        
+                        Spacer()
+                        
+                        Text("\(stats.totalScore)")
+                            .font(.title)
+                    }
+                    .padding(5)
+                    .padding(.horizontal, 10)
+                    .background(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .fill(Color("Blue3"))
+                                .shadow(color: Color("Blue1").opacity(0.2), radius: 10, x: 10, y: 10)
                             
-                            GeometryReader { geo in
-//                                let midX = geo.frame(in: .global).minX
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .stroke(Color("Blue2"), lineWidth: 5)
+                                .blur(radius: 10)
+                        }
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    )
+                    .padding(.horizontal)
+                    .padding(.bottom, 5)
+                    
+                    
+                    
+                    // MARK: Perfect Rounds
+                    HStack{
+                        Text("Perfect Rounds :")
+                            .font(.title2)
+                            .foregroundColor(Color("Red"))
+                            .bold()
+                        
+                        Spacer()
+                        
+                        Text("\(stats.perfectRounds)")
+                            .font(.title)
+                        
+                    }
+                    .padding(5)
+                    .padding(.horizontal, 10)
+                    .background(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .fill(Color("Blue3"))
+                                .shadow(color: Color("Blue1").opacity(0.2), radius: 10, x: 10, y: 10)
+                            
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .stroke(Color("Blue2"), lineWidth: 5)
+                                .blur(radius: 10)
+                        }
+                            .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    )
+                    .padding(.horizontal)
+                    .padding(.bottom, 10)
+                    
+                        // MARK: Best Category
+                        Text("Best Category")
+                            .font(.title2)
+                            .foregroundColor(Color("Gray"))
+                            .bold()
+                        
+                        CategoryStatView(category: stats.bestCategory())
+                        .padding(.bottom)
+                        
+                    
+                    //MARK: All Stats
+                    Text("All Stats")
+                        .font(.title2)
+                        .foregroundColor(Color("Gray"))
+                        .bold()
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(stats.allCategories(), id: \.self) { category in
                                 
-                                CategoryStatView(category: category)
-                                    .padding(.trailing, 5)
-                                    .padding(.bottom)
+                                GeometryReader { geo in
+    //                                let midX = geo.frame(in: .global).minX
+                                    
+                                    CategoryStatView(category: category)
+                                        .padding(.trailing, 5)
+                                        .padding(.bottom)
 
-                                
+                                    
+                                }
+                                .frame(width: 210, height: 150)
+
                             }
-                            .frame(width: 210, height: 150)
-
                         }
                     }
-                }
-                .padding(.bottom)
-                .padding(.leading, 15)
-                
-                
-                Spacer()
-                
-                Button {
-                    showingAlert = true
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 15)
-                            .frame(width: screenSize().width / 3, height: screenSize().height / 16)
-                            .foregroundColor(Color("Blue1"))
-                            .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
-                        
-                        Text("Clear Score")
-                            .font(.headline)
+                    .padding(.bottom)
+                    .padding(.leading, 15)
+                    
+                    
+//                    Spacer()
+//
+//                    Button {
+//                        showingAlert = true
+//                    } label: {
+//                        ZStack {
+//                            RoundedRectangle(cornerRadius: 15)
+//                                .frame(width: screenSize().width / 3, height: screenSize().height / 16)
+//                                .foregroundColor(Color("Blue1"))
+//                                .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
+//
+//                            Text("Clear Score")
+//                                .font(.headline)
+//                        }
+//                    }
+//
+//
+//                    Spacer()
                     }
+//                    .padding(.bottom)
                 }
-                
-                
-                Spacer()
                 
             }
         .foregroundColor(.white)
         .background(
-            LinearGradient(colors: [Color("Blue2"), Color("Blue3"), Color("Blue3"), Color("Blue3"), Color("Blue2")], startPoint: .top, endPoint: .bottom)
+            LinearGradient(colors: [Color("Blue1"), Color("Blue2"), Color("Blue2"), Color("Blue2"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
         )
         .alert("Are you sure you want to reset your score?", isPresented: $showingAlert) {
             Button("Yes") {

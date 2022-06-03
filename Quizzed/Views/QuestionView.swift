@@ -18,6 +18,9 @@ struct QuestionView: View {
     
     @State private var showQuiz = false
     
+    @State private var hasError = false
+    @State private var error: QuizViewModel.QuizError?
+    
     var body: some View {
         
         
@@ -69,7 +72,19 @@ struct QuestionView: View {
                 }
                 .padding(.horizontal)
             }
-            
+            .alert(isPresented: $hasError, error: error) {
+                Button {
+                    Task {
+                        await execute()
+                    }
+                } label: {
+                    Text("Retry")
+                }
+                
+                Button("Cancel") {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
             
             
             if !showQuiz {
@@ -174,7 +189,7 @@ struct QuestionView: View {
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .task {
-            await quizModel.fetchQuiz()
+            await execute()
         }
         .alert("Are you sure you want to quit?", isPresented: $showingAlert) {
             Button("Yes") {
@@ -182,9 +197,22 @@ struct QuestionView: View {
             }
             Button("No", role: .cancel) {}
         }
+        
     }
         
     }
+    
+    func execute() async {
+        do {
+            try await quizModel.fetchQuiz()
+        } catch {
+            if let quizError = error as? QuizViewModel.QuizError {
+                self.hasError = true
+                self.error = quizError
+            }
+        }
+    }
+    
 }
 
 struct QuestionView_Previews: PreviewProvider {

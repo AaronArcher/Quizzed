@@ -68,12 +68,23 @@ struct CategoryStatView: View {
                 .foregroundColor(Color("Gray"))
                 .padding(.horizontal)
                 .padding(.vertical, 10)
-                .frame(width: 210, height: 150)
+//                .frame(width: 210, height: 150)
                 .background(
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .fill(Color("Blue1"))
-                        .shadow(color: Color("Blue1").opacity(0.2), radius: 10, x: 10, y: 10)
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(Color("Blue3"))
+                            .shadow(color: Color("Blue1").opacity(0.2), radius: 10, x: 10, y: 10)
+                        
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .stroke(Color("Blue2"), lineWidth: 15)
+                            .blur(radius: 20)
+                    }
             )
+                .frame(width: 210, height: 150)
+                .clipShape(
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                )
+
         
         
     }

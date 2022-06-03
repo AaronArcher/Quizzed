@@ -102,7 +102,7 @@ struct HomeView: View {
                             LazyVGrid(columns: columns, spacing: 15) {
                                 ForEach(categories, id: \.id) { item in
                                     
-                                    NewCategoryButton(selectedCategory: $selectedCategory, category: item.category)
+                                    CategoryButton(selectedCategory: $selectedCategory, category: item.category)
                                         .frame(width: screenSize().width / 2.3, height: screenSize().width / 4)
                                         .onTapGesture {
                                             if selectedCategory == item.category {
@@ -121,27 +121,6 @@ struct HomeView: View {
                                 }
                             }
                             .padding(.vertical)
-                            
-//                            ForEach(categories, id: \.id) { item in
-//
-//                                CategoryButton(selectedCategory: $selectedCategory, category: item.category)
-//                                    .onTapGesture {
-//                                        if selectedCategory == item.category {
-//                                            withAnimation(.easeInOut) {
-//                                                selectedCategory = ""
-//                                            }
-//                                        } else {
-//                                            withAnimation(.easeInOut) {
-//                                                selectedCategory = item.category
-//                                            }
-//                                        }
-//                                        quizModel.categoryID = item.categoryID
-//                                        quizModel.selectedCategory = item.category
-//                                        print(selectedCategory)
-//
-//                                    }
-//                                    .padding(5)
-//                            }
                             
                         }
                         .frame(maxWidth: .infinity)
@@ -199,8 +178,6 @@ struct HomeView: View {
     var rulesContent: some View {
         ZStack(alignment: .center) {
             ZStack(alignment: .top) {
-                RoundedRectangle(cornerRadius: 15)
-                    .foregroundColor(Color("Blue1"))
 
                 VStack(spacing: 0) {
                     Text("Welcome to")
@@ -258,6 +235,29 @@ struct HomeView: View {
                     }
                     .padding(.horizontal)
                     
+                    HStack {
+                        Text("Powered by: ")
+                            .font(.footnote)
+
+                        Button {
+                            
+                        } label: {
+                            Text("Open Trivia Database")
+                                .font(.footnote)
+                                .foregroundColor(Color("Red"))
+                        }
+                    }
+                    .padding(.top)
+                    .padding(.bottom, 8)
+                    
+                    Button {
+                        
+                    } label: {
+                        Text("Privacy Policy")
+                            .font(.caption)
+                    }
+
+                    
                    
                 }
                 .frame(maxWidth: screenSize().width / 1.4)
@@ -288,7 +288,11 @@ struct HomeView: View {
                 .padding()
 
             }
-            .frame(width: screenSize().width / 1.2, height: screenSize().height / 1.7)
+            .background(
+                RoundedRectangle(cornerRadius: 15)
+                    .foregroundColor(Color("Blue1"))
+            )
+            .frame(width: screenSize().width / 1.2)
 
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
