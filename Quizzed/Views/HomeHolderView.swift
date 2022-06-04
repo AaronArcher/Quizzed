@@ -7,20 +7,21 @@
 
 import SwiftUI
 
+// Keep HomeHolderView in rather than going straight to the Homeview so I only have to inject quizmodel once rather than to each child view...
+
 struct HomeHolderView: View {
     
     @StateObject var quizModel = QuizViewModel()
     
-    @State var showStats = false
-    
-    
     var body: some View {
 
-
+            
             HomeView()
                 .environmentObject(quizModel)
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
+            
+           
 
     }
 }

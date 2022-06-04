@@ -19,7 +19,7 @@ struct ResultView: View {
             return "Perfect Score!"
         }
         else if quizModel.score > 7 {
-            return "Congratulations!"
+            return "Awesome!"
         }
         else if quizModel.score < 4 {
             return "Terrible..."
@@ -38,22 +38,20 @@ struct ResultView: View {
     var body: some View {
         
         
-        
         VStack {
             
-            ZStack {
-                
-                RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                    .frame(height: screenSize().height / 7)
-                    .foregroundColor(Color("Red"))
-                
                 Text(resultsText)
                     .font(.largeTitle)
                     .foregroundColor(.white)
                     .bold()
                     .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 25)
+                    .background(
+                        RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                            .foregroundColor(Color("Red"))
+                    )
                 
-            }
             Spacer()
             
             
@@ -104,7 +102,7 @@ struct ResultView: View {
             
             NavigationLink {
                 HomeHolderView()
-                    .transition(.slide)
+
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
@@ -123,13 +121,16 @@ struct ResultView: View {
         .ignoresSafeArea()
         .foregroundColor(.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color("Blue1"))
+        .background(
+            LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
+        )
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+//        .transition(.move(edge: .trailing)) // After completing the quiz once, transitions seem to be disabled so added transitions manually as well for multiple games
         .onAppear {
             updateStorage()
         }
-        
+            
         
     }
     

@@ -21,12 +21,6 @@ struct DifficultyView: View {
         VStack(spacing: 0) {
             
             // MARK: Title Bar
-            ZStack {
-                
-                RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                    .frame(height: screenSize().height / 7)
-                    .foregroundColor(Color("Red"))
-
                 
                 HStack {
                     Button {
@@ -61,8 +55,12 @@ struct DifficultyView: View {
                     .frame(width: 30, height: 30)
                 }
                 .padding(.horizontal)
-                
-            }
+                .padding(.vertical, 25)
+                .background(
+                    RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                        .foregroundColor(Color("Red"))
+                )
+
             
             VStack(spacing: 10) {
                 Text(quizModel.selectedCategory)
@@ -136,24 +134,6 @@ struct DifficultyView: View {
             }
             .padding(.horizontal)
             .padding(.vertical, 10)
-
-            
-            
-           
-//            VStack(spacing: 10) {
-//                Text(quizModel.selectedCategory)
-//                        .font(.title)
-//                        .fontWeight(.light)
-//
-//                Image(quizModel.selectedCategory)
-//                            .resizable()
-//                            .aspectRatio(contentMode: .fit)
-//                            .frame(width: 60)
-//
-//
-//                }
-//                .padding(.top, 40)
-                
                 
 
             Spacer()
@@ -163,19 +143,17 @@ struct DifficultyView: View {
                 QuestionView()
 
             } label: {
-                ZStack{
-                    RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                        .frame(height: screenSize().height / 9)
-                        .foregroundColor(Color("Red"))
-                    
                     
                     Text("START")
                         .font(.largeTitle)
-                        .padding(.bottom, 10)
                         .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                    
-                }
-                .opacity(selectedDifficulty != "" ? 1 : 0.4)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 15)
+                        .background(
+                            RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                .foregroundColor(Color("Red"))
+                        )
+                        .opacity(selectedDifficulty != "" ? 1 : 0.4)
             }
             .disabled(selectedDifficulty != "" ? false : true)
 
@@ -184,9 +162,13 @@ struct DifficultyView: View {
         .frame(maxWidth: screenSize().width)
         .ignoresSafeArea()
         .foregroundColor(.white)
-        .background(Color("Blue1"))
+        .background(
+            LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
+        )
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+//        .transition(.move(edge: .trailing)) // After completing the quiz once, transitions seem to be disabled so added transitions manually as well for multiple games
+
 
     }
 }

@@ -11,32 +11,27 @@ import SwiftUI
 struct StartView: View {
     
 
-    @State var totalScore = 0
     @State var endAnimation = false
     
     var body: some View {
         
-
             ZStack {
-          
-//                if !endAnimation {
-//                    SplashView(endAnimation: $endAnimation)
-//
-//                } else {
-//                    HomeHolderView()
-//                        .transition(.move(edge: .trailing))
-//
-//                }
-                SplashView(endAnimation: $endAnimation)
-                    .zIndex(!endAnimation ? 1 : 0)
-    
     
                 HomeHolderView()
-                    .offset(x: endAnimation ? 0 : -screenSize().width)
-            }
-        
-        
+                
+                if !endAnimation {
+                    SplashView(endAnimation: $endAnimation)
+                        .ignoresSafeArea()
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+                                endAnimation = true
+                            }
+                        }
+                }
 
+                
+            }
+            .ignoresSafeArea()
         
     }
 }

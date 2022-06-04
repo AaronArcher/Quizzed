@@ -40,7 +40,7 @@ struct StatsView: View {
                     Spacer()
                     
                     Text("Stats")
-                        .font(.title)
+                        .font(.largeTitle)
                         .fontWeight(.bold)
                     
                     Spacer()
@@ -53,8 +53,8 @@ struct StatsView: View {
                     }
 
                 }
-                .padding()
-                .padding(.vertical, 5)
+                .padding(.horizontal)
+                .padding(.top, 25)
                 .padding(.bottom, 10)
                 
                 ScrollView(showsIndicators: false) {
@@ -163,6 +163,7 @@ struct StatsView: View {
                 }
                 
             }
+            .ignoresSafeArea()
         .foregroundColor(.white)
         .background(
             LinearGradient(colors: [Color("Blue1"), Color("Blue2"), Color("Blue2"), Color("Blue2"), Color("Blue1")], startPoint: .top, endPoint: .bottom)

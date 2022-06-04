@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     @EnvironmentObject var quizModel: QuizViewModel
+
     
     @State private var selectedCategory = ""
     @State private var categoryImage = ""
@@ -31,12 +32,7 @@ struct HomeView: View {
                     VStack(spacing: 0) {
                         
                         // MARK: Title Bar
-                        ZStack {
-                            
-                            RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                                .frame(height: screenSize().height / 7)
-                                .foregroundColor(Color("Red"))
-                            
+                      
                             HStack {
                                 
                                 Button {
@@ -85,8 +81,11 @@ struct HomeView: View {
                                 }
                             }
                             .padding(.horizontal)
-                            
-                        }
+                            .padding(.vertical, 25)
+                            .background(
+                                RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                                    .foregroundColor(Color("Red"))
+                            )
                                                 
                         // MARK: Select Category
                         Text("Select a category")
@@ -134,22 +133,19 @@ struct HomeView: View {
                         
                         NavigationLink {
                             DifficultyView()
-                            
+
                         } label: {
-                            ZStack{
-//
-                                RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                                    .frame(height: screenSize().height / 9)
-                                    .foregroundColor(Color("Red"))
-                                
-                                
-                                Text("NEXT")
-                                    .font(.largeTitle)
-                                    .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                                    .padding(.bottom, 10)
-                                
-                            }
-                            .opacity(selectedCategory != "" ? 1 : 0.4)
+
+                            Text("NEXT")
+                                .font(.largeTitle)
+                                .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 15)
+                                .background(
+                                    RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                        .foregroundColor(Color("Red"))
+                                )
+                                .opacity(selectedCategory != "" ? 1 : 0.4)
                             
                         }
                         .disabled(selectedCategory != "" ? false : true)
@@ -159,7 +155,9 @@ struct HomeView: View {
                     }
                     .ignoresSafeArea()
                     .foregroundColor(.white)
-                    .background(Color("Blue1"))
+                    .background(
+                        LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
+                    )
                     .navigationBarHidden(true)
                     .navigationBarBackButtonHidden(true)
                     .rulesPopup(show: $showRules) {

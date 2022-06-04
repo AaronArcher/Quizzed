@@ -25,22 +25,24 @@ struct QuestionView: View {
     
     var body: some View {
         
+        VStack {
         
-        if quizModel.reachedEnd {
-            
-            ResultView()
-
-            
-        } else {
+//        if quizModel.reachedEnd {
+//
+//
+//            ResultView()
+//
+//
+//        } else {
             
         VStack(spacing: 0) {
             
+            // Progammatic Navigation link to results view when the quiz ends
+            NavigationLink(destination: ResultView(), isActive: $quizModel.reachedEnd) {
+                EmptyView()
+            }
+            
             // MARK: Header
-            ZStack {
-                
-                RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                    .frame(height: screenSize().height / 7)
-                    .foregroundColor(Color("Red"))
                 
                 HStack(spacing: 15) {
                         
@@ -76,20 +78,25 @@ struct QuestionView: View {
 
                 }
                 .padding(.horizontal)
-            }
-            .alert(isPresented: $hasError, error: error) {
-                Button {
-                    Task {
-                        await execute()
+                .padding(.vertical, 25)
+                .background(
+                    RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                        .foregroundColor(Color("Red"))
+                )
+                // Cannot put 2 alerts on the same view so added the second alert here as the header is always on screen
+                .alert(isPresented: $hasError, error: error) {
+                    Button {
+                        Task {
+                            await execute()
+                        }
+                    } label: {
+                        Text("Retry")
                     }
-                } label: {
-                    Text("Retry")
+                    
+                    Button("Cancel") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
                 }
-                
-                Button("Cancel") {
-                    presentationMode.wrappedValue.dismiss()
-                }
-            }
             
             
             if !showQuiz {
@@ -163,19 +170,18 @@ struct QuestionView: View {
             Button {
                 quizModel.nextQuestion()
             } label: {
-                ZStack{
-                    RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                        .frame(height: screenSize().height / 9)
-                        .foregroundColor(Color("Red"))
-                    
+                
                     Text("NEXT")
                         .font(.largeTitle)
-                        .padding(.bottom, 10)
                         .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                    
-                }
-                .opacity(!quizModel.showNext ? 0.4 : 1)
-                .animation(.easeInOut, value: quizModel.showNext)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 15)
+                        .background(
+                            RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                .foregroundColor(Color("Red"))
+                        )
+                        .opacity(!quizModel.showNext ? 0.4 : 1)
+                        .animation(.easeInOut, value: quizModel.showNext)
 
 
             }
@@ -202,9 +208,12 @@ struct QuestionView: View {
         })
         .ignoresSafeArea()
         .foregroundColor(.white)
-        .background(Color("Blue1"))
+        .background(
+            LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
+        )
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
+//        .transition(.move(edge: .trailing)) // After completing the quiz once, transitions seem to be disabled so added transitions manually as well for multiple games
         .task {
             await execute()
         }
@@ -224,6 +233,12 @@ struct QuestionView: View {
         }
         
     }
+        
+//    }
+//        .background(
+//            LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
+//        )
+//        .animation(.default, value: quizModel.reachedEnd)
         
     }
     
