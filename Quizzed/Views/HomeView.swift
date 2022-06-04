@@ -21,7 +21,6 @@ struct HomeView: View {
     let columns = [
             GridItem(.flexible()),
             GridItem(.flexible())
-
         ]
     
     

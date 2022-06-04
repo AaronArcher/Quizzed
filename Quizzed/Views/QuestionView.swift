@@ -15,6 +15,8 @@ struct QuestionView: View {
     @EnvironmentObject var quizModel: QuizViewModel
     
     @State private var showingAlert = false
+    @State private var alertText = ""
+    @State private var isAlertToQuit = false
     
     @State private var showQuiz = false
     
@@ -55,7 +57,10 @@ struct QuestionView: View {
                     Spacer()
                     
                     Button {
+                        alertText = "Are you sure you want to quit?"
+                        isAlertToQuit = true
                         showingAlert = true
+
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
@@ -180,8 +185,20 @@ struct QuestionView: View {
         }
         .onAppear(perform: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                showQuiz = true
+                if quizModel.quiz.count != 0 {
+                    showQuiz = true
+                } else {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            alertText = "Took too long to load quiz. Check connection and try again."
+                            isAlertToQuit = false
+                            showingAlert = true
+                        
+                    }
+                }
             }
+            
+            
+            
         })
         .ignoresSafeArea()
         .foregroundColor(.white)
@@ -191,11 +208,19 @@ struct QuestionView: View {
         .task {
             await execute()
         }
-        .alert("Are you sure you want to quit?", isPresented: $showingAlert) {
-            Button("Yes") {
-                presentationMode.wrappedValue.dismiss()
+        .alert(alertText, isPresented: $showingAlert) {
+            if isAlertToQuit {
+                Button("Yes") {
+                    presentationMode.wrappedValue.dismiss()
+                }
+                Button("No", role: .cancel) {}
+
+            } else {
+                Button("OK") {
+                    presentationMode.wrappedValue.dismiss()
+                }
+
             }
-            Button("No", role: .cancel) {}
         }
         
     }

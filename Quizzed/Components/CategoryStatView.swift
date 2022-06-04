@@ -68,7 +68,6 @@ struct CategoryStatView: View {
                 .foregroundColor(Color("Gray"))
                 .padding(.horizontal)
                 .padding(.vertical, 10)
-//                .frame(width: 210, height: 150)
                 .background(
                     ZStack {
                         RoundedRectangle(cornerRadius: 10, style: .continuous)

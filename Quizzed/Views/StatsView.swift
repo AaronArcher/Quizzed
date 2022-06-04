@@ -28,7 +28,6 @@ struct StatsView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 5)
                                 .foregroundColor(.white)
-                                .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                             
                             Image(systemName: "xmark")
                                 .font(.title2)
@@ -43,7 +42,6 @@ struct StatsView: View {
                     Text("Stats")
                         .font(.title)
                         .fontWeight(.bold)
-                        .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                     
                     Spacer()
                     
@@ -130,7 +128,7 @@ struct StatsView: View {
                             .bold()
                         
                         CategoryStatView(category: stats.bestCategory())
-                        .padding(.bottom)
+                        .padding(.bottom, 10)
                         
                     
                     //MARK: All Stats
@@ -157,30 +155,11 @@ struct StatsView: View {
                             }
                         }
                     }
-                    .padding(.bottom)
+                    .padding(.bottom, 10)
                     .padding(.leading, 15)
                     
-                    
-//                    Spacer()
-//
-//                    Button {
-//                        showingAlert = true
-//                    } label: {
-//                        ZStack {
-//                            RoundedRectangle(cornerRadius: 15)
-//                                .frame(width: screenSize().width / 3, height: screenSize().height / 16)
-//                                .foregroundColor(Color("Blue1"))
-//                                .shadow(color: .black.opacity(0.6), radius: 2, x: 2, y: 2)
-//
-//                            Text("Clear Score")
-//                                .font(.headline)
-//                        }
-//                    }
-//
-//
-//                    Spacer()
+
                     }
-//                    .padding(.bottom)
                 }
                 
             }

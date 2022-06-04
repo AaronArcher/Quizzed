@@ -34,6 +34,9 @@ class QuizViewModel: ObservableObject {
         @MainActor
         func fetchQuiz() async throws {
             
+            // reset quiz data - if a user switches between quiz categories for example and then loses connection, it will show their previous questions.
+            quiz = []
+            
             let urlString = "https://opentdb.com/api.php?amount=10&category=\(categoryID)&difficulty=\(difficulty)"
             if let url = URL(string: urlString) {
                                 
