@@ -54,8 +54,8 @@ struct StatsView: View {
                 
             }
             .padding(.horizontal)
-            .padding(.top, 25)
-            .padding(.bottom, 10)
+            .padding(.top, Constants.headerPadding())
+            .padding(.bottom, Constants.isScreenLarge ? 25 : 10)
             
             ScrollView(showsIndicators: false) {
                 VStack {
@@ -229,7 +229,7 @@ struct StatsView: View {
         .background(
             LinearGradient(colors: [Color("Blue1"), Color("Blue2"), Color("Blue2"), Color("Blue2"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
         )
-        .alert("Are you sure you want to reset your score?", isPresented: $showingAlert) {
+        .alert("Are you sure you want to reset your statistics?", isPresented: $showingAlert) {
             Button("Yes") {
                 stats.resetData()
             }

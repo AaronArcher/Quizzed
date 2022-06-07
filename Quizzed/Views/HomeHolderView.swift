@@ -20,7 +20,6 @@ struct HomeHolderView: View {
                 .environmentObject(quizModel)
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
-            
            
 
     }

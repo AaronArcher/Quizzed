@@ -55,8 +55,8 @@ struct DifficultyView: View {
                     .frame(width: 30, height: 30)
                 }
                 .padding(.horizontal)
-                .padding(.vertical, 25)
-                .background(
+                .padding(.top, Constants.headerPadding())
+                .padding(.bottom, 25)                .background(
                     ZStack {
                         RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
                             .foregroundColor(Color("Red"))
@@ -155,7 +155,8 @@ struct DifficultyView: View {
                         .font(.largeTitle)
                         .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 15)
+                        .padding(.bottom, Constants.bottomButtonPadding())
+                        .padding(.top, 15)
                         .background(
                             ZStack {
                                 RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
@@ -181,7 +182,6 @@ struct DifficultyView: View {
         )
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-//        .transition(.move(edge: .trailing)) // After completing the quiz once, transitions seem to be disabled so added transitions manually as well for multiple games
 
 
     }

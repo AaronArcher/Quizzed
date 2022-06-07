@@ -29,7 +29,8 @@ struct SplashView: View {
                 .rotation(Angle(degrees: -90))
                 .trim(from: 0, to: startAnimation ? 1 : 0)
                 .stroke(
-                    Color("Blue1")
+//                    Color("Blue1")
+                    LinearGradient(colors: [Color("Blue3"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .topLeading, endPoint: .bottomTrailing)
                     , style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
                 .frame(width: 200, height: 200)
                 .opacity(hideText ? 0 : 1)
@@ -38,24 +39,15 @@ struct SplashView: View {
             RoundedRectangle(cornerRadius: 15)
                 .rotation(Angle(degrees: 45))
                 .offset(x: 70, y: 70)
-                .fill(Color("Blue1"))
+                .fill(
+                    LinearGradient(colors: [Color("Blue3"), Color("Blue3"), Color("Blue3"), Color("Blue2"), Color("Blue1")], startPoint: .leading, endPoint: .trailing)
+                )
                 .frame(width: lineAnimation ? 100 : 0, height: 20)
                 .opacity(hideText ? 0 : 1)
 
             
-//            Rectangle()
-//                .rotation(Angle(degrees: 45))
-//                .fill(Color("Blue1"))
-//                .frame(width: 900, height: screenAnimation ? 1000 : 0)
-//                .frame(maxWidth: UIScreen.main.bounds.width, maxHeight: UIScreen.main.bounds.height)
-            
             VStack {
-//                Spacer()
                 
-//                Text("QUIZZED")
-//                    .font(.title)
-//                    .bold()
-//                    .foregroundColor(.white)
                 
                 Spacer()
                 
@@ -70,7 +62,7 @@ struct SplashView: View {
                 
             }
             .padding(.bottom, 60)
-            .frame(height: UIScreen.main.bounds.height)
+//            .frame(height: UIScreen.main.bounds.height)
             .opacity(hideText ? 0 : 1)
             
         }

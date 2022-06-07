@@ -31,9 +31,10 @@ struct ResultView: View {
     
     
     // Disable animation with navigation Link to HomeViewHolder as the default animation shows the StatsView when sliding in
-    init(){
-        UINavigationBar.setAnimationsEnabled(false)
-    }
+    
+//    init(){
+//        UINavigationBar.setAnimationsEnabled(false)
+//    }
     
     var body: some View {
         
@@ -46,7 +47,8 @@ struct ResultView: View {
                     .bold()
                     .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 25)
+                    .padding(.top, Constants.headerPadding())
+                    .padding(.bottom, 25)
                     .background(
                         ZStack {
                             RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)

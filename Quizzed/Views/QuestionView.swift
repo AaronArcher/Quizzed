@@ -10,7 +10,7 @@ import SwiftUI
 struct QuestionView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
+    
     
     @EnvironmentObject var quizModel: QuizViewModel
     
@@ -25,85 +25,77 @@ struct QuestionView: View {
     
     var body: some View {
         
-        VStack {
         
-//        if quizModel.reachedEnd {
-//
-//
-//            ResultView()
-//
-//
-//        } else {
-            
         VStack(spacing: 0) {
             
-            // Progammatic Navigation link to results view when the quiz ends
+//             Progammatic Navigation link to results view when the quiz ends
             NavigationLink(destination: ResultView(), isActive: $quizModel.reachedEnd) {
                 EmptyView()
             }
             
             // MARK: Header
+            
+            HStack(spacing: 15) {
                 
-                HStack(spacing: 15) {
-                        
-                    Image(quizModel.selectedCategory)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 40)
+                Image(quizModel.selectedCategory)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 40)
+                
+                
+                Text(quizModel.selectedCategory)
+                    .foregroundColor(.white)
+                    .font(.title2)
+                
+                Spacer()
+                
+                Button {
+                    alertText = "Are you sure you want to quit?"
+                    isAlertToQuit = true
+                    showingAlert = true
                     
-                    
-                    Text(quizModel.selectedCategory)
-                        .foregroundColor(.white)
-                        .font(.title2)
-                    
-                    Spacer()
-                    
-                    Button {
-                        alertText = "Are you sure you want to quit?"
-                        isAlertToQuit = true
-                        showingAlert = true
-
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .foregroundColor(.white)
-                                .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                            
-                            Image(systemName: "xmark")
-                                .font(.title2)
-                                .foregroundColor(Color("Blue1"))
-                        }
-                        .frame(width: 30, height: 30)
-                    }
-
-                }
-                .padding(.horizontal)
-                .padding(.vertical, 25)
-                .background(
+                } label: {
                     ZStack {
-                        RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                            .foregroundColor(Color("Red"))
-                            
-                        RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                            .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
-                            .blur(radius: 20)
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundColor(.white)
+                            .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                        
+                        Image(systemName: "xmark")
+                            .font(.title2)
+                            .foregroundColor(Color("Blue1"))
                     }
-                )
-                .clipShape(RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25))
-                // Cannot put 2 alerts on the same view so added the second alert here as the header is always on screen
-                .alert(isPresented: $hasError, error: error) {
-                    Button {
-                        Task {
-                            await execute()
-                        }
-                    } label: {
-                        Text("Retry")
-                    }
-                    
-                    Button("Cancel") {
-                        presentationMode.wrappedValue.dismiss()
-                    }
+                    .frame(width: 30, height: 30)
                 }
+                
+            }
+            .padding(.horizontal)
+            .padding(.top, Constants.headerPadding())
+            .padding(.bottom, 25)
+            .background(
+                ZStack {
+                    RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                        .foregroundColor(Color("Red"))
+                    
+                    RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                        .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
+                        .blur(radius: 20)
+                }
+            )
+            .clipShape(RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25))
+            // Cannot put 2 alerts on the same view so added the second alert here as the header is always on screen
+            .alert(isPresented: $hasError, error: error) {
+                Button {
+                    Task {
+                        await execute()
+                    }
+                } label: {
+                    Text("Retry")
+                }
+                
+                Button("Cancel") {
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
             
             
             if !showQuiz {
@@ -116,7 +108,7 @@ struct QuestionView: View {
                 LottieView()
                     .frame(width: screenSize().width / 2, height: screenSize().width / 2)
                 
-           
+                
             }
             
             else {
@@ -145,30 +137,30 @@ struct QuestionView: View {
                 .padding(.horizontal, 40)
                 .padding(.top, 20)
                 
-        
+                
                 ProgressBarView(progress: quizModel.progress)
                     .padding(.top, 10)
                     .padding(.horizontal, 30)
                 
                 // MARK: Questions
-                    VStack(alignment: .leading, spacing: 10) {
-                        
-                        Text(quizModel.question)
-                            .foregroundColor(.white)
+                VStack(alignment: .leading, spacing: 10) {
+                    
+                    Text(quizModel.question)
+                        .foregroundColor(.white)
+                    
+                    ScrollView {
+                        ForEach(quizModel.answerChoices, id: \.id) { answer in
                             
-                        ScrollView {
-                            ForEach(quizModel.answerChoices, id: \.id) { answer in
-                                
-                                AnswerRow(answer: answer)
-
-                            }
+                            AnswerRow(answer: answer)
+                            
                         }
-                        
-                            
                     }
-                    .padding(.horizontal)
-                    .padding(.top, 20)
-               
+                    
+                    
+                }
+                .padding(.horizontal)
+                .padding(.top, 20)
+                
             }
             
             Spacer()
@@ -177,30 +169,31 @@ struct QuestionView: View {
             Button {
                 quizModel.nextQuestion()
             } label: {
-                
-                    Text("NEXT")
-                        .font(.largeTitle)
-                        .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 15)
-                        .background(
-                            ZStack {
-                                RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                                    .foregroundColor(Color("Red"))
-                                
-                                RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                                    .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
-                                    .blur(radius: 20)
-                            }
-                        )
-                        .clipShape(RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25))
-                        .opacity(!quizModel.showNext ? 0.4 : 1)
-                        .animation(.easeInOut, value: quizModel.showNext)
+
+                Text("NEXT")
+                    .font(.largeTitle)
+                    .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                    .frame(maxWidth: .infinity)
+                    .padding(.bottom, Constants.bottomButtonPadding())
+                    .padding(.top, 15)
+                    .background(
+                        ZStack {
+                            RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                .foregroundColor(Color("Red"))
+
+                            RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
+                                .blur(radius: 20)
+                        }
+                    )
+                    .clipShape(RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25))
+                    .opacity(!quizModel.showNext ? 0.4 : 1)
+                    .animation(.easeInOut, value: quizModel.showNext)
 
 
             }
             .disabled(!quizModel.answerSelected)
-
+            
             
         }
         .onAppear(perform: {
@@ -209,9 +202,9 @@ struct QuestionView: View {
                     showQuiz = true
                 } else {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            alertText = "Took too long to load quiz. Check connection and try again."
-                            isAlertToQuit = false
-                            showingAlert = true
+                        alertText = "Took too long to load quiz. Check connection and try again."
+                        isAlertToQuit = false
+                        showingAlert = true
                         
                     }
                 }
@@ -227,7 +220,6 @@ struct QuestionView: View {
         )
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-//        .transition(.move(edge: .trailing)) // After completing the quiz once, transitions seem to be disabled so added transitions manually as well for multiple games
         .task {
             await execute()
         }
@@ -237,22 +229,15 @@ struct QuestionView: View {
                     presentationMode.wrappedValue.dismiss()
                 }
                 Button("No", role: .cancel) {}
-
+                
             } else {
                 Button("OK") {
                     presentationMode.wrappedValue.dismiss()
                 }
-
+                
             }
         }
         
-    }
-        
-//    }
-//        .background(
-//            LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
-//        )
-//        .animation(.default, value: quizModel.reachedEnd)
         
     }
     

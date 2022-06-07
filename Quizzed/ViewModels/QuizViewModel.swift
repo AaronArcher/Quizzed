@@ -78,7 +78,7 @@ class QuizViewModel: ObservableObject {
             index += 1
             setQuestion()
         } else {
-            reachedEnd = true
+                reachedEnd = true
         }
     }
     

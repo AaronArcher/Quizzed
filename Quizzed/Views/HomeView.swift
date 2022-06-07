@@ -81,7 +81,8 @@ struct HomeView: View {
                                 }
                             }
                             .padding(.horizontal)
-                            .padding(.vertical, 25)
+                            .padding(.top, Constants.headerPadding())
+                            .padding(.bottom, 25)
                             .background(
                                 ZStack {
                                 RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
@@ -129,7 +130,8 @@ struct HomeView: View {
                             
                         }
                         .frame(maxWidth: .infinity)
-                        .frame(height: screenSize().height / 1.7)
+//                        .frame(height: screenSize().height / 1.7)
+                        .frame(maxHeight: Constants.isScreenLarge ? 600 : 430)
                         .padding(.horizontal)
                         .padding(.top, 10)
                         
@@ -147,7 +149,8 @@ struct HomeView: View {
                                 .font(.largeTitle)
                                 .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                                 .frame(maxWidth: .infinity)
-                                .padding(.vertical, 15)
+                                .padding(.bottom, Constants.bottomButtonPadding())
+                                .padding(.top, 15)
                                 .background(
                                     ZStack {
                                         RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
