@@ -48,9 +48,16 @@ struct ResultView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 25)
                     .background(
-                        RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                            .foregroundColor(Color("Red"))
+                        ZStack {
+                            RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                                .foregroundColor(Color("Red"))
+                                
+                            RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                                .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
+                                .blur(radius: 20)
+                        }
                     )
+                    .clipShape(RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25))
                 
             Spacer()
             
@@ -104,15 +111,16 @@ struct ResultView: View {
                 HomeHolderView()
 
             } label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(Color("Red"))
-                        .frame(width: 160, height: 50)
-                    
+                            
                     Text("Play Again!")
                         .foregroundColor(.white)
                         .font(.title2)
-                }
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 40)
+                        .background(
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .foregroundColor(Color("Red"))
+                        )
             }
             
             Spacer()
@@ -192,6 +200,18 @@ struct ResultView: View {
             stats.comics.score += quizModel.configuredScore
             if quizModel.score == 10 {
                 stats.comics.perfectRound += 1
+            }
+        }  else if quizModel.selectedCategory == "General Knowledge" {
+            stats.generalKnowledge.timesPlayed += 1
+            stats.generalKnowledge.score += quizModel.configuredScore
+            if quizModel.score == 10 {
+                stats.generalKnowledge.perfectRound += 1
+            }
+        }  else if quizModel.selectedCategory == "Sport" {
+            stats.sport.timesPlayed += 1
+            stats.sport.score += quizModel.configuredScore
+            if quizModel.score == 10 {
+                stats.sport.perfectRound += 1
             }
         } else {
             

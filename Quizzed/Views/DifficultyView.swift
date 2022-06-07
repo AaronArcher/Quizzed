@@ -57,9 +57,16 @@ struct DifficultyView: View {
                 .padding(.horizontal)
                 .padding(.vertical, 25)
                 .background(
-                    RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                        .foregroundColor(Color("Red"))
+                    ZStack {
+                        RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                            .foregroundColor(Color("Red"))
+                            
+                        RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                            .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
+                            .blur(radius: 20)
+                    }
                 )
+                .clipShape(RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25))
 
             
             VStack(spacing: 10) {
@@ -150,9 +157,16 @@ struct DifficultyView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 15)
                         .background(
-                            RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                                .foregroundColor(Color("Red"))
+                            ZStack {
+                                RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                    .foregroundColor(Color("Red"))
+                                
+                                RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                    .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
+                                    .blur(radius: 20)
+                            }
                         )
+                        .clipShape(RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25))
                         .opacity(selectedDifficulty != "" ? 1 : 0.4)
             }
             .disabled(selectedDifficulty != "" ? false : true)

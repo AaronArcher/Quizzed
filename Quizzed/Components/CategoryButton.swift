@@ -35,7 +35,7 @@ struct CategoryButton: View {
                         .fill(Color("Red"))
                     
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .stroke(Color("Blue2").opacity(0.5), lineWidth: 15)
+                        .stroke(Color("Red2").opacity(0.5), lineWidth: 25)
                         .blur(radius: 20)
                     
                 }

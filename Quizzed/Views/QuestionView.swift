@@ -80,9 +80,16 @@ struct QuestionView: View {
                 .padding(.horizontal)
                 .padding(.vertical, 25)
                 .background(
-                    RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                        .foregroundColor(Color("Red"))
+                    ZStack {
+                        RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                            .foregroundColor(Color("Red"))
+                            
+                        RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                            .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
+                            .blur(radius: 20)
+                    }
                 )
+                .clipShape(RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25))
                 // Cannot put 2 alerts on the same view so added the second alert here as the header is always on screen
                 .alert(isPresented: $hasError, error: error) {
                     Button {
@@ -177,9 +184,16 @@ struct QuestionView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 15)
                         .background(
-                            RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                                .foregroundColor(Color("Red"))
+                            ZStack {
+                                RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                    .foregroundColor(Color("Red"))
+                                
+                                RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                    .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
+                                    .blur(radius: 20)
+                            }
                         )
+                        .clipShape(RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25))
                         .opacity(!quizModel.showNext ? 0.4 : 1)
                         .animation(.easeInOut, value: quizModel.showNext)
 

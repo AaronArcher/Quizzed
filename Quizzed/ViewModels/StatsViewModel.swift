@@ -81,16 +81,30 @@ class StatsViewModel: ObservableObject {
             }
         }
     }
+    @Published var generalKnowledge = CategoryStat(categoryName: "General Knowledge", score: 0, timesPlayed: 0, perfectRound: 0) {
+        didSet {
+            if let encoded = try? JSONEncoder().encode(generalKnowledge) {
+                UserDefaults.standard.set(encoded, forKey: "generalStat")
+            }
+        }
+    }
+    @Published var sport = CategoryStat(categoryName: "Sport", score: 0, timesPlayed: 0, perfectRound: 0) {
+        didSet {
+            if let encoded = try? JSONEncoder().encode(sport) {
+                UserDefaults.standard.set(encoded, forKey: "sportStat")
+            }
+        }
+    }
     
     
     func bestCategory() -> CategoryStat {
-        let allCategories = [film, music, television, videoGames, scienceAndNature, mythology, animals, comics]
+        let allCategories = [film, music, television, videoGames, scienceAndNature, mythology, animals, comics, sport, generalKnowledge]
         let sortedCategories = allCategories.sorted()
         let best = sortedCategories[0]
         return best
     }
     func allCategories() -> [CategoryStat] {
-        let allCategories = [film, music, television, videoGames, scienceAndNature, mythology, animals, comics]
+        let allCategories = [film, music, television, videoGames, scienceAndNature, mythology, animals, comics, sport, generalKnowledge]
         let sortedCategories = allCategories.sorted()
         return sortedCategories
     }
@@ -178,6 +192,18 @@ class StatsViewModel: ObservableObject {
         if let comicsStat = UserDefaults.standard.data(forKey: "comicsStat") {
             if let decodedItems = try? JSONDecoder().decode(CategoryStat.self, from: comicsStat) {
                 comics = decodedItems
+            }
+        }
+        
+        if let generalStat = UserDefaults.standard.data(forKey: "generalStat") {
+            if let decodedItems = try? JSONDecoder().decode(CategoryStat.self, from: generalStat) {
+                generalKnowledge = decodedItems
+            }
+        }
+        
+        if let sportStat = UserDefaults.standard.data(forKey: "sportStat") {
+            if let decodedItems = try? JSONDecoder().decode(CategoryStat.self, from: sportStat) {
+                sport = decodedItems
             }
         }
                 

@@ -83,9 +83,16 @@ struct HomeView: View {
                             .padding(.horizontal)
                             .padding(.vertical, 25)
                             .background(
+                                ZStack {
                                 RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
                                     .foregroundColor(Color("Red"))
+                                    
+                                RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                                    .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
+                                    .blur(radius: 20)
+                                }
                             )
+                            .clipShape(RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25))
                                                 
                         // MARK: Select Category
                         Text("Select a category")
@@ -142,9 +149,16 @@ struct HomeView: View {
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 15)
                                 .background(
-                                    RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                                        .foregroundColor(Color("Red"))
+                                    ZStack {
+                                        RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                            .foregroundColor(Color("Red"))
+                                        
+                                        RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                            .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
+                                            .blur(radius: 20)
+                                    }
                                 )
+                                .clipShape(RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25))
                                 .opacity(selectedCategory != "" ? 1 : 0.4)
                             
                         }
@@ -183,7 +197,7 @@ struct HomeView: View {
                     Text("QUIZZED")
                         .font(.title)
                         .foregroundColor(Color("Red"))
-                        .padding(.bottom, 20)
+                        .padding(.bottom, 10)
                     
                     Text("Simply select a category and difficulty to start your quiz.")
                         .font(.subheadline)
@@ -191,46 +205,36 @@ struct HomeView: View {
                     
                     Text("Points earned will depend on your difficulty selected:")
                         .font(.subheadline)
-                        .padding(.vertical)
+                        .padding(.top, 10)
+                        .padding(.bottom)
                     
-                    VStack(alignment: .leading) {
-                        HStack{
-                            Text("EASY")
-                                .font(.title2)
-                                .foregroundColor(Color("Red"))
-                           
-                            Spacer()
+                    VStack(spacing: 10) {
+
+                        Text("EASY")
+                            .font(.title2)
+                            .foregroundColor(Color("Red"))
                             
-                            Text("5 points each")
-                                .font(.subheadline)
-                        }
-                        .padding(.top,10)
+                        + Text("   5 points each")
+                            .font(.subheadline)
                         
-                        HStack(spacing: 20){
-                            Text("MEDIUM")
-                                .font(.title2)
-                                .foregroundColor(Color("Red"))
+                        
+                        Text("MEDIUM")
+                            .font(.title2)
+                            .foregroundColor(Color("Red"))
                             
-                            Spacer()
-
-                            Text("10 points each")
-                                .font(.subheadline)
-                        }
-                        .padding(.top, 10)
+                        + Text("   10 points each")
+                            .font(.subheadline)
                        
-                        HStack(spacing: 20){
-                            Text("HARD")
-                                .font(.title2)
-                                .foregroundColor(Color("Red"))
+                        Text("HARD")
+                            .font(.title2)
+                            .foregroundColor(Color("Red"))
                            
-                            Spacer()
-
-                            Text("15 points each")
-                                .font(.subheadline)
-                        }
-                        .padding(.top, 10)
+                        + Text("   15 points each")
+                            .font(.subheadline)
+                        
                     }
                     .padding(.horizontal)
+                    .padding(.vertical, 10)
                     
                     HStack {
                         Text("Powered by: ")

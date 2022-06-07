@@ -24,7 +24,7 @@ struct DifficultyButton: View {
                     .foregroundColor(Color("Red"))
                     
                 RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .stroke(Color("Blue2").opacity(0.5), lineWidth: 5)
+                    .stroke(Color("Red2").opacity(0.5), lineWidth: 15)
                     .blur(radius: 15)
                     
             }
