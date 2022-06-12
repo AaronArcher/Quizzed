@@ -31,11 +31,11 @@ struct DifficultyView: View {
                                 .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                             
                             Image(systemName: "chevron.left")
-                                .font(.title)
+                                .font(.title).dynamicTypeSize(.medium)
                                 .foregroundColor(Color("Blue3"))
                             
                         }
-                        .frame(width: 30, height: 30)
+                        .frame(width: 32, height: 32)
                     }
                     
                     Spacer()
@@ -87,8 +87,8 @@ struct DifficultyView: View {
             Text("Select your difficulty")
                 .font(.title2)
                 .fontWeight(.light)
-                .padding(.vertical)
-                .padding(.top, 20)
+//                .padding(.vertical)
+                .padding(.top, 30)
             
             // MARK: Difficulties
             Group {

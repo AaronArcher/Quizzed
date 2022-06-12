@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CategoryButton: View {
     
+    @Environment(\.dynamicTypeSize) var typeSize
+    
     @Binding var selectedCategory: String    
     var category: String = "Animals"
         
@@ -19,7 +21,7 @@ struct CategoryButton: View {
             let width = geo.size.width
             let height = geo.size.height
             
-            ZStack() {
+            ZStack {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .fill(Color("Blue3"))
@@ -49,13 +51,14 @@ struct CategoryButton: View {
                     Image(category)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: geo.size.width / 4, height: geo.size.width / 4)
+                        .frame(width: typeSize > .large ? width / 3 : width / 3.8, height: typeSize > .large ? width / 3 : width / 3.8)
                     
                     Spacer()
                     
                     Text(category)
-                        .font(.title3)
+                        .font(.callout)
                         .multilineTextAlignment(.center)
+                        .lineLimit(2)
                     
                     Spacer()
                 }
@@ -64,6 +67,7 @@ struct CategoryButton: View {
             .foregroundColor(.white)
             
         }
+        .frame(width: screenSize().width / 2.3, height: typeSize > .large ? 135 : 100)
         
     }
 }

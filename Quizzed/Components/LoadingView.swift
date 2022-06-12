@@ -8,12 +8,12 @@
 import SwiftUI
 import Lottie
 
-struct LottieView: UIViewRepresentable {
+struct LoadingView: UIViewRepresentable {
     
     var name: String = "loadingAnimation"
     var loopMode: LottieLoopMode = .loop
     
-    func makeUIView(context: UIViewRepresentableContext<LottieView>) -> UIView {
+    func makeUIView(context: UIViewRepresentableContext<LoadingView>) -> UIView {
         
         let view = UIView(frame: .zero)
         let animationView = AnimationView()
@@ -35,7 +35,7 @@ struct LottieView: UIViewRepresentable {
         return view
     }
     
-    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LottieView>) {
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LoadingView>) {
         
     }
 }

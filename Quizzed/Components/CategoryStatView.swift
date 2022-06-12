@@ -23,6 +23,7 @@ struct CategoryStatView: View {
                             .font(.title2)
                             .frame(width: 120, height: 60, alignment: .leading)
                             .lineLimit(2)
+                            .dynamicTypeSize(...DynamicTypeSize.xLarge)
                     
                     Spacer()
                     
@@ -65,7 +66,7 @@ struct CategoryStatView: View {
                             .font(.headline)
                     }
                 }
-                .foregroundColor(Color("Gray"))
+                .foregroundColor(.white)
                 .padding(.horizontal)
                 .padding(.vertical, 10)
                 .background(
@@ -79,10 +80,11 @@ struct CategoryStatView: View {
                             .blur(radius: 20)
                     }
             )
-                .frame(width: 210, height: 150)
+                .frame(width: 210)
                 .clipShape(
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                 )
+                .accessibilityElement(children: .combine)
 
         
         

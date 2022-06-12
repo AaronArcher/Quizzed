@@ -61,10 +61,10 @@ struct QuestionView: View {
                             .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                         
                         Image(systemName: "xmark")
-                            .font(.title2)
+                            .font(.title).dynamicTypeSize(.medium)
                             .foregroundColor(Color("Blue1"))
                     }
-                    .frame(width: 30, height: 30)
+                    .frame(width: 32, height: 32)
                 }
                 
             }
@@ -105,7 +105,7 @@ struct QuestionView: View {
                     .font(.title3)
                     .padding(.bottom, 30)
                 
-                LottieView()
+                LoadingView()
                     .frame(width: screenSize().width / 2, height: screenSize().width / 2)
                 
                 
@@ -122,6 +122,7 @@ struct QuestionView: View {
                         Text("\(quizModel.index + 1) out of \(quizModel.length) ")
                             .font(.subheadline)
                     }
+                    .accessibilityElement(children: .combine)
                     
                     Spacer()
                     
@@ -133,6 +134,8 @@ struct QuestionView: View {
                             .font(.subheadline)
                             .animation(nil)
                     }
+                    .accessibilityElement(children: .combine)
+
                 }
                 .padding(.horizontal, 40)
                 .padding(.top, 20)
@@ -152,6 +155,7 @@ struct QuestionView: View {
                         ForEach(quizModel.answerChoices, id: \.id) { answer in
                             
                             AnswerRow(answer: answer)
+                                .accessibilityAddTraits(.isButton)
                             
                         }
                     }
@@ -192,7 +196,7 @@ struct QuestionView: View {
 
 
             }
-            .disabled(!quizModel.answerSelected)
+            .disabled(!quizModel.showNext)
             
             
         }

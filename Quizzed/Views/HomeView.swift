@@ -45,18 +45,19 @@ struct HomeView: View {
                                             .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                                         
                                         Image(systemName: "chart.bar.fill")
-                                            .font(.title3)
+                                            .font(.title3).dynamicTypeSize(.medium)
                                             .foregroundColor(Color("Blue3"))
+                                            .accessibilityLabel("Statistics")
                                         
                                     }
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: 32, height: 32)
                                 }
                                 
                                 Spacer()
                                 
                                 Text("QUIZZED")
-                                    .font(.largeTitle)
-                                    .fontWeight(.bold)
+                                    .font(.largeTitle.bold())
+                                    .tracking(5)
                                     .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                                 
                                 Spacer()
@@ -72,12 +73,12 @@ struct HomeView: View {
                                         
                                         
                                         Text("?")
-                                            .font(.title2)
-                                            .bold()
+                                            .font(.title.bold()).dynamicTypeSize(.medium)
                                             .foregroundColor(Color("Blue3"))
+                                            .accessibilityLabel("Help and rules")
                                         
                                     }
-                                    .frame(width: 30, height: 30)
+                                    .frame(width: 32, height: 32)
                                 }
                             }
                             .padding(.horizontal)
@@ -108,29 +109,45 @@ struct HomeView: View {
                             LazyVGrid(columns: columns, spacing: 15) {
                                 ForEach(categories, id: \.id) { item in
                                     
-                                    CategoryButton(selectedCategory: $selectedCategory, category: item.category)
-                                        .frame(width: screenSize().width / 2.3, height: screenSize().width / 4)
-                                        .onTapGesture {
-                                            if selectedCategory == item.category {
-                                                withAnimation {
-                                                    selectedCategory = ""
-                                                }
-                                            } else {
-                                                withAnimation {
-                                                    selectedCategory = item.category
-                                                }
+                                    Button {
+                                        if selectedCategory == item.category {
+                                            withAnimation {
+                                                selectedCategory = ""
                                             }
-                                            quizModel.categoryID = item.categoryID
-                                            quizModel.selectedCategory = item.category
-                                            print(selectedCategory)
+                                        } else {
+                                            withAnimation {
+                                                selectedCategory = item.category
+                                            }
                                         }
+                                        quizModel.categoryID = item.categoryID
+                                        quizModel.selectedCategory = item.category
+                                        print(selectedCategory)
+                                    } label: {
+                                        CategoryButton(selectedCategory: $selectedCategory, category: item.category)
+
+                                    }
+
+//                                    CategoryButton(selectedCategory: $selectedCategory, category: item.category)
+//                                        .onTapGesture {
+//                                            if selectedCategory == item.category {
+//                                                withAnimation {
+//                                                    selectedCategory = ""
+//                                                }
+//                                            } else {
+//                                                withAnimation {
+//                                                    selectedCategory = item.category
+//                                                }
+//                                            }
+//                                            quizModel.categoryID = item.categoryID
+//                                            quizModel.selectedCategory = item.category
+//                                            print(selectedCategory)
+//                                        }
                                 }
                             }
                             .padding(.vertical)
                             
                         }
                         .frame(maxWidth: .infinity)
-//                        .frame(height: screenSize().height / 1.7)
                         .frame(maxHeight: Constants.isScreenLarge ? 600 : 430)
                         .padding(.horizontal)
                         .padding(.top, 10)
@@ -189,6 +206,7 @@ struct HomeView: View {
         
     }
     
+    @ViewBuilder
     var rulesContent: some View {
         ZStack(alignment: .center) {
             ZStack(alignment: .top) {
@@ -236,6 +254,7 @@ struct HomeView: View {
                             .font(.subheadline)
                         
                     }
+                    .dynamicTypeSize(..<DynamicTypeSize.xLarge)
                     .padding(.horizontal)
                     .padding(.vertical, 10)
                     
@@ -251,6 +270,7 @@ struct HomeView: View {
                                 .foregroundColor(Color("Red"))
                         }
                     }
+                    .dynamicTypeSize(..<DynamicTypeSize.xLarge)
                     .padding(.top)
                     .padding(.bottom, 8)
                     
@@ -259,6 +279,7 @@ struct HomeView: View {
                     } label: {
                         Text("Privacy Policy")
                             .font(.caption)
+                            .dynamicTypeSize(..<DynamicTypeSize.xLarge)
                     }
 
                     

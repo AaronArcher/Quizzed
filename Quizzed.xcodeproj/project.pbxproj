@@ -14,13 +14,15 @@
 		EE14C889278B14A8007AE31B /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14C888278B14A8007AE31B /* SplashView.swift */; };
 		EE14C890278B422D007AE31B /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE14C88F278B422D007AE31B /* Category.swift */; };
 		EE4EDB07283C1FCA003E7CA8 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4EDB06283C1FCA003E7CA8 /* CategoryButton.swift */; };
+		EE50521028562DB600C3DF50 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50520F28562DB600C3DF50 /* ConfettiView.swift */; };
+		EE50521228562FD700C3DF50 /* confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = EE50521128562FD700C3DF50 /* confetti.json */; };
 		EE6D0B1127A58A8F00975AB1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D0B1027A58A8F00975AB1 /* Extensions.swift */; };
 		EE6D0B1327A58F5400975AB1 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D0B1227A58F5400975AB1 /* StatsView.swift */; };
 		EE6D0B1527A5980D00975AB1 /* HomeHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D0B1427A5980D00975AB1 /* HomeHolderView.swift */; };
 		EE86CD4327A87E5200BDB3C8 /* RoundedCornerShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86CD4227A87E5200BDB3C8 /* RoundedCornerShape.swift */; };
 		EE86CD4627A8979700BDB3C8 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = EE86CD4527A8979700BDB3C8 /* Lottie */; };
 		EE86CD4927A897CC00BDB3C8 /* loadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = EE86CD4827A897CC00BDB3C8 /* loadingAnimation.json */; };
-		EE86CD4B27A897EA00BDB3C8 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86CD4A27A897EA00BDB3C8 /* LottieView.swift */; };
+		EE86CD4B27A897EA00BDB3C8 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86CD4A27A897EA00BDB3C8 /* LoadingView.swift */; };
 		EE90063F278CB51200B9BAB8 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE90063E278CB51200B9BAB8 /* QuizViewModel.swift */; };
 		EE900641278CB5A900B9BAB8 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE900640278CB5A900B9BAB8 /* Answer.swift */; };
 		EE900643278CB5D600B9BAB8 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE900642278CB5D600B9BAB8 /* Quiz.swift */; };
@@ -46,12 +48,14 @@
 		EE14C88C278B2A9C007AE31B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EE14C88F278B422D007AE31B /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		EE4EDB06283C1FCA003E7CA8 /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
+		EE50520F28562DB600C3DF50 /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
+		EE50521128562FD700C3DF50 /* confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = confetti.json; sourceTree = "<group>"; };
 		EE6D0B1027A58A8F00975AB1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EE6D0B1227A58F5400975AB1 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		EE6D0B1427A5980D00975AB1 /* HomeHolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHolderView.swift; sourceTree = "<group>"; };
 		EE86CD4227A87E5200BDB3C8 /* RoundedCornerShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerShape.swift; sourceTree = "<group>"; };
 		EE86CD4827A897CC00BDB3C8 /* loadingAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingAnimation.json; sourceTree = "<group>"; };
-		EE86CD4A27A897EA00BDB3C8 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		EE86CD4A27A897EA00BDB3C8 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		EE90063E278CB51200B9BAB8 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		EE900640278CB5A900B9BAB8 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		EE900642278CB5D600B9BAB8 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 		EE86CD4727A897AC00BDB3C8 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				EE50521128562FD700C3DF50 /* confetti.json */,
 				EE86CD4827A897CC00BDB3C8 /* loadingAnimation.json */,
 			);
 			path = Lottie;
@@ -179,7 +184,8 @@
 				EE4EDB06283C1FCA003E7CA8 /* CategoryButton.swift */,
 				EEC1F6F927A1F4F200CDD70A /* DifficultyButton.swift */,
 				EE86CD4227A87E5200BDB3C8 /* RoundedCornerShape.swift */,
-				EE86CD4A27A897EA00BDB3C8 /* LottieView.swift */,
+				EE86CD4A27A897EA00BDB3C8 /* LoadingView.swift */,
+				EE50520F28562DB600C3DF50 /* ConfettiView.swift */,
 				EEF33CAC284013B600D3618D /* CategoryStatView.swift */,
 			);
 			path = Components;
@@ -250,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE86CD4927A897CC00BDB3C8 /* loadingAnimation.json in Resources */,
+				EE50521228562FD700C3DF50 /* confetti.json in Resources */,
 				EE14C881278B1358007AE31B /* Preview Assets.xcassets in Resources */,
 				EE14C87E278B1358007AE31B /* Assets.xcassets in Resources */,
 			);
@@ -270,10 +277,11 @@
 				EE90063F278CB51200B9BAB8 /* QuizViewModel.swift in Sources */,
 				EE9E475D284FA35C0089C1F5 /* Constants.swift in Sources */,
 				EE14C87A278B1356007AE31B /* QuizzedApp.swift in Sources */,
-				EE86CD4B27A897EA00BDB3C8 /* LottieView.swift in Sources */,
+				EE86CD4B27A897EA00BDB3C8 /* LoadingView.swift in Sources */,
 				EE4EDB07283C1FCA003E7CA8 /* CategoryButton.swift in Sources */,
 				EE14C889278B14A8007AE31B /* SplashView.swift in Sources */,
 				EECE92BA283A8A99001FD7A4 /* StatsViewModel.swift in Sources */,
+				EE50521028562DB600C3DF50 /* ConfettiView.swift in Sources */,
 				EE978A59278F83BE00B89F0A /* ResultView.swift in Sources */,
 				EE86CD4327A87E5200BDB3C8 /* RoundedCornerShape.swift in Sources */,
 				EEC1F6FC27A1FDBC00CDD70A /* DifficultyView.swift in Sources */,

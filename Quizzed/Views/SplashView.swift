@@ -16,7 +16,7 @@ struct SplashView: View {
     
     let height = UIScreen.main.bounds.height
     @State var reveal = false
-    @State var hideText = false
+    @State var hideText = true
     
     var body: some View {
         
@@ -29,8 +29,8 @@ struct SplashView: View {
                 .rotation(Angle(degrees: -90))
                 .trim(from: 0, to: startAnimation ? 1 : 0)
                 .stroke(
-//                    Color("Blue1")
-                    LinearGradient(colors: [Color("Blue3"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .topLeading, endPoint: .bottomTrailing)
+//                    LinearGradient(colors: [Color("Blue3"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .topLeading, endPoint: .bottomTrailing)
+                    AngularGradient(colors: [Color("Blue1"), Color("Blue2"), Color("Blue2"), Color("Blue3"), Color("Blue2"), Color("Blue1")], center: .center)
                     , style: StrokeStyle(lineWidth: 20, lineCap: .round, lineJoin: .round))
                 .frame(width: 200, height: 200)
                 .opacity(hideText ? 0 : 1)
@@ -40,13 +40,26 @@ struct SplashView: View {
                 .rotation(Angle(degrees: 45))
                 .offset(x: 70, y: 70)
                 .fill(
-                    LinearGradient(colors: [Color("Blue3"), Color("Blue3"), Color("Blue3"), Color("Blue2"), Color("Blue1")], startPoint: .leading, endPoint: .trailing)
+                    LinearGradient(colors: [Color("Blue3"), Color("Blue2"), Color("Blue1")], startPoint: .leading, endPoint: .trailing)
                 )
                 .frame(width: lineAnimation ? 100 : 0, height: 20)
                 .opacity(hideText ? 0 : 1)
 
             
+            //MARK: Splash Text
             VStack {
+           
+                    
+                Text("QUIZZED")
+                    .font(Font.system(size: 50).bold())
+                    .tracking(10)
+                    .foregroundStyle(
+                        LinearGradient(colors: [Color("Blue3"), Color("Blue2"), Color("Blue1")], startPoint: .leading, endPoint: .trailing)
+                    )
+                    .padding(.top, Constants.isScreenLarge ? 140 : 80)
+                    
+                    Spacer()
+            
                 
                 
                 Spacer()
@@ -58,11 +71,15 @@ struct SplashView: View {
                 Text("Open Trivia Database")
                     .font(.caption)
                     .foregroundColor(Color("Blue1"))
+                    .padding(.bottom, 60)
 
                 
             }
-            .padding(.bottom, 60)
-//            .frame(height: UIScreen.main.bounds.height)
+            .onAppear(perform: {
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    hideText = false
+                }
+            })
             .opacity(hideText ? 0 : 1)
             
         }

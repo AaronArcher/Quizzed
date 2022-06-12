@@ -73,11 +73,6 @@ struct AnswerRow: View {
                 Spacer()
                 
                 ZStack {
-                    RoundedRectangle(cornerRadius: 5)
-                        .frame(width: screenSize().height / 12 - 30, height: screenSize().height / 12 - 30)
-                        .foregroundColor(Color(hue: 0.365, saturation: 0.0, brightness: 0.94))
-                        .shadow(color: Color("Blue1").opacity(0.3), radius: 2, x: 2, y: 2)
-                        .scaleEffect(selectedBox ? 1 : 0)
                     
                     Image(systemName: "checkmark")
                         .font(.system(size: 20))
@@ -94,10 +89,18 @@ struct AnswerRow: View {
                         .offset(x: (isSelected && !selectedCorrect) ? -40 : 0, y: (isSelected && !selectedCorrect) ? -40 : 0)
                         .opacity((isSelected && !selectedCorrect) ? 1 : 0)
                         .animation(.spring(response: 0.5, dampingFraction: 0.5).delay(0.3), value: isSelected)
-//                        .animation(.easeInOut.delay(0.7), value: isSelected)
                 }
+                .padding(5)
+                .background(
+                    RoundedRectangle(cornerRadius: 5)
+//                        .frame(width: screenSize().height / 12 - 30, height: screenSize().height / 12 - 30)
+                        .foregroundColor(Color(hue: 0.365, saturation: 0.0, brightness: 0.94))
+                        .shadow(color: Color("Blue1").opacity(0.3), radius: 2, x: 2, y: 2)
+                        .scaleEffect(selectedBox ? 1 : 0)
+                )
             }
             .padding(.trailing, 10)
+            .accessibilityHidden(true)
                     
             
         }

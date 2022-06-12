@@ -22,7 +22,7 @@ struct ResultView: View {
             return "Awesome!"
         }
         else if quizModel.score < 4 {
-            return "Terrible..."
+            return "Could be better..."
         }
         else {
             return "Not bad!"
@@ -30,80 +30,71 @@ struct ResultView: View {
     }
     
     
-    // Disable animation with navigation Link to HomeViewHolder as the default animation shows the StatsView when sliding in
-    
-//    init(){
-//        UINavigationBar.setAnimationsEnabled(false)
-//    }
-    
     var body: some View {
         
         
         VStack {
             
-                Text(resultsText)
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
-                    .bold()
-                    .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, Constants.headerPadding())
-                    .padding(.bottom, 25)
-                    .background(
-                        ZStack {
-                            RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                                .foregroundColor(Color("Red"))
-                                
-                            RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                                .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
-                                .blur(radius: 20)
-                        }
-                    )
-                    .clipShape(RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25))
-                
-            Spacer()
+            Text(resultsText)
+                .font(.title)
+                .foregroundColor(Color("Red"))
+                .padding(.top, 25)
+                .padding(.vertical)
             
+            Text(quizModel.selectedCategory)
+                .font(.largeTitle)
+                .foregroundColor(.white)
+                .padding(.top)
+                
+            
+            Image(quizModel.selectedCategory)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 70, height: 70)
+                .padding(.bottom, 20)
             
             
             HStack {
                 
-                Text("Correct Answers:")
-                
+                Text("Correct answers:")
+                    .foregroundColor(.white)
+
                 Spacer()
                 
-                Text("\(quizModel.score)")
-                    .foregroundColor(.white)
+                Text("\(quizModel.score) / 10")
+                    .foregroundColor(Color("Red"))
                     .bold()
                 
             }
             .font(.title)
-            .foregroundColor(Color("Red"))
+            .padding(10)
+            .padding(.horizontal, 10)
+            .background(
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .fill(Color("Blue3"))
+                        .shadow(color: Color("Blue1").opacity(0.2), radius: 10, x: 10, y: 10)
+                    
+                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .stroke(Color("Blue2"), lineWidth: 5)
+                        .blur(radius: 10)
+                }
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            )
             .padding()
-            
-            HStack {
-                
-                Text("Out of:")
-                
-                Spacer()
-                
-                Text("\(quizModel.length)")
-                    .foregroundColor(.white)
-                    .bold()
-                
-            }
-            .font(.title)
-            .foregroundColor(Color("Red"))
-            .padding()
+            .padding(.top, 20)
             
         
-            Text("Score")
-                .font(.largeTitle)
+            Text("SCORE")
+                .font(Font.system(size: 50).bold())
+                .foregroundStyle(
+                    LinearGradient(colors: [Color("Red2"), Color("Red"), Color("Red"), Color("Red"), Color("Red2")], startPoint: .leading, endPoint: .trailing)
+                )
                 .padding(.top)
             
             Text("\(quizModel.configuredScore)")
-                .font(.largeTitle)
-                .bold()
-                .foregroundColor(Color("Red"))
+                .font(Font.system(size: 50).bold())
+                .foregroundColor(.white)
             
             Spacer()
             
@@ -136,10 +127,15 @@ struct ResultView: View {
         )
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-//        .transition(.move(edge: .trailing)) // After completing the quiz once, transitions seem to be disabled so added transitions manually as well for multiple games
         .onAppear {
             updateStorage()
         }
+        .overlay(
+            ConfettiView()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
+        )
             
         
     }
@@ -223,9 +219,9 @@ struct ResultView: View {
     
 }
 
-struct ResultView_Previews: PreviewProvider {
-    static var previews: some View {
-        ResultView()
-            .environmentObject(QuizViewModel())
-    }
-}
+//struct ResultView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ResultView()
+//            .environmentObject(QuizViewModel())
+//    }
+//}
