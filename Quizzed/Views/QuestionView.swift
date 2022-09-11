@@ -56,9 +56,7 @@ struct QuestionView: View {
                     
                 } label: {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 5)
-                            .foregroundColor(.white)
-                            .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                        HeaderButton()
                         
                         Image(systemName: "xmark")
                             .font(.title).dynamicTypeSize(.medium)
@@ -68,20 +66,7 @@ struct QuestionView: View {
                 }
                 
             }
-            .padding(.horizontal)
-            .padding(.top, ScreenOptions.headerPadding())
-            .padding(.bottom, 25)
-            .background(
-                ZStack {
-                    RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                        .foregroundColor(Color("Red"))
-                    
-                    RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                        .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
-                        .blur(radius: 20)
-                }
-            )
-            .clipShape(RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25))
+            .headerShapeModifier()
             // Cannot put 2 alerts on the same view so added the second alert here as the header is always on screen
             .alert(isPresented: $hasError, error: error) {
                 Button {

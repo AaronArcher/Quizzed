@@ -30,6 +30,13 @@ extension View {
     }
 }
 
+// MARK: Extension for the header background shape
+extension View {
+    func headerShapeModifier() -> some View {
+        modifier(HeaderShapeModifier())
+    }
+}
+
 extension QuizViewModel {
     enum QuizError: LocalizedError {
         case custom(error: Error)

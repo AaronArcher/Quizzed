@@ -12,6 +12,7 @@ struct HeaderButton: View {
     var body: some View {
         
             RoundedRectangle(cornerRadius: 5)
+                .foregroundColor(.white)
                 .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
         
     }
