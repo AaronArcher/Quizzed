@@ -55,7 +55,7 @@ struct DifficultyView: View {
                     .frame(width: 30, height: 30)
                 }
                 .padding(.horizontal)
-                .padding(.top, Constants.headerPadding())
+                .padding(.top, ScreenOptions.headerPadding())
                 .padding(.bottom, 25)                .background(
                     ZStack {
                         RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
@@ -155,7 +155,7 @@ struct DifficultyView: View {
                         .font(.largeTitle)
                         .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                         .frame(maxWidth: .infinity)
-                        .padding(.bottom, Constants.bottomButtonPadding())
+                        .padding(.bottom, ScreenOptions.bottomButtonPadding())
                         .padding(.top, 15)
                         .background(
                             ZStack {

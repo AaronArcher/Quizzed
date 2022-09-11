@@ -23,6 +23,13 @@ extension View {
     }
 }
 
+// MARK: Extension to get screen size
+extension View {
+    func screenSize() -> CGRect {
+        return UIScreen.main.bounds
+    }
+}
+
 extension QuizViewModel {
     enum QuizError: LocalizedError {
         case custom(error: Error)
@@ -41,3 +48,4 @@ extension QuizViewModel {
         }
     }
 }
+

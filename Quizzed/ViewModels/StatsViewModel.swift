@@ -100,13 +100,11 @@ class StatsViewModel: ObservableObject {
     func bestCategory() -> CategoryStat {
         let allCategories = [film, music, television, videoGames, scienceAndNature, mythology, animals, comics, sport, generalKnowledge]
         let sortedCategories = allCategories.sorted()
-        let best = sortedCategories[0]
-        return best
+        return sortedCategories[0]
     }
     func allCategories() -> [CategoryStat] {
         let allCategories = [film, music, television, videoGames, scienceAndNature, mythology, animals, comics, sport, generalKnowledge]
-        let sortedCategories = allCategories.sorted()
-        return sortedCategories
+        return allCategories.sorted()
     }
     
     func resetData() {

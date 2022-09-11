@@ -54,8 +54,8 @@ struct StatsView: View {
                 
             }
             .padding(.horizontal)
-            .padding(.top, Constants.headerPadding())
-            .padding(.bottom, Constants.isScreenLarge ? 25 : 10)
+            .padding(.top, ScreenOptions.headerPadding())
+            .padding(.bottom, ScreenOptions.isScreenLarge ? 25 : 10)
             
             ScrollView(showsIndicators: false) {
                 VStack {

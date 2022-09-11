@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Constants {
+enum ScreenOptions {
     
     static var isScreenLarge: Bool {
         UIScreen.main.bounds.height > 680
@@ -30,5 +30,18 @@ struct Constants {
         }
     }
     
+}
+
+enum Categories {
     
+    static let animals = "Animals"
+    static let comics = "Comics"
+    static let film = "Film"
+    static let generalKnowledge = "General Knowledge"
+    static let music = "Music"
+    static let mythology = "Mythology"
+    static let television = "Television"
+    static let scienceAndNature = "Science & Nature"
+    static let sport = "Sport"
+    static let videoGames = "Video Games"
 }

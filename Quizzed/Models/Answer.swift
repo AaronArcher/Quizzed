@@ -8,7 +8,7 @@
 import Foundation
 
 struct Answer: Identifiable {
-    var id = UUID()
-    var text: AttributedString
-    var isCorrect: Bool
+    let id = UUID()
+    let text: AttributedString
+    let isCorrect: Bool
 }

@@ -44,9 +44,3 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-// MARK: Extension to get screen size
-extension View {
-    func screenSize() -> CGRect {
-        return UIScreen.main.bounds
-    }
-}

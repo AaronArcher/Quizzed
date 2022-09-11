@@ -82,7 +82,7 @@ struct HomeView: View {
                                 }
                             }
                             .padding(.horizontal)
-                            .padding(.top, Constants.headerPadding())
+                            .padding(.top, ScreenOptions.headerPadding())
                             .padding(.bottom, 25)
                             .background(
                                 ZStack {
@@ -127,28 +127,13 @@ struct HomeView: View {
 
                                     }
 
-//                                    CategoryButton(selectedCategory: $selectedCategory, category: item.category)
-//                                        .onTapGesture {
-//                                            if selectedCategory == item.category {
-//                                                withAnimation {
-//                                                    selectedCategory = ""
-//                                                }
-//                                            } else {
-//                                                withAnimation {
-//                                                    selectedCategory = item.category
-//                                                }
-//                                            }
-//                                            quizModel.categoryID = item.categoryID
-//                                            quizModel.selectedCategory = item.category
-//                                            print(selectedCategory)
-//                                        }
                                 }
                             }
                             .padding(.vertical)
                             
                         }
                         .frame(maxWidth: .infinity)
-                        .frame(maxHeight: Constants.isScreenLarge ? 600 : 430)
+                        .frame(maxHeight: ScreenOptions.isScreenLarge ? 600 : 430)
                         .padding(.horizontal)
                         .padding(.top, 10)
                         
@@ -166,7 +151,7 @@ struct HomeView: View {
                                 .font(.largeTitle)
                                 .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
                                 .frame(maxWidth: .infinity)
-                                .padding(.bottom, Constants.bottomButtonPadding())
+                                .padding(.bottom, ScreenOptions.bottomButtonPadding())
                                 .padding(.top, 15)
                                 .background(
                                     ZStack {
@@ -195,7 +180,7 @@ struct HomeView: View {
                     .navigationBarHidden(true)
                     .navigationBarBackButtonHidden(true)
                     .rulesPopup(show: $showRules) {
-                        rulesContent
+                        RulesPopup(showRules: $showRules)
                     }
                     .overlay(
                         showStats ?  StatsView(showStats: $showStats.animation()) : nil
@@ -206,130 +191,6 @@ struct HomeView: View {
         
     }
     
-    @ViewBuilder
-    var rulesContent: some View {
-        ZStack(alignment: .center) {
-            ZStack(alignment: .top) {
-
-                VStack(spacing: 0) {
-                    Text("Welcome to")
-                        .font(.title3)
-
-                    Text("QUIZZED")
-                        .font(.title)
-                        .foregroundColor(Color("Red"))
-                        .padding(.bottom, 10)
-                    
-                    Text("Simply select a category and difficulty to start your quiz.")
-                        .font(.subheadline)
-                        .padding(.top)
-                    
-                    Text("Points earned will depend on your difficulty selected:")
-                        .font(.subheadline)
-                        .padding(.top, 10)
-                        .padding(.bottom)
-                    
-                    VStack(spacing: 10) {
-
-                        Text("EASY")
-                            .font(.title2)
-                            .foregroundColor(Color("Red"))
-                            
-                        + Text("   5 points each")
-                            .font(.subheadline)
-                        
-                        
-                        Text("MEDIUM")
-                            .font(.title2)
-                            .foregroundColor(Color("Red"))
-                            
-                        + Text("   10 points each")
-                            .font(.subheadline)
-                       
-                        Text("HARD")
-                            .font(.title2)
-                            .foregroundColor(Color("Red"))
-                           
-                        + Text("   15 points each")
-                            .font(.subheadline)
-                        
-                    }
-                    .dynamicTypeSize(..<DynamicTypeSize.xLarge)
-                    .padding(.horizontal)
-                    .padding(.vertical, 10)
-                    
-                    HStack {
-                        Text("Powered by: ")
-                            .font(.footnote)
-
-                        Button {
-                            
-                        } label: {
-                            Text("Open Trivia Database")
-                                .font(.footnote)
-                                .foregroundColor(Color("Red"))
-                        }
-                    }
-                    .dynamicTypeSize(..<DynamicTypeSize.xLarge)
-                    .padding(.top)
-                    .padding(.bottom, 8)
-                    
-                    Button {
-                        
-                    } label: {
-                        Text("Privacy Policy")
-                            .font(.caption)
-                            .dynamicTypeSize(..<DynamicTypeSize.xLarge)
-                    }
-
-                    
-                   
-                }
-                .frame(maxWidth: screenSize().width / 1.4)
-                .multilineTextAlignment(.center)
-                .foregroundColor(.white)
-                .padding()
-
-                HStack {
-
-                    Spacer()
-
-                    Button {
-                        withAnimation {
-                            showRules.toggle()
-                        }
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .foregroundColor(.white)
-
-                            Image(systemName: "xmark")
-                                .font(.title2)
-                                .foregroundColor(Color("Blue1"))
-                        }
-                        .frame(width: 30, height: 30)
-                }
-                }
-                .padding()
-
-            }
-            .background(
-                RoundedRectangle(cornerRadius: 15)
-                    .foregroundColor(Color("Blue1"))
-            )
-            .frame(width: screenSize().width / 1.2)
-
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .ignoresSafeArea()
-        .background(.ultraThinMaterial)
-        .onTapGesture {
-            withAnimation {
-                showRules.toggle()
-            }
-        }
-        
-    }
 }
 
 struct HomeView_Previews: PreviewProvider {

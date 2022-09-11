@@ -30,7 +30,7 @@ class QuizViewModel: ObservableObject {
  
     
 
-    // User Main Actor as this function is Asynchronous so will be performed on a background thread including any updates that may change the UI so marking this with Main Actor ensure UI changes are performed on the main thread
+    // Use Main Actor as this function is Asynchronous so will be performed on a background thread including any updates that may change the UI so marking this with Main Actor ensure UI changes are performed on the main thread
         @MainActor
         func fetchQuiz() async throws {
             
@@ -54,7 +54,6 @@ class QuizViewModel: ObservableObject {
                         throw QuizError.failedToDecode
                     }
 
-//                    DispatchQueue.main.async {
                         self.index = 0
                         self.score = 0
                         self.progress = 0
@@ -62,7 +61,6 @@ class QuizViewModel: ObservableObject {
                         self.quiz = decodedData.results
                         self.length = self.quiz.count
                         self.setQuestion()
-//                    }
                     
                 } catch {
                     throw QuizError.custom(error: error)

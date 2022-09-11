@@ -56,7 +56,7 @@ struct SplashView: View {
                     .foregroundStyle(
                         LinearGradient(colors: [Color("Blue3"), Color("Blue2"), Color("Blue1")], startPoint: .leading, endPoint: .trailing)
                     )
-                    .padding(.top, Constants.isScreenLarge ? 140 : 80)
+                    .padding(.top, ScreenOptions.isScreenLarge ? 140 : 80)
                     
                     Spacer()
             
