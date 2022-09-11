@@ -20,6 +20,7 @@
 		EE6D0B1327A58F5400975AB1 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D0B1227A58F5400975AB1 /* StatsView.swift */; };
 		EE6D0B1527A5980D00975AB1 /* HomeHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D0B1427A5980D00975AB1 /* HomeHolderView.swift */; };
 		EE6D147728CE28DD00D6EC57 /* RulesPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D147628CE28DD00D6EC57 /* RulesPopup.swift */; };
+		EE6D147A28CE2D5200D6EC57 /* HeaderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D147928CE2D5200D6EC57 /* HeaderButton.swift */; };
 		EE86CD4327A87E5200BDB3C8 /* RoundedCornerShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE86CD4227A87E5200BDB3C8 /* RoundedCornerShape.swift */; };
 		EE86CD4627A8979700BDB3C8 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = EE86CD4527A8979700BDB3C8 /* Lottie */; };
 		EE86CD4927A897CC00BDB3C8 /* loadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = EE86CD4827A897CC00BDB3C8 /* loadingAnimation.json */; };
@@ -55,6 +56,7 @@
 		EE6D0B1227A58F5400975AB1 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		EE6D0B1427A5980D00975AB1 /* HomeHolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHolderView.swift; sourceTree = "<group>"; };
 		EE6D147628CE28DD00D6EC57 /* RulesPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesPopup.swift; sourceTree = "<group>"; };
+		EE6D147928CE2D5200D6EC57 /* HeaderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderButton.swift; sourceTree = "<group>"; };
 		EE86CD4227A87E5200BDB3C8 /* RoundedCornerShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerShape.swift; sourceTree = "<group>"; };
 		EE86CD4827A897CC00BDB3C8 /* loadingAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loadingAnimation.json; sourceTree = "<group>"; };
 		EE86CD4A27A897EA00BDB3C8 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,14 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		EE6D147828CE2D3C00D6EC57 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				EE6D147928CE2D5200D6EC57 /* HeaderButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
 		EE86CD4727A897AC00BDB3C8 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +191,7 @@
 		EE900646278CD8DF00B9BAB8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				EE6D147828CE2D3C00D6EC57 /* Buttons */,
 				EE900647278CD8F700B9BAB8 /* ProgressBarView.swift */,
 				EE900649278CDBEB00B9BAB8 /* AnswerRow.swift */,
 				EE4EDB06283C1FCA003E7CA8 /* CategoryButton.swift */,
@@ -280,6 +291,7 @@
 				EE90063F278CB51200B9BAB8 /* QuizViewModel.swift in Sources */,
 				EE9E475D284FA35C0089C1F5 /* Constants.swift in Sources */,
 				EE14C87A278B1356007AE31B /* QuizzedApp.swift in Sources */,
+				EE6D147A28CE2D5200D6EC57 /* HeaderButton.swift in Sources */,
 				EE86CD4B27A897EA00BDB3C8 /* LoadingView.swift in Sources */,
 				EE4EDB07283C1FCA003E7CA8 /* CategoryButton.swift in Sources */,
 				EE14C889278B14A8007AE31B /* SplashView.swift in Sources */,

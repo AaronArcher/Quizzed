@@ -32,6 +32,10 @@ enum ScreenOptions {
     
 }
 
+enum Backgrounds {
+    static let gradient = LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
+}
+
 enum Categories {
     
     static let animals = "Animals"

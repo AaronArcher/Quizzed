@@ -48,7 +48,7 @@ struct HomeView: View {
                     .ignoresSafeArea()
                     .foregroundColor(.white)
                     .background(
-                        LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
+                        Backgrounds.gradient
                     )
                     .navigationBarHidden(true)
                     .navigationBarBackButtonHidden(true)
@@ -73,8 +73,7 @@ struct HomeView: View {
                 }
             } label: {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 5)
-                        .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                    HeaderButton()
                     
                     Image(systemName: "chart.bar.fill")
                         .font(.title3).dynamicTypeSize(.medium)
@@ -100,9 +99,7 @@ struct HomeView: View {
                 }
             } label: {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 5)
-                        .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                    
+                    HeaderButton()
                     
                     Text("?")
                         .font(.title.bold()).dynamicTypeSize(.medium)
@@ -202,5 +199,3 @@ struct HomeView_Previews: PreviewProvider {
 
     }
 }
-
-

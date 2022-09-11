@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DifficultyView: View {
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.dismiss) private var dismiss
     
     @EnvironmentObject var quizModel: QuizViewModel
     
@@ -20,55 +20,10 @@ struct DifficultyView: View {
 
         VStack(spacing: 0) {
             
-            // MARK: Title Bar
-                
-                HStack {
-                    Button {
-                        presentationMode.wrappedValue.dismiss()
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 5)
-                                .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                            
-                            Image(systemName: "chevron.left")
-                                .font(.title).dynamicTypeSize(.medium)
-                                .foregroundColor(Color("Blue3"))
-                            
-                        }
-                        .frame(width: 32, height: 32)
-                    }
-                    
-                    Spacer()
-                    
-                    Text("QUIZZED")
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                    
-                    Spacer()
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 5)
-                            .foregroundColor(.clear)
-                        
-                    }
-                    .frame(width: 30, height: 30)
-                }
-                .padding(.horizontal)
-                .padding(.top, ScreenOptions.headerPadding())
-                .padding(.bottom, 25)                .background(
-                    ZStack {
-                        RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                            .foregroundColor(Color("Red"))
-                            
-                        RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
-                            .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
-                            .blur(radius: 20)
-                    }
-                )
-                .clipShape(RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25))
-
+            // MARK: Header
+            header
             
+            // MARK: Selected Category
             VStack(spacing: 10) {
                 Text(quizModel.selectedCategory)
                         .font(.title)
@@ -83,108 +38,161 @@ struct DifficultyView: View {
                 }
                 .padding(.top, 40)
             
-            // MARK: Select Difficulty
+            // MARK: Difficulties
             Text("Select your difficulty")
                 .font(.title2)
                 .fontWeight(.light)
-//                .padding(.vertical)
                 .padding(.top, 30)
             
-            // MARK: Difficulties
-            Group {
-                DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "easy")
-                    .onTapGesture {
-                        if selectedDifficulty == "easy" {
-                            withAnimation(.easeInOut) {
-                                selectedDifficulty = ""
-                                quizModel.difficulty = ""
-                            }
-                        } else {
-                            withAnimation(.easeInOut) {
-                                selectedDifficulty = "easy"
-                                quizModel.difficulty = selectedDifficulty
-                            }
-                        }
-                    }
-                
-                DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "medium")
-                    .onTapGesture {
-                        if selectedDifficulty == "medium" {
-                            withAnimation(.easeInOut) {
-                                selectedDifficulty = ""
-                                quizModel.difficulty = ""
-                            }
-                        } else {
-                            withAnimation(.easeInOut) {
-                                selectedDifficulty = "medium"
-                                quizModel.difficulty = selectedDifficulty
-                            }
-                        }
-
-                    }
-                
-                DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "hard")
-                    .onTapGesture {
-                        if selectedDifficulty == "hard" {
-                            withAnimation(.easeInOut) {
-                                selectedDifficulty = ""
-                                quizModel.difficulty = ""
-                            }
-                        } else {
-                            withAnimation(.easeInOut) {
-                                selectedDifficulty = "hard"
-                                quizModel.difficulty = selectedDifficulty
-                            }
-                        }
-
-                    }
-            }
-            .padding(.horizontal)
-            .padding(.vertical, 10)
+            difficulties
                 
 
             Spacer()
             
             // MARK: Start Button
-            NavigationLink {
-                QuestionView()
-
-            } label: {
-                    
-                    Text("START")
-                        .font(.largeTitle)
-                        .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                        .frame(maxWidth: .infinity)
-                        .padding(.bottom, ScreenOptions.bottomButtonPadding())
-                        .padding(.top, 15)
-                        .background(
-                            ZStack {
-                                RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                                    .foregroundColor(Color("Red"))
-                                
-                                RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                                    .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
-                                    .blur(radius: 20)
-                            }
-                        )
-                        .clipShape(RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25))
-                        .opacity(selectedDifficulty != "" ? 1 : 0.4)
-            }
-            .disabled(selectedDifficulty != "" ? false : true)
+            startButton
 
             
         }
-        .frame(maxWidth: screenSize().width)
         .ignoresSafeArea()
         .foregroundColor(.white)
         .background(
-            LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
+            Backgrounds.gradient
         )
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
 
 
     }
+    
+    var header: some View {
+        HStack {
+            Button {
+                dismiss()
+            } label: {
+                ZStack {
+                    HeaderButton()
+                    
+                    Image(systemName: "chevron.left")
+                        .font(.title).dynamicTypeSize(.medium)
+                        .foregroundColor(Color("Blue3"))
+                    
+                }
+                .frame(width: 32, height: 32)
+            }
+            
+            Spacer()
+            
+            Text("QUIZZED")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+            
+            Spacer()
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 5)
+                    .foregroundColor(.clear)
+                
+            }
+            .frame(width: 30, height: 30)
+        }
+        .padding(.horizontal)
+        .padding(.top, ScreenOptions.headerPadding())
+        .padding(.bottom, 25)                .background(
+            ZStack {
+                RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                    .foregroundColor(Color("Red"))
+                    
+                RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25)
+                    .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
+                    .blur(radius: 20)
+            }
+        )
+        .clipShape(RoundedCornerShape(corners: [.bottomLeft, .bottomRight], radius: 25))
+    }
+    
+    var difficulties: some View {
+        Group {
+            DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "easy")
+                .onTapGesture {
+                    if selectedDifficulty == "easy" {
+                        withAnimation(.easeInOut) {
+                            selectedDifficulty = ""
+                            quizModel.difficulty = ""
+                        }
+                    } else {
+                        withAnimation(.easeInOut) {
+                            selectedDifficulty = "easy"
+                            quizModel.difficulty = selectedDifficulty
+                        }
+                    }
+                }
+            
+            DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "medium")
+                .onTapGesture {
+                    if selectedDifficulty == "medium" {
+                        withAnimation(.easeInOut) {
+                            selectedDifficulty = ""
+                            quizModel.difficulty = ""
+                        }
+                    } else {
+                        withAnimation(.easeInOut) {
+                            selectedDifficulty = "medium"
+                            quizModel.difficulty = selectedDifficulty
+                        }
+                    }
+
+                }
+            
+            DifficultyButton(selectedDifficulty: $selectedDifficulty, difficulty: "hard")
+                .onTapGesture {
+                    if selectedDifficulty == "hard" {
+                        withAnimation(.easeInOut) {
+                            selectedDifficulty = ""
+                            quizModel.difficulty = ""
+                        }
+                    } else {
+                        withAnimation(.easeInOut) {
+                            selectedDifficulty = "hard"
+                            quizModel.difficulty = selectedDifficulty
+                        }
+                    }
+
+                }
+        }
+        .padding(.horizontal)
+        .padding(.vertical, 10)
+    }
+    
+    var startButton: some View {
+        NavigationLink {
+            QuestionView()
+
+        } label: {
+                
+                Text("START")
+                    .font(.largeTitle)
+                    .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
+                    .frame(maxWidth: .infinity)
+                    .padding(.bottom, ScreenOptions.bottomButtonPadding())
+                    .padding(.top, 15)
+                    .background(
+                        ZStack {
+                            RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                .foregroundColor(Color("Red"))
+                            
+                            RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
+                                .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
+                                .blur(radius: 20)
+                        }
+                    )
+                    .clipShape(RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25))
+                    .opacity(selectedDifficulty != "" ? 1 : 0.4)
+        }
+        .disabled(selectedDifficulty != "" ? false : true)
+    }
+    
 }
 
 struct DifficultyViewTwo_Previews: PreviewProvider {

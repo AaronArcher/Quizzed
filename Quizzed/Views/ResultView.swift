@@ -123,7 +123,7 @@ struct ResultView: View {
         .foregroundColor(.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
-            LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
+            Backgrounds.gradient
         )
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)

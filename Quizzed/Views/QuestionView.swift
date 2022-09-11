@@ -220,7 +220,7 @@ struct QuestionView: View {
         .ignoresSafeArea()
         .foregroundColor(.white)
         .background(
-            LinearGradient(colors: [Color("Blue1"), Color("Blue1"), Color("Blue2"), Color("Blue1"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
+            Backgrounds.gradient
         )
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)

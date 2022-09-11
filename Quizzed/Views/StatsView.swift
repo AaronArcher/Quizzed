@@ -225,7 +225,7 @@ struct StatsView: View {
         .ignoresSafeArea()
         .foregroundColor(.white)
         .background(
-            LinearGradient(colors: [Color("Blue1"), Color("Blue2"), Color("Blue2"), Color("Blue2"), Color("Blue1")], startPoint: .top, endPoint: .bottom)
+            Backgrounds.gradient
         )
         .alert("Are you sure you want to reset your statistics?", isPresented: $showingAlert) {
             Button("Yes") {
