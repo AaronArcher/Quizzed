@@ -9,8 +9,7 @@ import SwiftUI
 
 struct QuestionView: View {
     
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
+    @Environment(\.dismiss) private var dismiss
     
     @EnvironmentObject var quizModel: QuizViewModel
     
@@ -34,39 +33,8 @@ struct QuestionView: View {
             }
             
             // MARK: Header
+            header
             
-            HStack(spacing: 15) {
-                
-                Image(quizModel.selectedCategory)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 40)
-                
-                
-                Text(quizModel.selectedCategory)
-                    .foregroundColor(.white)
-                    .font(.title2)
-                
-                Spacer()
-                
-                Button {
-                    alertText = "Are you sure you want to quit?"
-                    isAlertToQuit = true
-                    showingAlert = true
-                    
-                } label: {
-                    ZStack {
-                        HeaderButton()
-                        
-                        Image(systemName: "xmark")
-                            .font(.title).dynamicTypeSize(.medium)
-                            .foregroundColor(Color("Blue1"))
-                    }
-                    .frame(width: 32, height: 32)
-                }
-                
-            }
-            .headerShapeModifier()
             // Cannot put 2 alerts on the same view so added the second alert here as the header is always on screen
             .alert(isPresented: $hasError, error: error) {
                 Button {
@@ -78,13 +46,12 @@ struct QuestionView: View {
                 }
                 
                 Button("Cancel") {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }
             }
             
-            
+            // MARK: Loading view
             if !showQuiz {
-                
                 Text("Loading Quiz")
                     .padding(.top, 60)
                     .font(.title3)
@@ -92,96 +59,25 @@ struct QuestionView: View {
                 
                 LoadingView()
                     .frame(width: screenSize().width / 2, height: screenSize().width / 2)
-                
-                
             }
             
             else {
                 //MARK: Score
-                HStack {
-                    
-                    VStack {
-                        Text("Question")
-                            .font(.headline)
-                        
-                        Text("\(quizModel.index + 1) out of \(quizModel.length) ")
-                            .font(.subheadline)
-                    }
-                    .accessibilityElement(children: .combine)
-                    
-                    Spacer()
-                    
-                    VStack {
-                        Text("Score")
-                            .font(.headline)
-                        
-                        Text("\(quizModel.configuredScore)")
-                            .font(.subheadline)
-                            .animation(nil)
-                    }
-                    .accessibilityElement(children: .combine)
-
-                }
-                .padding(.horizontal, 40)
-                .padding(.top, 20)
-                
+                score
                 
                 ProgressBarView(progress: quizModel.progress)
                     .padding(.top, 10)
                     .padding(.horizontal, 30)
                 
                 // MARK: Questions
-                VStack(alignment: .leading, spacing: 10) {
-                    
-                    Text(quizModel.question)
-                        .foregroundColor(.white)
-                    
-                    ScrollView {
-                        ForEach(quizModel.answerChoices, id: \.id) { answer in
-                            
-                            AnswerRow(answer: answer)
-                                .accessibilityAddTraits(.isButton)
-                            
-                        }
-                    }
-                    
-                    
-                }
-                .padding(.horizontal)
-                .padding(.top, 20)
+                questions
                 
             }
             
             Spacer()
             
-            
-            Button {
-                quizModel.nextQuestion()
-            } label: {
-
-                Text("NEXT")
-                    .font(.largeTitle)
-                    .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                    .frame(maxWidth: .infinity)
-                    .padding(.bottom, ScreenOptions.bottomButtonPadding())
-                    .padding(.top, 15)
-                    .background(
-                        ZStack {
-                            RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                                .foregroundColor(Color("Red"))
-
-                            RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                                .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
-                                .blur(radius: 20)
-                        }
-                    )
-                    .clipShape(RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25))
-                    .opacity(!quizModel.showNext ? 0.4 : 1)
-                    .animation(.easeInOut, value: quizModel.showNext)
-
-
-            }
-            .disabled(!quizModel.showNext)
+            //MARK: Next Button
+            nextButton
             
             
         }
@@ -215,19 +111,113 @@ struct QuestionView: View {
         .alert(alertText, isPresented: $showingAlert) {
             if isAlertToQuit {
                 Button("Yes") {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }
                 Button("No", role: .cancel) {}
                 
             } else {
                 Button("OK") {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }
                 
             }
         }
         
         
+    }
+    
+    var header: some View {
+        HStack(spacing: 15) {
+            
+            Image(quizModel.selectedCategory)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: 40)
+            
+            
+            Text(quizModel.selectedCategory)
+                .foregroundColor(.white)
+                .font(.title2)
+            
+            Spacer()
+            
+            Button {
+                alertText = "Are you sure you want to quit?"
+                isAlertToQuit = true
+                showingAlert = true
+                
+            } label: {
+                ZStack {
+                    HeaderButton()
+                    
+                    Image(systemName: "xmark")
+                        .font(.title).dynamicTypeSize(.medium)
+                        .foregroundColor(Color("Blue1"))
+                }
+                .frame(width: 32, height: 32)
+            }
+            
+        }
+        .headerShapeModifier()
+    }
+    
+    var score: some View {
+        HStack {
+            VStack {
+                Text("Question")
+                    .font(.headline)
+                
+                Text("\(quizModel.index + 1) out of \(quizModel.length) ")
+                    .font(.subheadline)
+            }
+            .accessibilityElement(children: .combine)
+            
+            Spacer()
+            
+            VStack {
+                Text("Score")
+                    .font(.headline)
+                
+                Text("\(quizModel.configuredScore)")
+                    .font(.subheadline)
+                    .animation(nil)
+            }
+            .accessibilityElement(children: .combine)
+
+        }
+        .padding(.horizontal, 40)
+        .padding(.top, 20)
+    }
+    
+    var questions: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            
+            Text(quizModel.question)
+                .foregroundColor(.white)
+            
+            ScrollView {
+                ForEach(quizModel.answerChoices, id: \.id) { answer in
+                    
+                    AnswerRow(answer: answer)
+                        .accessibilityAddTraits(.isButton)
+
+                }
+            }
+        }
+        .padding(.horizontal)
+        .padding(.top, 20)
+    }
+    
+    var nextButton: some View {
+        Button {
+            quizModel.nextQuestion()
+        } label: {
+
+            Text("NEXT")
+                .bottomButtonModifier(isActive: quizModel.showNext)
+
+        }
+        .disabled(!quizModel.showNext)
     }
     
     func execute() async {

@@ -157,27 +157,11 @@ struct DifficultyView: View {
     var startButton: some View {
         NavigationLink {
             QuestionView()
-
+            
         } label: {
-                
-                Text("START")
-                    .font(.largeTitle)
-                    .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                    .frame(maxWidth: .infinity)
-                    .padding(.bottom, ScreenOptions.bottomButtonPadding())
-                    .padding(.top, 15)
-                    .background(
-                        ZStack {
-                            RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                                .foregroundColor(Color("Red"))
-                            
-                            RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                                .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
-                                .blur(radius: 20)
-                        }
-                    )
-                    .clipShape(RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25))
-                    .opacity(selectedDifficulty != "" ? 1 : 0.4)
+            
+            Text("START")
+                .bottomButtonModifier(isActive: selectedDifficulty != "")
         }
         .disabled(selectedDifficulty != "" ? false : true)
     }

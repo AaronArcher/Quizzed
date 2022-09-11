@@ -154,25 +154,8 @@ struct HomeView: View {
             DifficultyView()
 
         } label: {
-
             Text("NEXT")
-                .font(.largeTitle)
-                .shadow(color: Color("Blue3"), radius: 3, x: 3, y: 3)
-                .frame(maxWidth: .infinity)
-                .padding(.bottom, ScreenOptions.bottomButtonPadding())
-                .padding(.top, 15)
-                .background(
-                    ZStack {
-                        RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                            .foregroundColor(Color("Red"))
-                        
-                        RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25)
-                            .stroke(Color("Red2").opacity(0.5), lineWidth: 20)
-                            .blur(radius: 20)
-                    }
-                )
-                .clipShape(RoundedCornerShape(corners: [.topLeft, .topRight], radius: 25))
-                .opacity(selectedCategory != "" ? 1 : 0.4)
+                .bottomButtonModifier(isActive: selectedCategory != "")
             
         }
         .disabled(selectedCategory != "" ? false : true)

@@ -7,35 +7,34 @@
 
 import SwiftUI
 
-// MARK: Rules popup extension
 extension View {
     
-    // MARK: Custom Modifier for Rules Popup
+    // MARK: Rules popup extension
     func rulesPopup<Content: View>(show: Binding<Bool>,@ViewBuilder content: @escaping ()-> Content)-> some View {
-        
         return self
             .overlay {
-                
                 if show.wrappedValue {
                     content()
                 }
             }
     }
-}
-
-// MARK: Extension to get screen size
-extension View {
+    
+    // MARK: Extension to get screen size
     func screenSize() -> CGRect {
         return UIScreen.main.bounds
     }
-}
-
-// MARK: Extension for the header background shape
-extension View {
+    
+    // MARK: Extension for the header background modifier
     func headerShapeModifier() -> some View {
         modifier(HeaderShapeModifier())
     }
+    
+    // MARK: Extension for bottom button modifier
+    func bottomButtonModifier(isActive: Bool) -> some View {
+        modifier(BottomButtonModifier(isActive: isActive))
+    }
 }
+
 
 extension QuizViewModel {
     enum QuizError: LocalizedError {
