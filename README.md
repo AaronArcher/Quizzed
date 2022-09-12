@@ -1,5 +1,7 @@
 # Quizzed
 
+Published on the App Store - https://apps.apple.com/us/app/quizzed-trivia-game/id1629321066 
+
 A simple Quiz app with multiple categories & difficulties built using SwiftUI and powered by Open Trivia Database - https://opentdb.com/ 
 
 Key features include: 
