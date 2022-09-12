@@ -15,8 +15,6 @@ Key features include:
   - Built using MVVM Architecture
   
   App Preview:
-  
-  ![Quizzed Categories](https://user-images.githubusercontent.com/89655771/189653169-660423a6-acd4-4921-a858-2cb68717b1db.png)
 
   
   
