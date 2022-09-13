@@ -14,13 +14,11 @@ struct HomeHolderView: View {
     @StateObject var quizModel = QuizViewModel()
     
     var body: some View {
-
-            
+        
             HomeView()
                 .environmentObject(quizModel)
                 .navigationBarHidden(true)
                 .navigationBarBackButtonHidden(true)
-           
 
     }
 }

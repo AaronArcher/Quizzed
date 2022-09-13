@@ -151,6 +151,7 @@ struct ResultView: View {
     }
     
     func updateCategoryStat() {
+        
         if quizModel.selectedCategory == "Film" {
             stats.film.timesPlayed += 1
             stats.film.score += quizModel.configuredScore

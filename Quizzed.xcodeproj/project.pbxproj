@@ -16,6 +16,8 @@
 		EE4EDB07283C1FCA003E7CA8 /* CategoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4EDB06283C1FCA003E7CA8 /* CategoryButton.swift */; };
 		EE50521028562DB600C3DF50 /* ConfettiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE50520F28562DB600C3DF50 /* ConfettiView.swift */; };
 		EE50521228562FD700C3DF50 /* confetti.json in Resources */ = {isa = PBXBuildFile; fileRef = EE50521128562FD700C3DF50 /* confetti.json */; };
+		EE651DD028CE414E00372AC0 /* CategoryStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE651DCF28CE414E00372AC0 /* CategoryStat.swift */; };
+		EE651DD728D1167900372AC0 /* StatsViewModelNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE651DD628D1167900372AC0 /* StatsViewModelNew.swift */; };
 		EE6D0B1127A58A8F00975AB1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D0B1027A58A8F00975AB1 /* Extensions.swift */; };
 		EE6D0B1327A58F5400975AB1 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D0B1227A58F5400975AB1 /* StatsView.swift */; };
 		EE6D0B1527A5980D00975AB1 /* HomeHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE6D0B1427A5980D00975AB1 /* HomeHolderView.swift */; };
@@ -53,6 +55,8 @@
 		EE4EDB06283C1FCA003E7CA8 /* CategoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryButton.swift; sourceTree = "<group>"; };
 		EE50520F28562DB600C3DF50 /* ConfettiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfettiView.swift; sourceTree = "<group>"; };
 		EE50521128562FD700C3DF50 /* confetti.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = confetti.json; sourceTree = "<group>"; };
+		EE651DCF28CE414E00372AC0 /* CategoryStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryStat.swift; sourceTree = "<group>"; };
+		EE651DD628D1167900372AC0 /* StatsViewModelNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModelNew.swift; sourceTree = "<group>"; };
 		EE6D0B1027A58A8F00975AB1 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EE6D0B1227A58F5400975AB1 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		EE6D0B1427A5980D00975AB1 /* HomeHolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHolderView.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 				EE14C88F278B422D007AE31B /* Category.swift */,
 				EE900640278CB5A900B9BAB8 /* Answer.swift */,
 				EE900642278CB5D600B9BAB8 /* Quiz.swift */,
+				EE651DCF28CE414E00372AC0 /* CategoryStat.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -168,6 +173,8 @@
 		EE6D147828CE2D3C00D6EC57 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				EE4EDB06283C1FCA003E7CA8 /* CategoryButton.swift */,
+				EEC1F6F927A1F4F200CDD70A /* DifficultyButton.swift */,
 				EE6D147928CE2D5200D6EC57 /* HeaderButton.swift */,
 			);
 			path = Buttons;
@@ -187,6 +194,7 @@
 			children = (
 				EE90063E278CB51200B9BAB8 /* QuizViewModel.swift */,
 				EECE92B9283A8A99001FD7A4 /* StatsViewModel.swift */,
+				EE651DD628D1167900372AC0 /* StatsViewModelNew.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -197,8 +205,6 @@
 				EE6D147828CE2D3C00D6EC57 /* Buttons */,
 				EE900647278CD8F700B9BAB8 /* ProgressBarView.swift */,
 				EE900649278CDBEB00B9BAB8 /* AnswerRow.swift */,
-				EE4EDB06283C1FCA003E7CA8 /* CategoryButton.swift */,
-				EEC1F6F927A1F4F200CDD70A /* DifficultyButton.swift */,
 				EE86CD4227A87E5200BDB3C8 /* RoundedCornerShape.swift */,
 				EE86CD4A27A897EA00BDB3C8 /* LoadingView.swift */,
 				EE50520F28562DB600C3DF50 /* ConfettiView.swift */,
@@ -299,12 +305,14 @@
 				EE4EDB07283C1FCA003E7CA8 /* CategoryButton.swift in Sources */,
 				EE14C889278B14A8007AE31B /* SplashView.swift in Sources */,
 				EECE92BA283A8A99001FD7A4 /* StatsViewModel.swift in Sources */,
+				EE651DD728D1167900372AC0 /* StatsViewModelNew.swift in Sources */,
 				EE50521028562DB600C3DF50 /* ConfettiView.swift in Sources */,
 				EE978A59278F83BE00B89F0A /* ResultView.swift in Sources */,
 				EE86CD4327A87E5200BDB3C8 /* RoundedCornerShape.swift in Sources */,
 				EE6D147728CE28DD00D6EC57 /* RulesPopup.swift in Sources */,
 				EEC1F6FC27A1FDBC00CDD70A /* DifficultyView.swift in Sources */,
 				EE6D0B1527A5980D00975AB1 /* HomeHolderView.swift in Sources */,
+				EE651DD028CE414E00372AC0 /* CategoryStat.swift in Sources */,
 				EE900641278CB5A900B9BAB8 /* Answer.swift in Sources */,
 				EEF33CAD284013B700D3618D /* CategoryStatView.swift in Sources */,
 				EE6D147C28CE371A00D6EC57 /* ViewModifiers.swift in Sources */,

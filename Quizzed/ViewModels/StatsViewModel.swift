@@ -9,7 +9,8 @@ import Foundation
 
 class StatsViewModel: ObservableObject {
 
-    
+    var allStats: [CategoryStat] = []
+        
     @Published var gamesPlayed = 0 {
         didSet {
             UserDefaults.standard.set(gamesPlayed, forKey: "gamesPlayed")
@@ -25,6 +26,7 @@ class StatsViewModel: ObservableObject {
             UserDefaults.standard.set(perfectRounds, forKey: "perfectRounds")
         }
     }
+    
     @Published var film = CategoryStat(categoryName: "Film", score: 0, timesPlayed: 0, perfectRound: 0) {
         didSet {
             if let encoded = try? JSONEncoder().encode(film) {
@@ -207,15 +209,4 @@ class StatsViewModel: ObservableObject {
                 
     }
 
-}
-
-struct CategoryStat: Comparable, Codable, Hashable {
-    static func < (lhs: CategoryStat, rhs: CategoryStat) -> Bool {
-        return lhs.score > rhs.score
-    }
-    
-    var categoryName: String
-    var score: Int
-    var timesPlayed: Int
-    var perfectRound: Int
 }

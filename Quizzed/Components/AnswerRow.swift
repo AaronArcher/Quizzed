@@ -55,11 +55,7 @@ struct AnswerRow: View {
                             .blur(radius: 10)
                     }
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                    
-//                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-//                        .fill(quizModel.showCorrect && answer.isCorrect ? Color(hue: 0.302, saturation: 1.0, brightness: 0.465) : .clear)
-//                        .animation(.easeInOut, value: quizModel.showCorrect)
-                    
+    
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .fill(.white)
                         .frame(maxWidth: isSelected ? .infinity : 0)
@@ -93,7 +89,6 @@ struct AnswerRow: View {
                 .padding(5)
                 .background(
                     RoundedRectangle(cornerRadius: 5)
-//                        .frame(width: screenSize().height / 12 - 30, height: screenSize().height / 12 - 30)
                         .foregroundColor(Color(hue: 0.365, saturation: 0.0, brightness: 0.94))
                         .shadow(color: Color("Blue1").opacity(0.3), radius: 2, x: 2, y: 2)
                         .scaleEffect(selectedBox ? 1 : 0)
