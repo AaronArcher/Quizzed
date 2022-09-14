@@ -128,7 +128,7 @@ struct ResultView: View {
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            updateStorage()
+            stats.updateStat(category: quizModel.selectedCategory, score: quizModel.configuredScore, perfectRound: quizModel.score == 10)
         }
         .overlay(
             ConfettiView()
@@ -140,83 +140,6 @@ struct ResultView: View {
         
     }
     
-    func updateStorage() {
-        stats.totalScore += quizModel.configuredScore
-        stats.gamesPlayed += 1
-        if quizModel.score == 10 {
-            stats.perfectRounds += 1
-        }
-        updateCategoryStat()
-        
-    }
-    
-    func updateCategoryStat() {
-        
-        if quizModel.selectedCategory == "Film" {
-            stats.film.timesPlayed += 1
-            stats.film.score += quizModel.configuredScore
-            if quizModel.score == 10 {
-                stats.film.perfectRound += 1
-            }
-        } else if quizModel.selectedCategory == "Music" {
-            stats.music.timesPlayed += 1
-            stats.music.score += quizModel.configuredScore
-            if quizModel.score == 10 {
-                stats.music.perfectRound += 1
-            }
-        } else if quizModel.selectedCategory == "Television" {
-            stats.television.timesPlayed += 1
-            stats.television.score += quizModel.configuredScore
-            if quizModel.score == 10 {
-                stats.television.perfectRound += 1
-            }
-        } else if quizModel.selectedCategory == "Video Games" {
-                stats.videoGames.timesPlayed += 1
-                stats.videoGames.score += quizModel.configuredScore
-                if quizModel.score == 10 {
-                    stats.videoGames.perfectRound += 1
-            }
-        } else if quizModel.selectedCategory == "Science & Nature" {
-            stats.scienceAndNature.timesPlayed += 1
-            stats.scienceAndNature.score += quizModel.configuredScore
-            if quizModel.score == 10 {
-                stats.scienceAndNature.perfectRound += 1
-            }
-        } else if quizModel.selectedCategory == "Mythology" {
-            stats.mythology.timesPlayed += 1
-            stats.mythology.score += quizModel.configuredScore
-            if quizModel.score == 10 {
-                stats.mythology.perfectRound += 1
-            }
-        } else if quizModel.selectedCategory == "Animals" {
-            stats.animals.timesPlayed += 1
-            stats.animals.score += quizModel.configuredScore
-            if quizModel.score == 10 {
-                stats.animals.perfectRound += 1
-            }
-        } else if quizModel.selectedCategory == "Comics" {
-            stats.comics.timesPlayed += 1
-            stats.comics.score += quizModel.configuredScore
-            if quizModel.score == 10 {
-                stats.comics.perfectRound += 1
-            }
-        }  else if quizModel.selectedCategory == "General Knowledge" {
-            stats.generalKnowledge.timesPlayed += 1
-            stats.generalKnowledge.score += quizModel.configuredScore
-            if quizModel.score == 10 {
-                stats.generalKnowledge.perfectRound += 1
-            }
-        }  else if quizModel.selectedCategory == "Sport" {
-            stats.sport.timesPlayed += 1
-            stats.sport.score += quizModel.configuredScore
-            if quizModel.score == 10 {
-                stats.sport.perfectRound += 1
-            }
-        } else {
-            
-        }
-    
-    }
     
 }
 

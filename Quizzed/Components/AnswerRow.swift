@@ -91,7 +91,7 @@ struct AnswerRow: View {
                     RoundedRectangle(cornerRadius: 5)
                         .foregroundColor(Color(hue: 0.365, saturation: 0.0, brightness: 0.94))
                         .shadow(color: Color("Blue1").opacity(0.3), radius: 2, x: 2, y: 2)
-                        .scaleEffect(selectedBox ? 1 : 0)
+                        .scaleEffect(selectedBox ? 1 : 0.001)
                 )
             }
             .padding(.trailing, 10)

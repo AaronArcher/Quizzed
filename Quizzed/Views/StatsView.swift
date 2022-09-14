@@ -198,10 +198,9 @@ struct StatsView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            ForEach(stats.allCategories(), id: \.self) { category in
+                            ForEach(stats.allStats.sorted(), id: \.self) { category in
                                 
                                 GeometryReader { geo in
-                                    //                                let midX = geo.frame(in: .global).minX
                                     
                                     CategoryStatView(category: category)
                                         .padding(.trailing, 5)
